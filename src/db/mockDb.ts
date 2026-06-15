@@ -192,6 +192,29 @@ const INITIAL_LISTINGS: PropertyListing[] = [
     ],
     is_verified: true,
     created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'listing-6',
+    provider_id: 'user-apex',
+    title: 'Penthouse with Panoramic Views in Westminster',
+    description: 'Breathtaking 3-bedroom penthouse located in the heart of Westminster. Features a private roof terrace with views of the London Eye and Big Ben. Ultra-modern interior design with high-end appliances.',
+    price_per_month: 4500,
+    deposit: 5000,
+    address: '1 Victoria Street, Westminster',
+    borough: 'Westminster',
+    postcode: 'SW1H 0ET',
+    type: 'entire_flat',
+    bedrooms: 3,
+    bathrooms: 3,
+    available_from: '2025-08-15',
+    is_bills_included: false,
+    amenities: ['Private Roof Terrace', 'Concierge', 'Air Conditioning', 'Gym', 'Parking'],
+    images: [
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
+    ],
+    is_verified: true,
+    created_at: new Date().toISOString()
   }
 ];
 
@@ -358,13 +381,21 @@ export class MockDatabase {
     const newListing: PropertyListing = {
       ...listingData,
       id: `listing-${generateId()}`,
-      is_verified: true, // Auto-verified for premium feel
+      is_verified: false, // Default to false, can be upgraded via fee
       created_at: new Date().toISOString()
     };
 
     this.listings.push(newListing);
     saveToStorage('listings', this.listings);
     return newListing;
+  }
+
+  verifyListing(id: string) {
+    const listing = this.listings.find(l => l.id === id);
+    if (listing) {
+      listing.is_verified = true;
+      saveToStorage('listings', this.listings);
+    }
   }
 
   deleteListing(id: string) {

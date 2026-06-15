@@ -335,9 +335,28 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ currentUser, onNav
                             <img src={item.images[0]} alt="" className="h-12 w-12 rounded-lg object-cover shrink-0" />
                             <div>
                               <h3 className="text-xs font-bold text-white line-clamp-1">{item.title}</h3>
-                              <span className="block text-[10px] text-slate-500 mt-0.5">
-                                {item.borough} • £{item.price_per_month.toLocaleString()} / mo
-                              </span>
+                              <div className="flex items-center space-x-2 mt-0.5">
+                                <span className="text-[10px] text-slate-500">
+                                  {item.borough} • £{item.price_per_month.toLocaleString()} / mo
+                                </span>
+                                {item.is_verified ? (
+                                  <span className="flex items-center text-[8px] font-bold text-emerald-400 bg-emerald-500/5 px-1.5 py-0.5 rounded border border-emerald-500/10">
+                                    VERIFIED
+                                  </span>
+                                ) : (
+                                  <button 
+                                    onClick={() => {
+                                      if (confirm('Apply for Verified Premium status for £25?')) {
+                                        db.verifyListing(item.id);
+                                        window.location.reload();
+                                      }
+                                    }}
+                                    className="text-[8px] font-bold text-amber-500 bg-amber-500/5 px-1.5 py-0.5 rounded border border-amber-500/10 hover:bg-amber-500 hover:text-slate-950 transition"
+                                  >
+                                    GET VERIFIED
+                                  </button>
+                                )}
+                              </div>
                             </div>
                           </div>
 
