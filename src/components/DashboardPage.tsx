@@ -86,6 +86,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ currentUser, onNav
         provider_id: currentUser.id,
         title: newTitle,
         description: newDescription,
+        listing_purpose: 'rent',
+        property_status: 'available',
         price_per_month: Number(newPrice),
         deposit: Number(newDeposit),
         address: newAddress,
@@ -337,7 +339,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ currentUser, onNav
                               <h3 className="text-xs font-bold text-white line-clamp-1">{item.title}</h3>
                               <div className="flex items-center space-x-2 mt-0.5">
                                 <span className="text-[10px] text-slate-500">
-                                  {item.borough} • £{item.price_per_month.toLocaleString()} / mo
+                                  {item.borough} • {item.listing_purpose === 'sale' ? `£${(item.price || 0).toLocaleString()}` : `£${(item.price_per_month || 0).toLocaleString()} / mo`}
                                 </span>
                                 {item.is_verified ? (
                                   <span className="flex items-center text-[8px] font-bold text-emerald-400 bg-emerald-500/5 px-1.5 py-0.5 rounded border border-emerald-500/10">

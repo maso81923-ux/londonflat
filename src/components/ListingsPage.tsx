@@ -5,7 +5,7 @@ import { MapPin, SlidersHorizontal, Check, Info, Compass, ShieldCheck } from 'lu
 interface ListingsPageProps {
   listings: PropertyListing[];
   onNavigate: (view: string, listingId?: string) => void;
-  initialFilters?: { borough: string; type: string; maxPrice: number };
+  initialFilters?: { borough: string; type: string; maxPrice: number; purpose?: string };
 }
 
 export const ListingsPage: React.FC<ListingsPageProps> = ({
@@ -15,6 +15,7 @@ export const ListingsPage: React.FC<ListingsPageProps> = ({
 }) => {
   const [boroughFilter, setBoroughFilter] = useState(initialFilters?.borough || '');
   const [typeFilter, setTypeFilter] = useState(initialFilters?.type || '');
+  const [purposeFilter, setPurposeFilter] = useState<string>(initialFilters?.purpose || 'rent');
   const [maxPriceFilter, setMaxPriceFilter] = useState(
     initialFilters?.maxPrice ? String(initialFilters.maxPrice) : ''
   );
@@ -37,14 +38,18 @@ export const ListingsPage: React.FC<ListingsPageProps> = ({
   // Live client filtering
   const filteredListings = useMemo(() => {
     return listings.filter((item) => {
+      if (purposeFilter && item.listing_purpose !== purposeFilter) return false;
       if (boroughFilter && item.borough !== boroughFilter) return false;
       if (typeFilter && item.type !== typeFilter) return false;
-      if (maxPriceFilter && item.price_per_month > Number(maxPriceFilter)) return false;
+      
+      const price = item.listing_purpose === 'sale' ? (item.price || 0) : (item.price_per_month || 0);
+      if (maxPriceFilter && price > Number(maxPriceFilter)) return false;
+      
       if (billsFilter && !item.is_bills_included) return false;
       if (bedroomsFilter && item.bedrooms !== Number(bedroomsFilter)) return false;
       return true;
     });
-  }, [listings, boroughFilter, typeFilter, maxPriceFilter, billsFilter, bedroomsFilter]);
+  }, [listings, boroughFilter, typeFilter, purposeFilter, maxPriceFilter, billsFilter, bedroomsFilter]);
 
   // Map highlights representing physical coordinates on our styled vector map
   const activeBorough = boroughFilter || hoveredBorough;
@@ -52,6 +57,7 @@ export const ListingsPage: React.FC<ListingsPageProps> = ({
   const handleResetFilters = () => {
     setBoroughFilter('');
     setTypeFilter('');
+    setPurposeFilter('rent');
     setMaxPriceFilter('');
     setBillsFilter(false);
     setBedroomsFilter('');
@@ -61,6 +67,32 @@ export const ListingsPage: React.FC<ListingsPageProps> = ({
     <div className="flex-grow bg-slate-950 text-white min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         
+        {/* Purpose Filter Bar (NEW) */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex p-1 bg-slate-900 rounded-xl border border-slate-800">
+            {[
+              { id: 'rent', label: 'Rent' },
+              { id: 'sale', label: 'Sale' },
+              { id: 'buy', label: 'Buy' }
+            ].map((p) => (
+              <button
+                key={p.id}
+                onClick={() => {
+                  setPurposeFilter(p.id);
+                  setMaxPriceFilter(''); // Reset budget as scale changes significantly
+                }}
+                className={`px-6 py-2 text-xs font-bold rounded-lg transition ${
+                  purposeFilter === p.id
+                    ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Title */}
         <div className="text-left mb-8 border-b border-slate-900 pb-6">
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
@@ -131,11 +163,11 @@ export const ListingsPage: React.FC<ListingsPageProps> = ({
                 {/* Max Budget */}
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
-                    Max Monthly Rent (£)
+                    {purposeFilter === 'sale' ? 'Max Purchase Price (£)' : 'Max Monthly Rent (£)'}
                   </label>
                   <input
                     type="number"
-                    placeholder="e.g. 2000"
+                    placeholder={purposeFilter === 'sale' ? 'e.g. 1000000' : 'e.g. 2000'}
                     value={maxPriceFilter}
                     onChange={(e) => setMaxPriceFilter(e.target.value)}
                     className="w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 px-3 text-xs font-medium text-slate-300 placeholder:text-slate-700 focus:border-amber-500 outline-none"
@@ -245,10 +277,17 @@ export const ListingsPage: React.FC<ListingsPageProps> = ({
                         
                         <div className="text-right">
                           <span className="block text-sm font-extrabold text-white leading-none">
-                            £{listing.price_per_month.toLocaleString()}
+                            {listing.listing_purpose === 'sale' 
+                              ? `£${listing.price?.toLocaleString()}` 
+                              : listing.listing_purpose === 'buy'
+                                ? 'Offers invited'
+                                : `£${listing.price_per_month?.toLocaleString()}/mo`
+                            }
                           </span>
                           <span className="text-[9px] text-slate-500">
-                            {listing.is_bills_included ? 'inc. bills' : 'excl. bills'}
+                            {listing.listing_purpose === 'rent' 
+                              ? (listing.is_bills_included ? 'inc. bills' : 'excl. bills')
+                              : listing.listing_purpose === 'sale' ? 'Freehold/Leasehold' : 'Market interest'}
                           </span>
                         </div>
                       </div>

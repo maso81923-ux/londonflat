@@ -29,18 +29,23 @@ export interface AgencyDetails {
 }
 
 export type PropertyType = 'room' | 'entire_flat';
+export type ListingPurpose = 'rent' | 'sale' | 'buy';
+export type PropertyStatus = 'available' | 'under_offer' | 'sold' | 'rented';
 
 export interface PropertyListing {
   id: string;
   provider_id: string; // Links to UserProfile
   title: string;
   description: string;
-  price_per_month: number;
+  price_per_month?: number; // Optional for rent
+  price?: number; // Optional for sale
   deposit: number;
   address: string;
   borough: string; // e.g. 'Westminster', 'Kensington & Chelsea', 'Camden', etc.
   postcode: string; // e.g. 'W1B', 'EC1A'
   type: PropertyType;
+  listing_purpose: ListingPurpose;
+  property_status: PropertyStatus;
   bedrooms: number;
   bathrooms: number;
   available_from: string;
@@ -48,6 +53,25 @@ export interface PropertyListing {
   amenities: string[]; // e.g. ['wifi', 'parking', 'gym', 'garden']
   images: string[];
   is_verified: boolean;
+  created_at: string;
+}
+
+export type ServiceCategory = 'maintenance-tradesmen' | 'legal-financial' | 'logistics-daily-life' | 'safety-care';
+
+export interface ServiceProvider {
+  id: string;
+  name: string;
+  description: string;
+  category: ServiceCategory;
+  subcategories: string[];
+  borough: string;
+  address: string;
+  phone: string;
+  email: string;
+  website?: string;
+  logo_url?: string;
+  is_verified: boolean;
+  agency_id?: string; // Optional link to agency_details
   created_at: string;
 }
 

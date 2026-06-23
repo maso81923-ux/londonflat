@@ -7,6 +7,7 @@ import { HomePage } from './components/HomePage';
 import { ListingsPage } from './components/ListingsPage';
 import { ListingDetailsPage } from './components/ListingDetailsPage';
 import { DashboardPage } from './components/DashboardPage';
+import { ServicesPage } from './components/ServicesPage';
 import { AuthModal } from './components/AuthModal';
 import './App.css';
 
@@ -104,6 +105,12 @@ function App() {
           <DashboardPage 
             currentUser={currentUser} 
             onNavigate={handleNavigate} 
+          />
+        );
+      case 'services':
+        return (
+          <ServicesPage 
+            providers={db.getServiceProviders()} 
           />
         );
       default:

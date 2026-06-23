@@ -236,7 +236,10 @@ export const HomePage: React.FC<HomePageProps> = ({ listings, onNavigate, onSear
                 {/* Price Overlay */}
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-4 flex items-end justify-between">
                   <span className="text-lg font-bold text-white">
-                    £{listing.price_per_month.toLocaleString()} <span className="text-xs font-medium text-slate-300">/ month</span>
+                    {listing.listing_purpose === 'sale' 
+                      ? `£${(listing.price || 0).toLocaleString()}` 
+                      : `£${(listing.price_per_month || 0).toLocaleString()}`} 
+                    {listing.listing_purpose !== 'sale' && <span className="text-xs font-medium text-slate-300">/ month</span>}
                   </span>
                   <span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full font-medium">
                     {listing.is_bills_included ? 'Bills Inc.' : 'Excl. Bills'}

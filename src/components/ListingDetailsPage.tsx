@@ -161,8 +161,14 @@ export const ListingDetailsPage: React.FC<ListingDetailsPageProps> = ({
             {/* Quick specifications grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 rounded-xl border border-slate-900 bg-slate-900/20 p-5 text-center">
               <div>
-                <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Monthly Rent</span>
-                <span className="text-lg font-black text-amber-400">£{listing.price_per_month.toLocaleString()}</span>
+                <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                  {listing.listing_purpose === 'sale' ? 'Purchase Price' : 'Monthly Rent'}
+                </span>
+                <span className="text-lg font-black text-amber-400">
+                  {listing.listing_purpose === 'sale' 
+                    ? `£${(listing.price || 0).toLocaleString()}` 
+                    : `£${(listing.price_per_month || 0).toLocaleString()}`}
+                </span>
               </div>
               <div>
                 <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Refundable Deposit</span>

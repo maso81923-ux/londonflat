@@ -50,6 +50,14 @@ export const Header: React.FC<HeaderProps> = ({
             Explore Listings
           </button>
           <button 
+            onClick={() => onNavigate('services')}
+            className={`text-sm font-medium transition duration-200 ${
+              currentView === 'services' ? 'text-amber-400' : 'text-slate-300 hover:text-white'
+            }`}
+          >
+            Services
+          </button>
+          <button 
             onClick={() => {
               if (currentUser?.role === 'agency' || currentUser?.role === 'landlord') {
                 onNavigate('dashboard');

@@ -1,4 +1,4 @@
-import type { PropertyListing, UserProfile, ViewingRequest, AgencyDetails, RequestStatus } from './schema';
+import type { PropertyListing, UserProfile, ViewingRequest, AgencyDetails, RequestStatus, ServiceProvider, ServiceCategory } from './schema';
 
 // Helper to generate IDs
 const generateId = () => Math.random().toString(36).substring(2, 11);
@@ -84,6 +84,8 @@ const INITIAL_LISTINGS: PropertyListing[] = [
     borough: 'Kensington & Chelsea',
     postcode: 'SW1X 0EP',
     type: 'room',
+    listing_purpose: 'rent',
+    property_status: 'available',
     bedrooms: 3,
     bathrooms: 2,
     available_from: '2025-07-01',
@@ -108,6 +110,8 @@ const INITIAL_LISTINGS: PropertyListing[] = [
     borough: 'Hackney',
     postcode: 'EC2A 4AA',
     type: 'entire_flat',
+    listing_purpose: 'rent',
+    property_status: 'available',
     bedrooms: 1,
     bathrooms: 1,
     available_from: '2025-06-25',
@@ -132,6 +136,8 @@ const INITIAL_LISTINGS: PropertyListing[] = [
     borough: 'Camden',
     postcode: 'NW1 8DJ',
     type: 'room',
+    listing_purpose: 'rent',
+    property_status: 'available',
     bedrooms: 2,
     bathrooms: 2,
     available_from: '2025-07-15',
@@ -146,73 +152,161 @@ const INITIAL_LISTINGS: PropertyListing[] = [
     created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
-    id: 'listing-4',
+    id: 'listing-sale-1',
     provider_id: 'user-apex',
-    title: 'Stunning Penthouse Flat overlooking Greenwich Park',
-    description: 'This premium, spacious 2-bedroom, 2-bathroom penthouse apartment offers breathtaking, uninterrupted views across Greenwich Park and the Thames barrier. Features an expansive open-plan lounge, high-spec marble breakfast bar, direct elevator entry, and a wrap-around sky terrace. Perfect for young professionals or couples seeking a calm oasis with fast transit links to the City and Canary Wharf.',
-    price_per_month: 3200,
-    deposit: 3700,
-    address: '7 Skyview Heights, Greenwich',
-    borough: 'Greenwich',
-    postcode: 'SE10 8GD',
+    title: 'Luxury 3-Bedroom Penthouse in Marylebone',
+    description: 'An exquisite 3-bedroom penthouse offering unparalleled views of the London skyline. This brand-new residence features bespoke finishes, a private terrace, and access to 5-star residential amenities.',
+    price: 3850000,
+    deposit: 0,
+    address: '42 Chiltern Street, Marylebone',
+    borough: 'Westminster',
+    postcode: 'W1U 7PR',
     type: 'entire_flat',
-    bedrooms: 2,
-    bathrooms: 2,
-    available_from: '2025-08-01',
+    listing_purpose: 'sale',
+    property_status: 'available',
+    bedrooms: 3,
+    bathrooms: 3.5,
+    available_from: '2025-06-01',
     is_bills_included: false,
-    amenities: ['Wrap-around Sky Terrace', 'Direct Elevator Entry', 'Private Gym Access', 'Underground Parking', 'Air Conditioning'],
+    amenities: ['Private Terrace', '24/7 Concierge', 'Valet Parking', 'Resident Gym', 'Climate Control'],
     images: [
-      'https://images.unsplash.com/photo-1502672012214-27dccd68155b?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'
     ],
     is_verified: true,
     created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
-    id: 'listing-5',
+    id: 'listing-sale-2',
     provider_id: 'user-prestige',
-    title: 'High-rise Premium Ensuite Room in Canary Wharf',
-    description: 'Stunning double ensuite room on the 32nd floor of an architect-designed residential skyscraper in the heart of Canary Wharf. Rent includes access to state-of-the-art residential facilities: private cinema room, 25-meter heated swimming pool, professional strength sky-gym, and residents business club lounge. Sharing with one high-end consultant. Absolutely spectacular sunset views.',
-    price_per_month: 1450,
-    deposit: 1500,
-    address: 'Arena Tower, Crossharbour',
-    borough: 'Tower Hamlets',
-    postcode: 'E14 9YF',
-    type: 'room',
+    title: 'Modern 2-Bedroom Apartment in Battersea Power Station',
+    description: 'Live in an icon. This stunning 2-bedroom apartment in the historic Battersea Power Station development offers modern luxury with historic charm.',
+    price: 1450000,
+    deposit: 0,
+    address: 'Circus West Village, Battersea',
+    borough: 'Wandsworth',
+    postcode: 'SW11 8EZ',
+    type: 'entire_flat',
+    listing_purpose: 'sale',
+    property_status: 'under_offer',
     bedrooms: 2,
     bathrooms: 2,
-    available_from: '2025-07-10',
-    is_bills_included: true,
-    amenities: ['Sky Gym & Pool Access', 'Private Cinema Lounge', 'Weekly Cleaner', 'Underfloor Heating', 'Dishwasher', 'Dryer'],
+    available_from: '2025-07-01',
+    is_bills_included: false,
+    amenities: ['River Views', 'Roof Garden', 'Underfloor Heating', 'On-site Cinema', '24-hour Security'],
     images: [
-      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1502005229762-fc1b2b812ca5?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80'
     ],
     is_verified: true,
-    created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+    created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+  }
+];
+
+const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
+  {
+    id: 'service-1',
+    name: 'London Handyman Pro',
+    description: 'Expert home repairs, furniture assembly, and general maintenance for London homes.',
+    category: 'maintenance-tradesmen',
+    subcategories: ['Handyman', 'Repairs', 'Assembly'],
+    borough: 'Hackney',
+    address: '123 Mare Street, London E8 3RH',
+    phone: '+44 20 8123 4567',
+    email: 'hello@londonhandyman.pro',
+    website: 'https://londonhandyman.pro',
+    is_verified: true,
+    created_at: new Date().toISOString()
   },
   {
-    id: 'listing-6',
-    provider_id: 'user-apex',
-    title: 'Penthouse with Panoramic Views in Westminster',
-    description: 'Breathtaking 3-bedroom penthouse located in the heart of Westminster. Features a private roof terrace with views of the London Eye and Big Ben. Ultra-modern interior design with high-end appliances.',
-    price_per_month: 4500,
-    deposit: 5000,
-    address: '1 Victoria Street, Westminster',
-    borough: 'Westminster',
-    postcode: 'SW1H 0ET',
-    type: 'entire_flat',
-    bedrooms: 3,
-    bathrooms: 3,
-    available_from: '2025-08-15',
-    is_bills_included: false,
-    amenities: ['Private Roof Terrace', 'Concierge', 'Air Conditioning', 'Gym', 'Parking'],
-    images: [
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
-    ],
+    id: 'service-2',
+    name: 'Elite Painters & Decorators',
+    description: 'High-end interior and exterior painting and decorating services for premium properties.',
+    category: 'maintenance-tradesmen',
+    subcategories: ['Painting', 'Decorating', 'Wallpapering'],
+    borough: 'Kensington & Chelsea',
+    address: '45 King\'s Road, Chelsea, SW3 4UD',
+    phone: '+44 20 7987 6543',
+    email: 'info@elitepainters.london',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-3',
+    name: 'Sterling Notary Services',
+    description: 'Professional notary public and legal documentation services in the City of London.',
+    category: 'legal-financial',
+    subcategories: ['Notary', 'Legal Docs', 'Apostille'],
+    borough: 'City of London',
+    address: '10 St Paul\'s Churchyard, EC4M 8AL',
+    phone: '+44 20 3456 7890',
+    email: 'contact@sterlingnotary.co.uk',
+    website: 'https://sterlingnotary.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-4',
+    name: 'Barclays Premier Banking — Canary Wharf',
+    description: 'Premium banking and financial services for high-net-worth individuals.',
+    category: 'legal-financial',
+    subcategories: ['Banking', 'Wealth Management', 'Mortgages'],
+    borough: 'Tower Hamlets',
+    address: '1 Churchill Place, Canary Wharf, E14 5HP',
+    phone: '+44 20 7116 1000',
+    email: 'premier.canarywharf@barclays.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-5',
+    name: 'London White Glove Removals',
+    description: 'Specialist removals and storage for fine art, antiques, and luxury furniture.',
+    category: 'logistics-daily-life',
+    subcategories: ['Removals', 'Storage', 'Fine Art Packing'],
+    borough: 'Islington',
+    address: '88 Upper Street, London N1 0NP',
+    phone: '+44 20 5678 9012',
+    email: 'move@whitegloveremovals.london',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-6',
+    name: 'Sparkle Clean London',
+    description: 'Eco-friendly premium cleaning services for flats and luxury residences.',
+    category: 'logistics-daily-life',
+    subcategories: ['Cleaning', 'Eco-friendly', 'Deep Clean'],
+    borough: 'Camden',
+    address: '15 Parkway, Camden Town, NW1 7PG',
+    phone: '+44 20 4321 0987',
+    email: 'sparkle@cleanlondon.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-7',
+    name: 'SecureView Surveillance London',
+    description: 'Advanced home security, CCTV, and smart alarm systems installation and monitoring.',
+    category: 'safety-care',
+    subcategories: ['Security', 'CCTV', 'Smart Alarms'],
+    borough: 'Southwark',
+    address: '25 The Shard, London Bridge Street, SE1 9SG',
+    phone: '+44 20 9012 3456',
+    email: 'secure@viewsurveillance.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-8',
+    name: 'HomeCare Angels',
+    description: 'Premium home care and companionship services for elderly residents in London.',
+    category: 'safety-care',
+    subcategories: ['Home Care', 'Elderly Care', 'Companionship'],
+    borough: 'Greenwich',
+    address: '5 Greenwich High Road, SE10 8NW',
+    phone: '+44 20 6789 0123',
+    email: 'care@homecareangels.co.uk',
     is_verified: true,
     created_at: new Date().toISOString()
   }
@@ -236,6 +330,7 @@ const INITIAL_REQUESTS: ViewingRequest[] = [
 
 // Initialize database in localStorage
 const loadFromStorage = <T>(key: string, defaults: T): T => {
+  if (typeof window === 'undefined') return defaults;
   const data = localStorage.getItem(`londonflat_${key}`);
   if (!data) {
     localStorage.setItem(`londonflat_${key}`, JSON.stringify(defaults));
@@ -245,6 +340,7 @@ const loadFromStorage = <T>(key: string, defaults: T): T => {
 };
 
 const saveToStorage = <T>(key: string, value: T): void => {
+  if (typeof window === 'undefined') return;
   localStorage.setItem(`londonflat_${key}`, JSON.stringify(value));
 };
 
@@ -253,6 +349,7 @@ export class MockDatabase {
   private agencies: AgencyDetails[] = [];
   private listings: PropertyListing[] = [];
   private requests: ViewingRequest[] = [];
+  private serviceProviders: ServiceProvider[] = [];
   private currentUser: UserProfile | null = null;
 
   constructor() {
@@ -261,6 +358,7 @@ export class MockDatabase {
       this.agencies = loadFromStorage('agencies', INITIAL_AGENCIES);
       this.listings = loadFromStorage('listings', INITIAL_LISTINGS);
       this.requests = loadFromStorage('requests', INITIAL_REQUESTS);
+      this.serviceProviders = loadFromStorage('service_providers', INITIAL_SERVICE_PROVIDERS);
       
       const loggedIn = localStorage.getItem('londonflat_current_user');
       if (loggedIn) {
@@ -271,6 +369,7 @@ export class MockDatabase {
       this.agencies = INITIAL_AGENCIES;
       this.listings = INITIAL_LISTINGS;
       this.requests = INITIAL_REQUESTS;
+      this.serviceProviders = INITIAL_SERVICE_PROVIDERS;
     }
   }
 
@@ -283,7 +382,9 @@ export class MockDatabase {
     const user = this.users.find(u => u.email.toLowerCase() === email.toLowerCase());
     if (user) {
       this.currentUser = user;
-      localStorage.setItem('londonflat_current_user', JSON.stringify(user));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('londonflat_current_user', JSON.stringify(user));
+      }
       return user;
     }
     return null;
@@ -291,7 +392,9 @@ export class MockDatabase {
 
   logout() {
     this.currentUser = null;
-    localStorage.removeItem('londonflat_current_user');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('londonflat_current_user');
+    }
   }
 
   registerUser(fullName: string, email: string, role: 'seeker' | 'agency' | 'landlord', phone?: string): UserProfile {
@@ -315,7 +418,9 @@ export class MockDatabase {
     saveToStorage('users', this.users);
 
     this.currentUser = newUser;
-    localStorage.setItem('londonflat_current_user', JSON.stringify(newUser));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('londonflat_current_user', JSON.stringify(newUser));
+    }
 
     return newUser;
   }
@@ -403,6 +508,19 @@ export class MockDatabase {
     saveToStorage('listings', this.listings);
   }
 
+  // --- Service Provider APIs ---
+  getServiceProviders(): ServiceProvider[] {
+    return this.serviceProviders;
+  }
+
+  getServiceProvidersByCategory(category: ServiceCategory): ServiceProvider[] {
+    return this.serviceProviders.filter(s => s.category === category);
+  }
+
+  getServiceProvidersByBorough(borough: string): ServiceProvider[] {
+    return this.serviceProviders.filter(s => s.borough.toLowerCase() === borough.toLowerCase());
+  }
+
   // --- Viewing Request APIs ---
   getViewingRequests(): ViewingRequest[] {
     return this.requests;
@@ -458,7 +576,7 @@ export class MockDatabase {
           propertyTitle: listing?.title || 'Unknown Property',
           propertyImage: listing?.images[0] || '',
           borough: listing?.borough || '',
-          price: listing?.price_per_month || 0
+          price: listing?.listing_purpose === 'sale' ? (listing?.price || 0) : (listing?.price_per_month || 0)
         };
       })
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
