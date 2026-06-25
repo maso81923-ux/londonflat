@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { db } from '../db/mockDb';
+import { db } from '../db';
 import type { UserRole, UserProfile } from '../db/schema';
 import { X, User, Mail, Building2, LogIn, UserPlus } from 'lucide-react';
 
@@ -41,30 +41,34 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!loginEmail) {
       setError('Please enter your registered email address.');
       return;
     }
 
-    const user = db.login(loginEmail);
-    if (user) {
-      setSuccess('Access granted. Welcome back.');
-      setError('');
-      setTimeout(() => {
-        onLoginSuccess(user);
-        onClose();
-        // Reset
-        setLoginEmail('');
-        setSuccess('');
-      }, 1000);
-    } else {
-      setError('No account matches this email. Please click "Create Account" below.');
+    try {
+      const user = await db.login(loginEmail);
+      if (user) {
+        setSuccess('Access granted. Welcome back.');
+        setError('');
+        setTimeout(() => {
+          onLoginSuccess(user);
+          onClose();
+          // Reset
+          setLoginEmail('');
+          setSuccess('');
+        }, 1000);
+      } else {
+        setError('No account matches this email. Please click "Create Account" below.');
+      }
+    } catch (err: any) {
+      setError(err.message || 'Login failed.');
     }
   };
 
-  const handleRegisterSubmit = (e: React.FormEvent) => {
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !email) {
       setError('Please complete all requested registration details.');
@@ -78,11 +82,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
     try {
       // 1. Create Profile
-      const newUser = db.registerUser(fullName, email, role, phone);
+      const newUser = await db.registerUser(fullName, email, role, phone);
 
       // 2. If Agency, create agency specifics
       if (role === 'agency') {
-        db.registerAgency(newUser.id, companyName, licenseNumber, phone, officeAddress, website);
+        await db.registerAgency(newUser.id, companyName, licenseNumber, phone, officeAddress, website);
       }
 
       setSuccess('Account registered successfully. Welcome to LondonFlat.');

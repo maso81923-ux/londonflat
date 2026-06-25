@@ -53,6 +53,8 @@ export interface PropertyListing {
   amenities: string[]; // e.g. ['wifi', 'parking', 'gym', 'garden']
   images: string[];
   is_verified: boolean;
+  latitude?: number;
+  longitude?: number;
   created_at: string;
 }
 

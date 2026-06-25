@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { db } from './db/mockDb';
+import { db } from './db';
 import type { UserProfile, PropertyListing } from './db/schema';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -26,14 +26,35 @@ function App() {
 
   // Load user on mount
   useEffect(() => {
-    const user = db.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
+    const init = async () => {
+      const user = await db.getCurrentUser();
+      if (user) {
+        setCurrentUser(user);
+      }
+    };
+    init();
   }, []);
 
+  // Listings state
+  const [listings, setListings] = useState<PropertyListing[]>([]);
+  const [serviceProviders, setServiceProviders] = useState<any[]>([]);
+
   // Sync listings live from DB
-  const listings: PropertyListing[] = db.getListings();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [listingsData, providersData] = await Promise.all([
+          db.getListings(),
+          db.getServiceProviders()
+        ]);
+        setListings(listingsData);
+        setServiceProviders(providersData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [currentView]); // Re-fetch on view change to ensure fresh data
 
   const handleNavigate = (view: string, listingId?: string) => {
     setCurrentView(view);
@@ -55,8 +76,8 @@ function App() {
     setCurrentUser(user);
   };
 
-  const handleLogout = () => {
-    db.logout();
+  const handleLogout = async () => {
+    await db.logout();
     setCurrentUser(null);
     handleNavigate('home');
   };
@@ -110,7 +131,7 @@ function App() {
       case 'services':
         return (
           <ServicesPage 
-            providers={db.getServiceProviders()} 
+            providers={serviceProviders} 
           />
         );
       default:

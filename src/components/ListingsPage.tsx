@@ -24,22 +24,42 @@ export const ListingsPage: React.FC<ListingsPageProps> = ({
 
   const [hoveredBorough, setHoveredBorough] = useState<string | null>(null);
 
-  const boroughsList = [
-    'Westminster',
-    'Kensington & Chelsea',
-    'Camden',
-    'Hackney',
-    'Tower Hamlets',
-    'Greenwich',
-    'Islington',
-    'Southwark'
-  ];
+  const boroughCoords: Record<string, { lat: number; lng: number; region: string }> = {
+    'Westminster': { lat: 51.4973, lng: -0.1372, region: 'West End / Central' },
+    'Kensington & Chelsea': { lat: 51.5020, lng: -0.1947, region: 'Exclusive SW' },
+    'Camden': { lat: 51.5290, lng: -0.1255, region: 'NW London' },
+    'Hackney': { lat: 51.5450, lng: -0.0553, region: 'East London' },
+    'Tower Hamlets': { lat: 51.5099, lng: -0.0059, region: 'Canary Wharf' },
+    'Greenwich': { lat: 51.4891, lng: 0.0648, region: 'SE Maritime' },
+    'Islington': { lat: 51.5416, lng: -0.1022, region: 'Central N' },
+    'Southwark': { lat: 51.5035, lng: -0.0804, region: 'South Bank' },
+    'Wandsworth': { lat: 51.4567, lng: -0.1910, region: 'SW London' }
+  };
+
+  const boroughsList = Object.keys(boroughCoords);
+
+  // Distance helper (Euclidean for simplicity in approximate proximity)
+  const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    return Math.sqrt(Math.pow(lat1 - lat2, 2) + Math.pow(lon1 - lon2, 2));
+  };
 
   // Live client filtering
   const filteredListings = useMemo(() => {
     return listings.filter((item) => {
       if (purposeFilter && item.listing_purpose !== purposeFilter) return false;
-      if (boroughFilter && item.borough !== boroughFilter) return false;
+      
+      // Proximity filtering: if a borough is selected, also show very close ones
+      if (boroughFilter) {
+        const selectedCoord = boroughCoords[boroughFilter];
+        if (selectedCoord && item.latitude && item.longitude) {
+          const dist = getDistance(selectedCoord.lat, selectedCoord.lng, item.latitude, item.longitude);
+          // Roughly 0.03 degrees is a few miles
+          if (item.borough !== boroughFilter && dist > 0.04) return false;
+        } else if (item.borough !== boroughFilter) {
+          return false;
+        }
+      }
+
       if (typeFilter && item.type !== typeFilter) return false;
       
       const price = item.listing_purpose === 'sale' ? (item.price || 0) : (item.price_per_month || 0);

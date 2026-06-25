@@ -1,4 +1,13 @@
-import type { PropertyListing, UserProfile, ViewingRequest, AgencyDetails, RequestStatus, ServiceProvider, ServiceCategory } from './schema';
+import type { Database } from './DatabaseInterface';
+import { 
+  type PropertyListing, 
+  type UserProfile, 
+  type ViewingRequest, 
+  type AgencyDetails, 
+  type RequestStatus, 
+  type ServiceProvider, 
+  type ServiceCategory 
+} from './schema';
 
 // Helper to generate IDs
 const generateId = () => Math.random().toString(36).substring(2, 11);
@@ -97,6 +106,8 @@ const INITIAL_LISTINGS: PropertyListing[] = [
       'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80'
     ],
     is_verified: true,
+    latitude: 51.498,
+    longitude: -0.163,
     created_at: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
@@ -123,6 +134,8 @@ const INITIAL_LISTINGS: PropertyListing[] = [
       'https://images.unsplash.com/photo-1502672012214-27dccd68155b?auto=format&fit=crop&w=800&q=80'
     ],
     is_verified: true,
+    latitude: 51.527,
+    longitude: -0.084,
     created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
@@ -149,6 +162,8 @@ const INITIAL_LISTINGS: PropertyListing[] = [
       'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
     ],
     is_verified: true,
+    latitude: 51.543,
+    longitude: -0.146,
     created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
@@ -174,6 +189,8 @@ const INITIAL_LISTINGS: PropertyListing[] = [
       'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'
     ],
     is_verified: true,
+    latitude: 51.520,
+    longitude: -0.155,
     created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
@@ -199,6 +216,8 @@ const INITIAL_LISTINGS: PropertyListing[] = [
       'https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80'
     ],
     is_verified: true,
+    latitude: 51.482,
+    longitude: -0.144,
     created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
   }
 ];
@@ -344,7 +363,7 @@ const saveToStorage = <T>(key: string, value: T): void => {
   localStorage.setItem(`londonflat_${key}`, JSON.stringify(value));
 };
 
-export class MockDatabase {
+export class MockDatabase implements Database {
   private users: UserProfile[] = [];
   private agencies: AgencyDetails[] = [];
   private listings: PropertyListing[] = [];
@@ -374,11 +393,11 @@ export class MockDatabase {
   }
 
   // --- Auth APIs ---
-  getCurrentUser() {
+  async getCurrentUser() {
     return this.currentUser;
   }
 
-  login(email: string): UserProfile | null {
+  async login(email: string): Promise<UserProfile | null> {
     const user = this.users.find(u => u.email.toLowerCase() === email.toLowerCase());
     if (user) {
       this.currentUser = user;
@@ -390,14 +409,14 @@ export class MockDatabase {
     return null;
   }
 
-  logout() {
+  async logout() {
     this.currentUser = null;
     if (typeof window !== 'undefined') {
       localStorage.removeItem('londonflat_current_user');
     }
   }
 
-  registerUser(fullName: string, email: string, role: 'seeker' | 'agency' | 'landlord', phone?: string): UserProfile {
+  async registerUser(fullName: string, email: string, role: 'seeker' | 'agency' | 'landlord', phone?: string): Promise<UserProfile> {
     // Check duplicate
     const existing = this.users.find(u => u.email.toLowerCase() === email.toLowerCase());
     if (existing) {
@@ -425,7 +444,7 @@ export class MockDatabase {
     return newUser;
   }
 
-  registerAgency(userId: string, companyName: string, licenseNumber: string, phone: string, officeAddress: string, website?: string): AgencyDetails {
+  async registerAgency(userId: string, companyName: string, licenseNumber: string, phone: string, officeAddress: string, website?: string): Promise<AgencyDetails> {
     const newAgency: AgencyDetails = {
       id: `agency-${generateId()}`,
       user_id: userId,
@@ -444,20 +463,20 @@ export class MockDatabase {
     return newAgency;
   }
 
-  getAgencyByUserId(userId: string): AgencyDetails | undefined {
+  async getAgencyByUserId(userId: string): Promise<AgencyDetails | undefined> {
     return this.agencies.find(a => a.user_id === userId);
   }
 
   // --- Property Listing APIs ---
-  getListings(): PropertyListing[] {
+  async getListings(): Promise<PropertyListing[]> {
     return [...this.listings].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   }
 
-  getListingById(id: string): PropertyListing | undefined {
+  async getListingById(id: string): Promise<PropertyListing | undefined> {
     return this.listings.find(l => l.id === id);
   }
 
-  getProviderByListingId(providerId: string): { name: string; avatar?: string; agencyName?: string; phone?: string; type: 'agency' | 'landlord' } {
+  async getProviderByListingId(providerId: string): Promise<{ name: string; avatar?: string; agencyName?: string; phone?: string; type: 'agency' | 'landlord' }> {
     const user = this.users.find(u => u.id === providerId);
     if (!user) {
       return { name: 'Unknown Landlord', type: 'landlord' };
@@ -482,7 +501,7 @@ export class MockDatabase {
     };
   }
 
-  createListing(listingData: Omit<PropertyListing, 'id' | 'is_verified' | 'created_at'>): PropertyListing {
+  async createListing(listingData: Omit<PropertyListing, 'id' | 'is_verified' | 'created_at'>): Promise<PropertyListing> {
     const newListing: PropertyListing = {
       ...listingData,
       id: `listing-${generateId()}`,
@@ -495,7 +514,7 @@ export class MockDatabase {
     return newListing;
   }
 
-  verifyListing(id: string) {
+  async verifyListing(id: string) {
     const listing = this.listings.find(l => l.id === id);
     if (listing) {
       listing.is_verified = true;
@@ -503,30 +522,30 @@ export class MockDatabase {
     }
   }
 
-  deleteListing(id: string) {
+  async deleteListing(id: string) {
     this.listings = this.listings.filter(l => l.id !== id);
     saveToStorage('listings', this.listings);
   }
 
   // --- Service Provider APIs ---
-  getServiceProviders(): ServiceProvider[] {
+  async getServiceProviders(): Promise<ServiceProvider[]> {
     return this.serviceProviders;
   }
 
-  getServiceProvidersByCategory(category: ServiceCategory): ServiceProvider[] {
+  async getServiceProvidersByCategory(category: ServiceCategory): Promise<ServiceProvider[]> {
     return this.serviceProviders.filter(s => s.category === category);
   }
 
-  getServiceProvidersByBorough(borough: string): ServiceProvider[] {
+  async getServiceProvidersByBorough(borough: string): Promise<ServiceProvider[]> {
     return this.serviceProviders.filter(s => s.borough.toLowerCase() === borough.toLowerCase());
   }
 
   // --- Viewing Request APIs ---
-  getViewingRequests(): ViewingRequest[] {
+  async getViewingRequests(): Promise<ViewingRequest[]> {
     return this.requests;
   }
 
-  createViewingRequest(requestData: Omit<ViewingRequest, 'id' | 'status' | 'created_at'>): ViewingRequest {
+  async createViewingRequest(requestData: Omit<ViewingRequest, 'id' | 'status' | 'created_at'>): Promise<ViewingRequest> {
     const newRequest: ViewingRequest = {
       ...requestData,
       id: `req-${generateId()}`,
@@ -539,7 +558,7 @@ export class MockDatabase {
     return newRequest;
   }
 
-  updateViewingRequestStatus(id: string, status: RequestStatus): void {
+  async updateViewingRequestStatus(id: string, status: RequestStatus): Promise<void> {
     const req = this.requests.find(r => r.id === id);
     if (req) {
       req.status = status;
@@ -547,7 +566,7 @@ export class MockDatabase {
     }
   }
 
-  getViewingRequestsForProvider(providerId: string): (ViewingRequest & { propertyTitle: string })[] {
+  async getViewingRequestsForProvider(providerId: string): Promise<(ViewingRequest & { propertyTitle: string })[]> {
     // 1. Find all properties owned by this provider
     const providerListingIds = this.listings
       .filter(l => l.provider_id === providerId)
@@ -566,7 +585,7 @@ export class MockDatabase {
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   }
 
-  getViewingRequestsForSeeker(seekerId: string): (ViewingRequest & { propertyTitle: string; propertyImage: string; borough: string; price: number })[] {
+  async getViewingRequestsForSeeker(seekerId: string): Promise<(ViewingRequest & { propertyTitle: string; propertyImage: string; borough: string; price: number })[]> {
     return this.requests
       .filter(r => r.seeker_id === seekerId)
       .map(r => {

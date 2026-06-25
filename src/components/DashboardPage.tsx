@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
-import type { UserProfile } from '../db/schema';
-import { db } from '../db/mockDb';
+import React, { useState, useMemo, useEffect } from 'react';
+import type { UserProfile, PropertyListing, ViewingRequest, AgencyDetails } from '../db/schema';
+import { db } from '../db';
 import { LayoutDashboard, Plus, Trash2, Calendar, Clock, User, Phone, Mail, Globe, MapPin, CheckCircle, XCircle, ChevronRight, Sparkles, Building2, ShieldCheck, Check } from 'lucide-react';
 
 interface DashboardPageProps {
@@ -25,21 +25,36 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ currentUser, onNav
 
   const [activeTab, setActiveTab] = useState<'overview' | 'post-listing'>('overview');
 
-  // Load live mock db states
-  const listings = db.getListings();
+  // Load live db states
+  const [listings, setListings] = useState<PropertyListing[]>([]);
+  const [seekerRequests, setSeekerRequests] = useState<(ViewingRequest & { propertyTitle: string; propertyImage: string; borough: string; price: number })[]>([]);
+  const [providerRequests, setProviderRequests] = useState<(ViewingRequest & { propertyTitle: string })[]>([]);
+  const [agencyDetails, setAgencyDetails] = useState<AgencyDetails | undefined>(undefined);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!currentUser) return;
+      try {
+        const [listingsData, seekerReqsData, providerReqsData, agencyData] = await Promise.all([
+          db.getListings(),
+          db.getViewingRequestsForSeeker(currentUser.id),
+          db.getViewingRequestsForProvider(currentUser.id),
+          db.getAgencyByUserId(currentUser.id)
+        ]);
+        setListings(listingsData);
+        setSeekerRequests(seekerReqsData);
+        setProviderRequests(providerReqsData);
+        setAgencyDetails(agencyData);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      }
+    };
+    fetchData();
+  }, [currentUser, activeTab]); // Re-fetch on tab change or user change
+
   const providerListings = useMemo(() => {
     return listings.filter(l => l.provider_id === currentUser.id);
   }, [listings, currentUser.id]);
-
-  const seekerRequests = useMemo(() => {
-    return db.getViewingRequestsForSeeker(currentUser.id);
-  }, [currentUser.id]);
-
-  const providerRequests = useMemo(() => {
-    return db.getViewingRequestsForProvider(currentUser.id);
-  }, [currentUser.id]);
-
-  const agencyDetails = db.getAgencyByUserId(currentUser.id);
 
   // New Property Form State
   const [newTitle, setNewTitle] = useState('');
@@ -74,7 +89,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ currentUser, onNav
   const [formSuccess, setFormSuccess] = useState(false);
   const [formError, setFormError] = useState('');
 
-  const handlePostListingSubmit = (e: React.FormEvent) => {
+  const handlePostListingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTitle || !newPrice || !newDeposit || !newAddress || !newPostcode || !newAvailable || !newDescription) {
       setFormError('Please fill in all requested fields.');
@@ -82,7 +97,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ currentUser, onNav
     }
 
     try {
-      db.createListing({
+      await db.createListing({
         provider_id: currentUser.id,
         title: newTitle,
         description: newDescription,
@@ -121,17 +136,20 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ currentUser, onNav
     }
   };
 
-  const handleDeleteListing = (id: string, e: React.MouseEvent) => {
+  const handleDeleteListing = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     if (window.confirm('Are you sure you want to permanently remove this listing?')) {
-      db.deleteListing(id);
-      window.location.reload(); // Quick refresh to update state
+      await db.deleteListing(id);
+      // Update local state instead of reload
+      setListings(listings.filter(l => l.id !== id));
     }
   };
 
-  const handleUpdateStatus = (reqId: string, status: 'confirmed' | 'cancelled') => {
-    db.updateViewingRequestStatus(reqId, status);
-    window.location.reload(); // Quick update
+  const handleUpdateStatus = async (reqId: string, status: 'confirmed' | 'cancelled') => {
+    await db.updateViewingRequestStatus(reqId, status);
+    // Update local state
+    setProviderRequests(providerRequests.map(r => r.id === reqId ? { ...r, status } : r));
+    setSeekerRequests(seekerRequests.map(r => r.id === reqId ? { ...r, status } : r));
   };
 
   const handleAmenityToggle = (amenity: string) => {
@@ -347,10 +365,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ currentUser, onNav
                                   </span>
                                 ) : (
                                   <button 
-                                    onClick={() => {
+                                    onClick={async () => {
                                       if (confirm('Apply for Verified Premium status for £25?')) {
-                                        db.verifyListing(item.id);
-                                        window.location.reload();
+                                        await db.verifyListing(item.id);
+                                        // Update local state
+                                        setListings(listings.map(l => l.id === item.id ? { ...l, is_verified: true } : l));
                                       }
                                     }}
                                     className="text-[8px] font-bold text-amber-500 bg-amber-500/5 px-1.5 py-0.5 rounded border border-amber-500/10 hover:bg-amber-500 hover:text-slate-950 transition"

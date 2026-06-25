@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import type { UserProfile } from '../db/schema';
-import { db } from '../db/mockDb';
+import type { UserProfile, PropertyListing } from '../db/schema';
+import { db } from '../db';
 import { MapPin, Calendar, Check, ShieldCheck, Phone, CalendarRange, Clock, Sparkles, Send, ArrowLeft, Home } from 'lucide-react';
 
 interface ListingDetailsPageProps {
@@ -16,7 +16,28 @@ export const ListingDetailsPage: React.FC<ListingDetailsPageProps> = ({
   onNavigate,
   onOpenAuth
 }) => {
-  const listing = db.getListingById(listingId);
+  const [listing, setListing] = useState<PropertyListing | undefined>(undefined);
+  const [provider, setProvider] = useState<{ name: string; avatar?: string; agencyName?: string; phone?: string; type: 'agency' | 'landlord' } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const listingData = await db.getListingById(listingId);
+        setListing(listingData);
+        if (listingData) {
+          const providerData = await db.getProviderByListingId(listingData.provider_id);
+          setProvider(providerData);
+        }
+      } catch (error) {
+        console.error('Error fetching listing details:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [listingId]);
 
   const [activeImageIdx, setActiveImageIdx] = useState(0);
 
@@ -40,7 +61,15 @@ export const ListingDetailsPage: React.FC<ListingDetailsPageProps> = ({
     }
   }, [currentUser]);
 
-  if (!listing) {
+  if (isLoading) {
+    return (
+      <div className="flex-grow bg-slate-950 text-white py-16 text-center">
+        <p className="text-slate-400">Loading premium listing details...</p>
+      </div>
+    );
+  }
+
+  if (!listing || !provider) {
     return (
       <div className="flex-grow bg-slate-950 text-white py-16 text-center">
         <p className="text-slate-400 mb-4">Listing not found or has been removed.</p>
@@ -54,9 +83,7 @@ export const ListingDetailsPage: React.FC<ListingDetailsPageProps> = ({
     );
   }
 
-  const provider = db.getProviderByListingId(listing.provider_id);
-
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!seekerName || !seekerEmail || !seekerPhone || !preferredDate || !preferredTime) {
       setErrorMessage('Please fill in all requested fields to secure your request.');
@@ -70,7 +97,7 @@ export const ListingDetailsPage: React.FC<ListingDetailsPageProps> = ({
     }
 
     try {
-      db.createViewingRequest({
+      await db.createViewingRequest({
         listing_id: listing.id,
         seeker_id: currentUser.id,
         seeker_name: seekerName,
