@@ -58,7 +58,7 @@ export interface PropertyListing {
   created_at: string;
 }
 
-export type ServiceCategory = 'maintenance-tradesmen' | 'legal-financial' | 'logistics-daily-life' | 'safety-care';
+export type ServiceCategory = string;
 
 export interface ServiceProvider {
   id: string;
