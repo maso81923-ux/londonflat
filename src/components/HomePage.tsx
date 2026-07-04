@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
-import type { PropertyListing } from '../db/schema';
-import { Search, MapPin, Sparkles, ShieldCheck, CheckCircle2, Star, Compass, ArrowRight, UserPlus } from 'lucide-react';
+import type { PropertyListing, ServiceProvider, ServiceCategory } from '../db/schema';
+import { Search, MapPin, Sparkles, ShieldCheck, CheckCircle2, Star, Compass, ArrowRight, UserPlus, Wrench, Scale, Truck, Shield, Zap, Droplet, Landmark, ShieldCheck as ShieldCheckIcon, Camera, Heart, Palette, Leaf, Ruler, Key, Trash2, Building2, Paintbrush } from 'lucide-react';
 
 interface HomePageProps {
   listings: PropertyListing[];
-  onNavigate: (view: string, listingId?: string) => void;
+  onNavigate: (view: string, listingId?: string, serviceCategory?: ServiceCategory) => void;
   onSearch: (filters: { borough: string; type: string; maxPrice: number }) => void;
+  serviceProviders?: ServiceProvider[];
 }
+
+const SERVICE_CATEGORIES: { id: ServiceCategory; label: string; icon: any }[] = [
+  { id: 'property-maintenance', label: 'Property Maintenance & Handyman Services', icon: Wrench },
+  { id: 'painters-decorators', label: 'Painters & Decorators', icon: Paintbrush },
+  { id: 'electricians', label: 'Electricians', icon: Zap },
+  { id: 'plumbing-heating', label: 'Plumbing & Heating', icon: Droplet },
+  { id: 'legal-notaries', label: 'Legal & Notaries', icon: Scale },
+  { id: 'banking-mortgages', label: 'Banking & Mortgages', icon: Landmark },
+  { id: 'insurance-agencies', label: 'Insurance Agencies', icon: ShieldCheckIcon },
+  { id: 'physical-security', label: 'Physical Property Security', icon: Shield },
+  { id: 'removals-transport', label: 'Removals & Transport', icon: Truck },
+  { id: 'surveillance-cctv', label: 'Home Surveillance & CCTV', icon: Camera },
+  { id: 'child-elderly-care', label: 'Child & Elderly Care', icon: Heart },
+  { id: 'cleaning-services', label: 'Cleaning Services', icon: Sparkles },
+  { id: 'architecture-planning', label: 'Architecture & Planning', icon: Building2 },
+  { id: 'interior-design', label: 'Interior Design', icon: Palette },
+  { id: 'landscape-gardening', label: 'Landscape Gardening', icon: Leaf },
+  { id: 'surveying-valuations', label: 'Surveying & Valuations', icon: Ruler },
+  { id: 'locksmith-services', label: 'Locksmith Services', icon: Key },
+  { id: 'waste-removal', label: 'Waste Removal', icon: Trash2 }
+];
 
 export const HomePage: React.FC<HomePageProps> = ({ listings, onNavigate, onSearch }) => {
   const [borough, setBorough] = useState('');
@@ -315,6 +337,45 @@ export const HomePage: React.FC<HomePageProps> = ({ listings, onNavigate, onSear
                 Eclectic, scenic, and historic. Featuring elegant Victorian terraces bordering the famous locks, providing quick access to Regent's Park.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* London Living Services Hub */}
+      <section className="bg-slate-900/40 py-20 border-t border-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-2xl font-bold sm:text-3xl text-white">
+              London Living <span className="text-amber-500">Services Hub</span>
+            </h2>
+            <p className="mt-3 text-slate-400 text-sm">
+              Trusted providers for every aspect of your London home — from maintenance to legal, cleaning to security.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 mb-8">
+            {SERVICE_CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => onNavigate('services', undefined, cat.id)}
+                className="flex flex-col items-center text-center p-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:bg-slate-950 hover:border-amber-500/40 transition duration-200 group"
+              >
+                <div className="mb-2 p-2.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-amber-500/20 group-hover:bg-amber-500/5 transition">
+                  <cat.icon className="h-5 w-5 text-amber-500" />
+                </div>
+                <span className="text-[11px] font-semibold text-slate-300 group-hover:text-white leading-tight">
+                  {cat.label}
+                </span>
+              </button>
+            ))}
+          </div>
+          <div className="text-center">
+            <button
+              onClick={() => onNavigate('services')}
+              className="inline-flex items-center space-x-1.5 text-xs font-bold text-amber-400 hover:text-amber-300 transition"
+            >
+              <span>View all service providers</span>
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </section>

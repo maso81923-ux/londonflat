@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { db } from '../db';
 import type { UserRole, UserProfile } from '../db/schema';
-import { X, User, Mail, Building2, LogIn, UserPlus } from 'lucide-react';
+import { X, User, Mail, Building2, LogIn, UserPlus, Wrench } from 'lucide-react';
 
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   onLoginSuccess: (user: UserProfile) => void;
   defaultTab?: 'login' | 'register';
-  defaultRole?: 'seeker' | 'agency';
+  defaultRole?: 'seeker' | 'agency' | 'service-provider';
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({
@@ -75,8 +75,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       return;
     }
 
-    if (role === 'agency' && (!companyName || !licenseNumber || !officeAddress)) {
-      setError('Please fill in your agency details and license number for verification.');
+    if ((role === 'agency' || role === 'service-provider') && (!companyName || !officeAddress)) {
+      setError('Please fill in your business name and office address.');
+      return;
+    }
+
+    if (role === 'agency' && !licenseNumber) {
+      setError('Please enter your UK License Number for verification.');
       return;
     }
 
@@ -215,21 +220,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <label className="block text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-2">
                 I am registering as a:
               </label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 <button
                   type="button"
                   onClick={() => {
                     setRole('seeker');
                     setError('');
+                    setCompanyName('');
+                    setLicenseNumber('');
                   }}
-                  className={`flex items-center justify-center space-x-2 border p-3 rounded-xl transition font-bold text-xs ${
+                  className={`flex items-center justify-center space-x-1.5 border p-3 rounded-xl transition font-bold text-xs ${
                     role === 'seeker'
                       ? 'border-amber-500 bg-amber-500/10 text-amber-400'
                       : 'border-slate-800 bg-slate-950 text-slate-400 hover:border-slate-700 hover:text-white'
                   }`}
                 >
                   <User className="h-4 w-4" />
-                  <span>Flat Hunter (Seeker)</span>
+                  <span>Flat Hunter</span>
                 </button>
 
                 <button
@@ -238,7 +245,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     setRole('agency');
                     setError('');
                   }}
-                  className={`flex items-center justify-center space-x-2 border p-3 rounded-xl transition font-bold text-xs ${
+                  className={`flex items-center justify-center space-x-1.5 border p-3 rounded-xl transition font-bold text-xs ${
                     role === 'agency'
                       ? 'border-amber-500 bg-amber-500/10 text-amber-400'
                       : 'border-slate-800 bg-slate-950 text-slate-400 hover:border-slate-700 hover:text-white'
@@ -246,6 +253,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 >
                   <Building2 className="h-4 w-4" />
                   <span>Letting Agency</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setRole('service-provider');
+                    setError('');
+                    setLicenseNumber('');
+                  }}
+                  className={`flex items-center justify-center space-x-1.5 border p-3 rounded-xl transition font-bold text-xs ${
+                    role === 'service-provider'
+                      ? 'border-amber-500 bg-amber-500/10 text-amber-400'
+                      : 'border-slate-800 bg-slate-950 text-slate-400 hover:border-slate-700 hover:text-white'
+                  }`}
+                >
+                  <Wrench className="h-4 w-4" />
+                  <span>Service Provider</span>
                 </button>
               </div>
             </div>
@@ -294,12 +318,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               />
             </div>
 
-            {/* Agency Specific fields */}
-            {role === 'agency' && (
+            {/* Business Fields (Agency & Service Provider) */}
+            {(role === 'agency' || role === 'service-provider') && (
               <div className="space-y-3 border-t border-slate-950 pt-3">
                 <div className="flex items-center space-x-1.5 text-xs font-bold text-amber-400 mb-1">
-                  <Building2 className="h-4 w-4" />
-                  <span>Licensed Agency Credentials</span>
+                  {role === 'agency' ? <Building2 className="h-4 w-4" /> : <Wrench className="h-4 w-4" />}
+                  <span>{role === 'agency' ? 'Licensed Agency Credentials' : 'Service Business Details'}</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -317,19 +341,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                      UK License Number
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. LN/2021/08492"
-                      value={licenseNumber}
-                      onChange={(e) => setLicenseNumber(e.target.value)}
-                      className="w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 px-3 text-xs font-medium text-slate-300 outline-none focus:border-amber-500"
-                      required
-                    />
-                  </div>
+                  {role === 'agency' && (
+                    <div>
+                      <label className="block text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                        UK License Number
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. LN/2021/08492"
+                        value={licenseNumber}
+                        onChange={(e) => setLicenseNumber(e.target.value)}
+                        className="w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 px-3 text-xs font-medium text-slate-300 outline-none focus:border-amber-500"
+                        required
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -348,11 +374,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
                 <div>
                   <label className="block text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                    Agency Website URL (Optional)
+                    Business Website URL (Optional)
                   </label>
                   <input
                     type="url"
-                    placeholder="e.g. https://apexlettings.co.uk"
+                    placeholder="e.g. https://example.com"
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
                     className="w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 px-3 text-xs font-medium text-slate-300 outline-none focus:border-amber-500"

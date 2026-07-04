@@ -4,6 +4,7 @@ import type { ServiceProvider, ServiceCategory } from '../db/schema';
 
 interface ServicesPageProps {
   providers: ServiceProvider[];
+  initialCategory?: ServiceCategory | null;
 }
 
 const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: string }[] = [
@@ -27,8 +28,8 @@ const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: 
   { id: 'waste-removal', label: 'Waste Removal', icon: Trash2, description: 'Domestic and commercial waste removal and clearance services.' }
 ];
 
-export const ServicesPage: React.FC<ServicesPageProps> = ({ providers }) => {
-  const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
+export const ServicesPage: React.FC<ServicesPageProps> = ({ providers, initialCategory }) => {
+  const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(initialCategory || null);
   const [boroughFilter, setBoroughFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 

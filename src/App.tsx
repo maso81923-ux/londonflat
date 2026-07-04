@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { db } from './db';
-import type { UserProfile, PropertyListing } from './db/schema';
+import type { UserProfile, PropertyListing, ServiceCategory } from './db/schema';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/HomePage';
@@ -15,6 +15,7 @@ function App() {
   const [currentView, setCurrentView] = useState<string>('home');
   const [activeListingId, setActiveListingId] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
+  const [selectedServiceCategory, setSelectedServiceCategory] = useState<ServiceCategory | null>(null);
   
   // Search state passed between Home and Listings
   const [searchFilters, setSearchFilters] = useState<{ borough: string; type: string; maxPrice: number } | undefined>(undefined);
@@ -56,12 +57,17 @@ function App() {
     fetchData();
   }, [currentView]); // Re-fetch on view change to ensure fresh data
 
-  const handleNavigate = (view: string, listingId?: string) => {
+  const handleNavigate = (view: string, listingId?: string, serviceCategory?: ServiceCategory) => {
     setCurrentView(view);
     if (listingId) {
       setActiveListingId(listingId);
     } else {
       setActiveListingId(null);
+    }
+    if (serviceCategory) {
+      setSelectedServiceCategory(serviceCategory);
+    } else if (view !== 'services') {
+      setSelectedServiceCategory(null);
     }
     // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -132,6 +138,7 @@ function App() {
         return (
           <ServicesPage 
             providers={serviceProviders} 
+            initialCategory={selectedServiceCategory}
           />
         );
       default:

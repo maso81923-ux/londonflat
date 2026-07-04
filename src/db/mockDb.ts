@@ -6,7 +6,8 @@ import {
   type AgencyDetails, 
   type RequestStatus, 
   type ServiceProvider, 
-  type ServiceCategory 
+  type ServiceCategory,
+  type UserRole 
 } from './schema';
 
 // Helper to generate IDs
@@ -548,7 +549,7 @@ export class MockDatabase implements Database {
     }
   }
 
-  async registerUser(fullName: string, email: string, role: 'seeker' | 'agency' | 'landlord', phone?: string): Promise<UserProfile> {
+  async registerUser(fullName: string, email: string, role: UserRole, phone?: string): Promise<UserProfile> {
     // Check duplicate
     const existing = this.users.find(u => u.email.toLowerCase() === email.toLowerCase());
     if (existing) {

@@ -1,6 +1,7 @@
 import type { Database } from './DatabaseInterface';
 import { supabaseDb } from './supabaseDb';
 import { db as mockDb } from './mockDb';
+import type { UserRole } from './schema';
 
 class DatabaseWrapper implements Database {
   private useSupabase: boolean = true;
@@ -27,7 +28,7 @@ class DatabaseWrapper implements Database {
   async getCurrentUser() { return (await this.getDb()).getCurrentUser(); }
   async login(email: string) { return (await this.getDb()).login(email); }
   async logout() { return (await this.getDb()).logout(); }
-  async registerUser(fullName: string, email: string, role: 'seeker' | 'agency' | 'landlord', phone?: string) {
+  async registerUser(fullName: string, email: string, role: UserRole, phone?: string) {
     return (await this.getDb()).registerUser(fullName, email, role, phone);
   }
   async registerAgency(userId: string, companyName: string, licenseNumber: string, phone: string, officeAddress: string, website?: string) {

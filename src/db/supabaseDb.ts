@@ -7,7 +7,8 @@ import {
   type AgencyDetails, 
   type RequestStatus, 
   type ServiceProvider, 
-  type ServiceCategory 
+  type ServiceCategory,
+  type UserRole 
 } from './schema';
 
 export class SupabaseDatabase implements Database {
@@ -43,7 +44,7 @@ export class SupabaseDatabase implements Database {
     await supabase.auth.signOut();
   }
 
-  async registerUser(fullName: string, email: string, role: 'seeker' | 'agency' | 'landlord', phone?: string): Promise<UserProfile> {
+  async registerUser(fullName: string, email: string, role: UserRole, phone?: string): Promise<UserProfile> {
     const { data, error } = await supabase.auth.signUp({
       email,
       password: 'Password123!',

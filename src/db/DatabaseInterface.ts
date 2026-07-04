@@ -5,14 +5,15 @@ import {
   type AgencyDetails, 
   type ServiceProvider, 
   type ServiceCategory, 
-  type RequestStatus 
+  type RequestStatus,
+  type UserRole
 } from './schema';
 
 export interface Database {
   getCurrentUser(): Promise<UserProfile | null>;
   login(email: string): Promise<UserProfile | null>;
   logout(): Promise<void>;
-  registerUser(fullName: string, email: string, role: 'seeker' | 'agency' | 'landlord', phone?: string): Promise<UserProfile>;
+  registerUser(fullName: string, email: string, role: UserRole, phone?: string): Promise<UserProfile>;
   registerAgency(userId: string, companyName: string, licenseNumber: string, phone: string, officeAddress: string, website?: string): Promise<AgencyDetails>;
   getAgencyByUserId(userId: string): Promise<AgencyDetails | undefined>;
   
