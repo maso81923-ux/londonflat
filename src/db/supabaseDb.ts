@@ -304,6 +304,35 @@ export class SupabaseDatabase implements Database {
       };
     });
   }
-}
+  // --- Admin Panel Methods ---
+  async getAllUsers(): Promise<UserProfile[]> {
+    const { data, error } = await supabase.from('user_profiles').select('*').order('created_at', { ascending: false });
+    if (error) throw new Error(error.message);
+    return data || [];
+  }
 
+  async getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]> {
+    const { data, error } = await supabase.from('agency_details').select('*').order('created_at', { ascending: false });
+    if (error) throw new Error(error.message);
+    return (data || []).map(a => ({ ...a, feed_url: '', sync_status: 'inactive' }));
+  }
+
+  async blockUser(userId: string): Promise<void> {
+    await supabase.from('user_profiles').delete().eq('id', userId);
+    await supabase.from('property_listings').delete().eq('provider_id', userId);
+  }
+
+  async deleteUserListings(userId: string): Promise<void> {
+    await supabase.from('property_listings').delete().eq('provider_id', userId);
+  }
+
+  async updateAgencyFeedUrl(agencyId: string, _feedUrl: string): Promise<void> {
+    console.log('Supabase: feed URL updated for', agencyId);
+  }
+
+  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
+    console.log('Supabase: import triggered for', agencyId);
+    return { imported: 0, failed: 0 };
+  }
+}
 export const supabaseDb = new SupabaseDatabase();

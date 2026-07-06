@@ -1,11 +1,11 @@
 import React from 'react';
-import type { UserProfile } from '../db/schema';
-import { Building2, LogOut, LayoutDashboard } from 'lucide-react';
+import type { UserProfile, UserRole } from '../db/schema';
+import { Building2, LogOut, LayoutDashboard, Shield } from 'lucide-react';
 
 interface HeaderProps {
   currentUser: UserProfile | null;
   onNavigate: (view: string, listingId?: string) => void;
-  onOpenAuth: (defaultTab?: 'login' | 'register', defaultRole?: 'seeker' | 'agency') => void;
+  onOpenAuth: (defaultTab?: 'login' | 'register', defaultRole?: UserRole) => void;
   onLogout: () => void;
   currentView: string;
 }
@@ -69,6 +69,17 @@ export const Header: React.FC<HeaderProps> = ({
           >
             Agency Portal
           </button>
+          {currentUser?.role === 'admin' && (
+            <button 
+              onClick={() => onNavigate('admin')}
+              className={`text-sm font-medium transition duration-200 flex items-center gap-1.5 ${
+                currentView === 'admin' ? 'text-amber-400' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              <Shield className="w-4 h-4" />
+              Admin
+            </button>
+          )}
           <a 
             href="#about-london" 
             onClick={(e) => {
@@ -99,6 +110,20 @@ export const Header: React.FC<HeaderProps> = ({
                 <LayoutDashboard className="h-3.5 w-3.5" />
                 <span>Dashboard</span>
               </button>
+
+              {currentUser?.role === 'admin' && (
+                <button
+                  onClick={() => onNavigate('admin')}
+                  className={`flex items-center space-x-1.5 rounded-lg px-4 py-2 text-xs font-medium border transition ${
+                    currentView === 'admin'
+                      ? 'border-amber-500/30 bg-amber-500/10 text-amber-400'
+                      : 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-slate-700 hover:text-white'
+                  }`}
+                >
+                  <Shield className="h-3.5 w-3.5" />
+                  <span>Admin</span>
+                </button>
+              )}
 
               <div className="relative group flex items-center space-x-2.5">
                 <img 

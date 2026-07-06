@@ -52,6 +52,14 @@ class DatabaseWrapper implements Database {
   async updateViewingRequestStatus(id: string, status: any) { return (await this.getDb()).updateViewingRequestStatus(id, status); }
   async getViewingRequestsForProvider(providerId: string) { return (await this.getDb()).getViewingRequestsForProvider(providerId); }
   async getViewingRequestsForSeeker(seekerId: string) { return (await this.getDb()).getViewingRequestsForSeeker(seekerId); }
+
+  // Admin Panel Methods
+  async getAllUsers() { return (await this.getDb()).getAllUsers(); }
+  async getAllAgencies() { return (await this.getDb()).getAllAgencies(); }
+  async blockUser(userId: string) { return (await this.getDb()).blockUser(userId); }
+  async deleteUserListings(userId: string) { return (await this.getDb()).deleteUserListings(userId); }
+  async updateAgencyFeedUrl(agencyId: string, feedUrl: string) { return (await this.getDb()).updateAgencyFeedUrl(agencyId, feedUrl); }
+  async importAgencyListings(agencyId: string) { return (await this.getDb()).importAgencyListings(agencyId); }
 }
 
 export const db = new DatabaseWrapper();

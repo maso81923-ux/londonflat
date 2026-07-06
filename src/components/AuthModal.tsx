@@ -8,7 +8,7 @@ interface AuthModalProps {
   onClose: () => void;
   onLoginSuccess: (user: UserProfile) => void;
   defaultTab?: 'login' | 'register';
-  defaultRole?: 'seeker' | 'agency' | 'service-provider';
+  defaultRole?: UserRole;
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({

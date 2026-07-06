@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { db } from './db';
-import type { UserProfile, PropertyListing, ServiceCategory } from './db/schema';
+import type { UserProfile, PropertyListing, ServiceCategory, UserRole } from './db/schema';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/HomePage';
 import { ListingsPage } from './components/ListingsPage';
 import { ListingDetailsPage } from './components/ListingDetailsPage';
 import { DashboardPage } from './components/DashboardPage';
+import { AdminPage } from './components/AdminPage';
 import { ServicesPage } from './components/ServicesPage';
 import { AuthModal } from './components/AuthModal';
 import './App.css';
@@ -23,7 +24,7 @@ function App() {
   // Auth modal state
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalTab, setAuthModalTab] = useState<'login' | 'register'>('login');
-  const [authModalRole, setAuthModalRole] = useState<'seeker' | 'agency'>('seeker');
+  const [authModalRole, setAuthModalRole] = useState<UserRole>('seeker');
 
   // Load user on mount
   useEffect(() => {
@@ -88,7 +89,7 @@ function App() {
     handleNavigate('home');
   };
 
-  const handleOpenAuth = (defaultTab: 'login' | 'register' = 'login', defaultRole: 'seeker' | 'agency' = 'seeker') => {
+  const handleOpenAuth = (defaultTab: 'login' | 'register' = 'login', defaultRole: UserRole = 'seeker') => {
     setAuthModalTab(defaultTab);
     setAuthModalRole(defaultRole);
     setIsAuthModalOpen(true);
@@ -141,6 +142,8 @@ function App() {
             initialCategory={selectedServiceCategory}
           />
         );
+      case 'admin':
+        return <AdminPage />;
       default:
         return (
           <HomePage 

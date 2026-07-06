@@ -33,4 +33,12 @@ export interface Database {
   updateViewingRequestStatus(id: string, status: RequestStatus): Promise<void>;
   getViewingRequestsForProvider(providerId: string): Promise<(ViewingRequest & { propertyTitle: string })[]>;
   getViewingRequestsForSeeker(seekerId: string): Promise<(ViewingRequest & { propertyTitle: string; propertyImage: string; borough: string; price: number })[]>;
+
+  // Admin Panel Methods
+  getAllUsers(): Promise<UserProfile[]>;
+  getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]>;
+  blockUser(userId: string): Promise<void>;
+  deleteUserListings(userId: string): Promise<void>;
+  updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void>;
+  importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }>;
 }

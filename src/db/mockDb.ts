@@ -50,6 +50,15 @@ const INITIAL_USERS: UserProfile[] = [
     phone: '+44 7700 900543',
     avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
     created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'user-admin',
+    email: 'admin@londonflat.uk',
+    full_name: 'LondonFlat Admin',
+    role: 'admin',
+    phone: '+44 20 7946 0001',
+    avatar_url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80',
+    created_at: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString()
   }
 ];
 
@@ -732,6 +741,74 @@ export class MockDatabase implements Database {
         };
       })
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  }
+
+  // --- Admin Panel Methods ---
+  private feedUrls: Record<string, string> = {};
+
+  async getAllUsers(): Promise<UserProfile[]> {
+    return this.users;
+  }
+
+  async getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]> {
+    return this.agencies.map(a => ({
+      ...a,
+      feed_url: this.feedUrls[a.id] || '',
+      sync_status: this.feedUrls[a.id] ? 'active' : 'inactive'
+    }));
+  }
+
+  async blockUser(userId: string): Promise<void> {
+    this.users = this.users.filter(u => u.id !== userId);
+    this.listings = this.listings.filter(l => l.provider_id !== userId);
+    this.requests = this.requests.filter(r => r.seeker_id !== userId);
+    this.serviceProviders = this.serviceProviders.filter(s => s.id !== userId);
+    saveToStorage('users', this.users);
+    saveToStorage('listings', this.listings);
+    saveToStorage('requests', this.requests);
+    saveToStorage('service_providers', this.serviceProviders);
+  }
+
+  async deleteUserListings(userId: string): Promise<void> {
+    this.listings = this.listings.filter(l => l.provider_id !== userId);
+    saveToStorage('listings', this.listings);
+  }
+
+  async updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void> {
+    this.feedUrls[agencyId] = feedUrl;
+  }
+
+  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
+    const agency = this.agencies.find(a => a.id === agencyId);
+    if (!agency || !this.feedUrls[agencyId]) return { imported: 0, failed: 0 };
+    // Simulate importing 3-5 listings from the feed
+    const count = Math.floor(Math.random() * 3) + 3;
+    for (let i = 0; i < count; i++) {
+      this.listings.push({
+        id: `listing-feed-${Date.now()}-${i}`,
+        provider_id: agency.user_id,
+        title: `Imported Property ${i + 1} - ${agency.company_name}`,
+        description: 'Automatically imported from XML/API feed.',
+        price_per_month: 1200 + Math.floor(Math.random() * 2000),
+        deposit: 1500,
+        address: 'London, UK',
+        borough: 'Westminster',
+        postcode: 'W1B',
+        type: 'entire_flat',
+        listing_purpose: 'rent',
+        property_status: 'available',
+        bedrooms: Math.floor(Math.random() * 3) + 1,
+        bathrooms: Math.floor(Math.random() * 2) + 1,
+        available_from: new Date().toISOString(),
+        is_bills_included: false,
+        amenities: ['Wifi', 'Furnished'],
+        images: ['https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80'],
+        is_verified: true,
+        created_at: new Date().toISOString()
+      });
+    }
+    saveToStorage('listings', this.listings);
+    return { imported: count, failed: 0 };
   }
 }
 
