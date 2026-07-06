@@ -56,8 +56,8 @@ const INITIAL_USERS: UserProfile[] = [
     id: 'user-seeker',
     email: 'alex.flatseeker@gmail.com',
     full_name: 'Alex Mercer',
-    role: 'seeker',
-    phone: '+44 7700 900543',
+    role: 'admin',
+    phone: '+387603158020',
     avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
     created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
   },
