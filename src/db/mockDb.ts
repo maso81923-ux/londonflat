@@ -33,6 +33,16 @@ const INITIAL_USERS: UserProfile[] = [
     avatar_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
     created_at: new Date(Date.now() - 200 * 24 * 60 * 60 * 1000).toISOString()
   },
+    {
+    id: 'user-admin-instant',
+    email: 'admin@londonflat.uk',
+    full_name: 'LondonFlat Admin',
+    role: 'admin',
+    phone: '+44 20 7946 0001',
+    avatar_url: 'https://unsplash.com',
+    created_at: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString()
+  },
+
   {
     id: 'user-sarah',
     email: 'sarah.j@gmail.com',
