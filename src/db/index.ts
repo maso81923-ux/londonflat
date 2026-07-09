@@ -25,11 +25,45 @@ class DatabaseWrapper implements Database {
     return mockDb;
   }
 
-  async getCurrentUser() { return (await this.getDb()).getCurrentUser(); }
-  async login(email: string) { return (await this.getDb()).login(email); }
-  async logout() { return (await this.getDb()).logout(); }
+  async getCurrentUser() {
+    if (this.useSupabase) {
+      try {
+        const result = await supabaseDb.getCurrentUser();
+        if (result) return result;
+      } catch (e) {
+        console.warn('Supabase getCurrentUser failed, falling back to mockDb', e);
+      }
+    }
+    return mockDb.getCurrentUser();
+  }
+  async login(email: string) {
+    // Try Supabase first, fall back to mockDb if it returns null (user not in Supabase Auth)
+    if (this.useSupabase) {
+      try {
+        const result = await supabaseDb.login(email);
+        if (result) return result;
+      } catch (e) {
+        console.warn('Supabase login failed, falling back to mockDb', e);
+      }
+    }
+    return mockDb.login(email);
+  }
+  async logout() {
+    if (this.useSupabase) {
+      try { await supabaseDb.logout(); } catch (e) {}
+    }
+    return mockDb.logout();
+  }
   async registerUser(fullName: string, email: string, role: UserRole, phone?: string) {
-    return (await this.getDb()).registerUser(fullName, email, role, phone);
+    if (this.useSupabase) {
+      try {
+        const result = await supabaseDb.registerUser(fullName, email, role, phone);
+        if (result) return result;
+      } catch (e) {
+        console.warn('Supabase registerUser failed, falling back to mockDb', e);
+      }
+    }
+    return mockDb.registerUser(fullName, email, role, phone);
   }
   async registerAgency(userId: string, companyName: string, licenseNumber: string, phone: string, officeAddress: string, website?: string) {
     return (await this.getDb()).registerAgency(userId, companyName, licenseNumber, phone, officeAddress, website);
