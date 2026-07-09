@@ -167,7 +167,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <div>
               <h2 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Welcome Back</h2>
               <p className="text-[11px] text-slate-500 leading-relaxed mb-4">
-                To sign in instantly, simply enter your registered email address. Try <strong className="text-amber-500">alex.flatseeker@gmail.com</strong> or <strong className="text-amber-500">info@apexlettings.co.uk</strong>.
+                To sign in instantly, simply enter your registered email address. Try <strong className="text-amber-500">admin@londonflat.uk</strong> (admin), <strong className="text-amber-500">alex.flatseeker@gmail.com</strong> (seeker), or <strong className="text-amber-500">info@apexlettings.co.uk</strong> (agency).
               </p>
             </div>
 

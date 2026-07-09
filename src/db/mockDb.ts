@@ -531,6 +531,15 @@ export class MockDatabase implements Database {
       this.requests = loadFromStorage('requests', INITIAL_REQUESTS);
       this.serviceProviders = loadFromStorage('service_providers', INITIAL_SERVICE_PROVIDERS);
       
+      // Ensure admin user is always present (localStorage may have stale data from before admin was added)
+      if (!this.users.find(u => u.id === 'user-admin')) {
+        const adminUser = INITIAL_USERS.find(u => u.id === 'user-admin');
+        if (adminUser) {
+          this.users.unshift(adminUser);
+          saveToStorage('users', this.users);
+        }
+      }
+      
       const loggedIn = localStorage.getItem('londonflat_current_user');
       if (loggedIn) {
         this.currentUser = JSON.parse(loggedIn);
