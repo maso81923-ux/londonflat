@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building2, Mail, Phone, MapPin, Heart } from 'lucide-react';
+import { Building2, Mail, Phone, Heart } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (view: string) => void;
@@ -89,15 +89,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="mt-4 space-y-2 text-xs">
               <li className="flex items-center space-x-2">
                 <Mail className="h-3.5 w-3.5 text-amber-500" />
-                <span>support@londonflat.uk</span>
+                <span>info@londonflat.uk</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="h-3.5 w-3.5 text-amber-500" />
-                <span>+44 20 7946 0950</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <MapPin className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
-                <span>85 Great Portland St, Marylebone, London, W1W 7LT</span>
+                <span>+447576040868</span>
               </li>
             </ul>
           </div>
