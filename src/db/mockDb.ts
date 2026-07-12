@@ -66,7 +66,7 @@ const INITIAL_USERS: UserProfile[] = [
     email: 'admin@londonflat.uk',
     full_name: 'LondonFlat Admin',
     role: 'admin',
-    phone: '+44 20 7946 0001',
+    phone: '+447576040868',
     avatar_url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80',
     created_at: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString()
   }
