@@ -10,6 +10,7 @@ import { DashboardPage } from './components/DashboardPage';
 import { AdminPage } from './components/AdminPage';
 import { ServicesPage } from './components/ServicesPage';
 import { AuthModal } from './components/AuthModal';
+import { SEO } from './components/SEO';
 import './App.css';
 
 function App() {
@@ -157,6 +158,25 @@ function App() {
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 font-sans text-white">
+      {/* SEO per page */}
+      {currentView === 'home' && (
+        <SEO title="Premium London Real Estate & Flat-Sharing Marketplace" path="/" />
+      )}
+      {currentView === 'listings' && (
+        <SEO title="Browse Premium Listings" description="Explore verified flats, rooms, and apartments for rent or sale in London." path="/listings" />
+      )}
+      {currentView === 'details' && activeListingId && (
+        <SEO title={`Property Listing - LondonFlat`} path={`/listing/${activeListingId}`} type="product" />
+      )}
+      {currentView === 'services' && (
+        <SEO title="London Living Services Hub" description="Find trusted service providers for your London home — maintenance, legal, removals, and more." path="/services" />
+      )}
+      {currentView === 'dashboard' && (
+        <SEO title="Dashboard" path="/dashboard" />
+      )}
+      {currentView === 'admin' && (
+        <SEO title="Admin Panel" path="/admin" />
+      )}
       {/* Header */}
       <Header 
         currentUser={currentUser} 
