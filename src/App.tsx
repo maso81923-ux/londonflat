@@ -10,6 +10,7 @@ import { DashboardPage } from './components/DashboardPage';
 import { AdminPage } from './components/AdminPage';
 import { ServicesPage } from './components/ServicesPage';
 import { AuthModal } from './components/AuthModal';
+import { InstallPWA } from './components/InstallPWA';
 import { SEO } from './components/SEO';
 import './App.css';
 
@@ -202,6 +203,9 @@ function App() {
         defaultTab={authModalTab}
         defaultRole={authModalRole}
       />
+
+      {/* PWA Install Prompt */}
+      <InstallPWA />
     </div>
   );
 }
