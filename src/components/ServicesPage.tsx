@@ -1,5 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { Wrench, Scale, Truck, Shield, Globe, Phone, Mail, CheckCircle, Search } from 'lucide-react';
+import { 
+  Wrench, Scale, Truck, Shield, Globe, Phone, Mail, CheckCircle, Search,
+  Zap, Droplets, Landmark, ShieldCheck, Camera, Heart, Sparkles,
+  Building2, Palette, Ruler, Key, Trash2, PenTool, Leaf
+} from 'lucide-react';
 import type { ServiceProvider, ServiceCategory } from '../db/schema';
 
 interface ServicesPageProps {
@@ -7,30 +11,24 @@ interface ServicesPageProps {
 }
 
 const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: string }[] = [
-  { 
-    id: 'maintenance-tradesmen', 
-    label: 'Maintenance & Tradesmen', 
-    icon: Wrench,
-    description: 'Expert repairs, plumbing, electrical and general upkeep for your London home.'
-  },
-  { 
-    id: 'legal-financial', 
-    label: 'Legal & Financial', 
-    icon: Scale,
-    description: 'Trusted solicitors, notaries, and banking services tailored for property seekers.'
-  },
-  { 
-    id: 'logistics-daily-life', 
-    label: 'Logistics & Daily Life', 
-    icon: Truck,
-    description: 'Seamless removals, professional cleaning, and daily essentials for city living.'
-  },
-  { 
-    id: 'safety-care', 
-    label: 'Safety & Care', 
-    icon: Shield,
-    description: 'Home security, CCTV, and professional care services for peace of mind.'
-  }
+  { id: 'property-maintenance', label: 'Property Maintenance & Handyman Services', icon: Wrench, description: 'Expert repairs, furniture assembly, and general upkeep for your London home.' },
+  { id: 'painters-decorators', label: 'Painters & Decorators', icon: PenTool, description: 'High-end interior and exterior painting and decorating for premium properties.' },
+  { id: 'electricians', label: 'Electricians', icon: Zap, description: 'Certified electrical installations, repairs, and smart home wiring across London.' },
+  { id: 'plumbing-heating', label: 'Plumbing & Heating', icon: Droplets, description: 'Professional plumbing, boiler servicing, and underfloor heating specialists.' },
+  { id: 'legal-notaries', label: 'Legal & Notaries', icon: Scale, description: 'Trusted solicitors, notaries, and conveyancing services for property transactions.' },
+  { id: 'banking-mortgages', label: 'Banking & Mortgages', icon: Landmark, description: 'Premium mortgage advice, wealth management, and high-street banking services.' },
+  { id: 'insurance', label: 'Insurance Agencies', icon: ShieldCheck, description: 'Comprehensive property, contents, and landlord insurance tailored for London.' },
+  { id: 'property-security', label: 'Physical Property Security', icon: Shield, description: 'Security guards, access control, and manned guarding for residential buildings.' },
+  { id: 'removals-transport', label: 'Removals & Transport', icon: Truck, description: 'White-glove removals, furniture transport, and fine art logistics across the capital.' },
+  { id: 'surveillance-cctv', label: 'Home Surveillance & CCTV', icon: Camera, description: 'Advanced CCTV, smart doorbells, and 24/7 remote monitoring solutions.' },
+  { id: 'child-elderly-care', label: 'Child & Elderly Care', icon: Heart, description: 'Professional nannies, elder companions, and home healthcare providers.' },
+  { id: 'cleaning', label: 'Cleaning Services', icon: Sparkles, description: 'Eco-friendly deep cleaning, regular maintenance, and end-of-tenancy specialists.' },
+  { id: 'architecture-planning', label: 'Architecture & Planning', icon: Building2, description: 'RIBA-chartered architects and planning consultants for home extensions.' },
+  { id: 'interior-design', label: 'Interior Design', icon: Palette, description: 'Bespoke interior design, space planning, and premium furnishing solutions.' },
+  { id: 'landscape-gardening', label: 'Landscape Gardening', icon: Leaf, description: 'Garden design, landscaping, and maintenance for London terraces and gardens.' },
+  { id: 'surveying-valuations', label: 'Surveying & Valuations', icon: Ruler, description: 'RICS-certified surveyors for building surveys, valuations, and home reports.' },
+  { id: 'locksmiths', label: 'Locksmith Services', icon: Key, description: '24/7 emergency locksmiths, security upgrades, and access control systems.' },
+  { id: 'waste-removal', label: 'Waste Removal', icon: Trash2, description: 'Licensed waste clearance, skip hire, and recycling services for London homes.' }
 ];
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ providers }) => {

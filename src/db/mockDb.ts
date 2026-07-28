@@ -223,12 +223,13 @@ const INITIAL_LISTINGS: PropertyListing[] = [
 ];
 
 const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
+  // 1. Property Maintenance & Handyman Services
   {
     id: 'service-1',
     name: 'London Handyman Pro',
-    description: 'Expert home repairs, furniture assembly, and general maintenance for London homes.',
-    category: 'maintenance-tradesmen',
-    subcategories: ['Handyman', 'Repairs', 'Assembly'],
+    description: 'Expert home repairs, furniture assembly, and general maintenance for London homes. 24/7 emergency call-out available.',
+    category: 'property-maintenance',
+    subcategories: ['Handyman', 'Repairs', 'Assembly', 'Emergency'],
     borough: 'Hackney',
     address: '123 Mare Street, London E8 3RH',
     phone: '+44 20 8123 4567',
@@ -238,11 +239,25 @@ const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
     created_at: new Date().toISOString()
   },
   {
+    id: 'service-1b',
+    name: 'Mayfair Property Care',
+    description: 'Premium property maintenance for high-end residences in Central London. Specialists in listed building upkeep.',
+    category: 'property-maintenance',
+    subcategories: ['Maintenance', 'Listed Buildings', 'Gutter Cleaning'],
+    borough: 'Westminster',
+    address: '22 Audley Street, Mayfair, W1K 2WW',
+    phone: '+44 20 7935 1122',
+    email: 'info@mayfairproperty.care',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 2. Painters & Decorators
+  {
     id: 'service-2',
     name: 'Elite Painters & Decorators',
-    description: 'High-end interior and exterior painting and decorating services for premium properties.',
-    category: 'maintenance-tradesmen',
-    subcategories: ['Painting', 'Decorating', 'Wallpapering'],
+    description: 'High-end interior and exterior painting and decorating services for premium London properties.',
+    category: 'painters-decorators',
+    subcategories: ['Painting', 'Decorating', 'Wallpapering', 'Faux Finishes'],
     borough: 'Kensington & Chelsea',
     address: '45 King\'s Road, Chelsea, SW3 4UD',
     phone: '+44 20 7987 6543',
@@ -250,12 +265,42 @@ const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
     is_verified: true,
     created_at: new Date().toISOString()
   },
+  // 3. Electricians
   {
     id: 'service-3',
+    name: 'Swift Electricians Ltd',
+    description: 'NICEIC-certified electrical installations, rewiring, fuseboard upgrades, and smart home electrical integration across London.',
+    category: 'electricians',
+    subcategories: ['Rewiring', 'Smart Home', 'Fuse Boards', 'Testing'],
+    borough: 'Westminster',
+    address: '14 Regency Street, London SW1P 4DD',
+    phone: '+44 20 7222 3456',
+    email: 'sparky@swiftelectric.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 4. Plumbing & Heating
+  {
+    id: 'service-4',
+    name: 'Pimlico Plumbers',
+    description: 'Central London\'s most trusted plumbing and heating engineers. Boiler servicing, underfloor heating, and bathroom installations.',
+    category: 'plumbing-heating',
+    subcategories: ['Plumbing', 'Boilers', 'Heating', 'Bathrooms'],
+    borough: 'Westminster',
+    address: '1 Sail Street, London SE11 6NQ',
+    phone: '+44 20 7928 8888',
+    email: 'info@pimlicoplumbers.com',
+    website: 'https://pimlicoplumbers.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 5. Legal & Notaries
+  {
+    id: 'service-5',
     name: 'Sterling Notary Services',
-    description: 'Professional notary public and legal documentation services in the City of London.',
-    category: 'legal-financial',
-    subcategories: ['Notary', 'Legal Docs', 'Apostille'],
+    description: 'Professional notary public and legal documentation services in the City of London. Apostille and document legalisation specialists.',
+    category: 'legal-notaries',
+    subcategories: ['Notary', 'Legal Docs', 'Apostille', 'Conveyancing'],
     borough: 'City of London',
     address: '10 St Paul\'s Churchyard, EC4M 8AL',
     phone: '+44 20 3456 7890',
@@ -264,12 +309,13 @@ const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
     is_verified: true,
     created_at: new Date().toISOString()
   },
+  // 6. Banking & Mortgages
   {
-    id: 'service-4',
+    id: 'service-6',
     name: 'Barclays Premier Banking — Canary Wharf',
-    description: 'Premium banking and financial services for high-net-worth individuals.',
-    category: 'legal-financial',
-    subcategories: ['Banking', 'Wealth Management', 'Mortgages'],
+    description: 'Premium banking, wealth management, and bespoke mortgage advisory for high-net-worth London residents.',
+    category: 'banking-mortgages',
+    subcategories: ['Banking', 'Wealth Management', 'Mortgages', 'International'],
     borough: 'Tower Hamlets',
     address: '1 Churchill Place, Canary Wharf, E14 5HP',
     phone: '+44 20 7116 1000',
@@ -278,11 +324,54 @@ const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
     created_at: new Date().toISOString()
   },
   {
-    id: 'service-5',
+    id: 'service-6b',
+    name: 'L&C Mortgages — London Bridge',
+    description: 'Fee-free mortgage brokers specialising in London property. Expert advice for first-time buyers, buy-to-let, and remortgaging.',
+    category: 'banking-mortgages',
+    subcategories: ['Mortgages', 'Buy-to-Let', 'Remortgaging', 'FTB'],
+    borough: 'Southwark',
+    address: '2 More London Place, SE1 2AP',
+    phone: '+44 20 7403 4000',
+    email: 'advice@landc.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 7. Insurance Agencies
+  {
+    id: 'service-7',
+    name: 'Lloyd\'s Residential Cover',
+    description: 'Specialist residential property insurance from Lloyd\'s of London. Tailored cover for high-value London homes and portfolios.',
+    category: 'insurance',
+    subcategories: ['Property Insurance', 'Contents', 'Landlord Cover', 'High-Value'],
+    borough: 'City of London',
+    address: '1 Lime Street, London EC3M 7HA',
+    phone: '+44 20 7327 1000',
+    email: 'residential.cover@lloyds.com',
+    website: 'https://lloyds.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 8. Physical Property Security
+  {
+    id: 'service-8',
+    name: 'Mayfair Security Solutions',
+    description: 'Elite manned guarding, access control, and residential security patrols for luxury London properties and gated communities.',
+    category: 'property-security',
+    subcategories: ['Manned Guarding', 'Access Control', 'Patrols', 'Concierge'],
+    borough: 'Westminster',
+    address: '15 Grosvenor Street, Mayfair, W1K 4QZ',
+    phone: '+44 20 7499 8800',
+    email: 'protect@mayfairsecurity.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 9. Removals & Transport
+  {
+    id: 'service-9',
     name: 'London White Glove Removals',
-    description: 'Specialist removals and storage for fine art, antiques, and luxury furniture.',
-    category: 'logistics-daily-life',
-    subcategories: ['Removals', 'Storage', 'Fine Art Packing'],
+    description: 'Specialist removals and storage for fine art, antiques, and luxury furniture. International relocation services available.',
+    category: 'removals-transport',
+    subcategories: ['Removals', 'Storage', 'Fine Art Packing', 'International'],
     borough: 'Islington',
     address: '88 Upper Street, London N1 0NP',
     phone: '+44 20 5678 9012',
@@ -290,25 +379,13 @@ const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
     is_verified: true,
     created_at: new Date().toISOString()
   },
+  // 10. Home Surveillance & CCTV
   {
-    id: 'service-6',
-    name: 'Sparkle Clean London',
-    description: 'Eco-friendly premium cleaning services for flats and luxury residences.',
-    category: 'logistics-daily-life',
-    subcategories: ['Cleaning', 'Eco-friendly', 'Deep Clean'],
-    borough: 'Camden',
-    address: '15 Parkway, Camden Town, NW1 7PG',
-    phone: '+44 20 4321 0987',
-    email: 'sparkle@cleanlondon.com',
-    is_verified: true,
-    created_at: new Date().toISOString()
-  },
-  {
-    id: 'service-7',
+    id: 'service-10',
     name: 'SecureView Surveillance London',
-    description: 'Advanced home security, CCTV, and smart alarm systems installation and monitoring.',
-    category: 'safety-care',
-    subcategories: ['Security', 'CCTV', 'Smart Alarms'],
+    description: 'Advanced home CCTV systems, smart doorbells, and 24/7 remote monitoring solutions. NSI Gold-accredited installers.',
+    category: 'surveillance-cctv',
+    subcategories: ['CCTV', 'Smart Doorbells', 'Remote Monitoring', 'NSI Gold'],
     borough: 'Southwark',
     address: '25 The Shard, London Bridge Street, SE1 9SG',
     phone: '+44 20 9012 3456',
@@ -316,17 +393,144 @@ const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
     is_verified: true,
     created_at: new Date().toISOString()
   },
+  // 11. Child & Elderly Care
   {
-    id: 'service-8',
+    id: 'service-11',
     name: 'HomeCare Angels',
-    description: 'Premium home care and companionship services for elderly residents in London.',
-    category: 'safety-care',
-    subcategories: ['Home Care', 'Elderly Care', 'Companionship'],
+    description: 'Premium home care, companionship, and convalescent support for elderly and vulnerable residents across Greater London.',
+    category: 'child-elderly-care',
+    subcategories: ['Elderly Care', 'Companionship', 'Convalescent', 'Dementia'],
     borough: 'Greenwich',
     address: '5 Greenwich High Road, SE10 8NW',
     phone: '+44 20 6789 0123',
     email: 'care@homecareangels.co.uk',
     is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-11b',
+    name: 'Kensington Nannies & Childcare',
+    description: 'Ofsted-registered nanny agency placing qualified childcare professionals with families across prime Central London.',
+    category: 'child-elderly-care',
+    subcategories: ['Nannies', 'Childcare', 'Ofsted', 'Maternity'],
+    borough: 'Kensington & Chelsea',
+    address: '32 Kensington Church Street, W8 4HA',
+    phone: '+44 20 7938 2200',
+    email: 'hello@kensingtonnannies.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 12. Cleaning Services
+  {
+    id: 'service-12',
+    name: 'Sparkle Clean London',
+    description: 'Eco-friendly premium cleaning services for luxury flats and residences. End-of-tenancy deep-clean specialists.',
+    category: 'cleaning',
+    subcategories: ['Deep Clean', 'End-of-Tenancy', 'Eco-friendly', 'Regular'],
+    borough: 'Camden',
+    address: '15 Parkway, Camden Town, NW1 7PG',
+    phone: '+44 20 4321 0987',
+    email: 'sparkle@cleanlondon.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 13. Architecture & Planning
+  {
+    id: 'service-13',
+    name: 'Foster & Partners Residential',
+    description: 'RIBA-chartered architectural practice specialising in premium residential extensions, basements, and new-build homes across London.',
+    category: 'architecture-planning',
+    subcategories: ['Extensions', 'Basements', 'New Build', 'Planning'],
+    borough: 'Wandsworth',
+    address: 'Battersea Park Road, London SW11 4BE',
+    phone: '+44 20 7738 0455',
+    email: 'residential@fosterandpartners.com',
+    website: 'https://fosterandpartners.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 14. Interior Design
+  {
+    id: 'service-14',
+    name: 'Kelly Hoppen Interiors',
+    description: 'Award-winning interior design studio creating bespoke luxury residential interiors for London\'s most discerning homeowners.',
+    category: 'interior-design',
+    subcategories: ['Residential', 'Bespoke', 'Luxury', 'Turnkey'],
+    borough: 'Kensington & Chelsea',
+    address: '2 Michael Road, Chelsea, SW6 2AD',
+    phone: '+44 20 7471 3350',
+    email: 'hello@kellyhoppeninteriors.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 15. Landscape Gardening
+  {
+    id: 'service-15',
+    name: 'Chelsea Garden Design',
+    description: 'RHS Chelsea Flower Show medal-winning landscape architects. Bespoke garden and terrace design for London properties.',
+    category: 'landscape-gardening',
+    subcategories: ['Garden Design', 'Terrace', 'Maintenance', 'RHS'],
+    borough: 'Kensington & Chelsea',
+    address: '88 Fulham Road, Chelsea, SW3 6HR',
+    phone: '+44 20 7584 3000',
+    email: 'design@chelseagardens.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 16. Surveying & Valuations
+  {
+    id: 'service-16',
+    name: 'Savills Surveying — Sloane Street',
+    description: 'RICS-certified chartered surveyors providing building surveys, valuations, and home-buyer reports for premium London property.',
+    category: 'surveying-valuations',
+    subcategories: ['Building Survey', 'Valuation', 'Home-Buyer Report', 'RICS'],
+    borough: 'Kensington & Chelsea',
+    address: '139 Sloane Street, London SW1X 9AY',
+    phone: '+44 20 7730 0822',
+    email: 'surveys@savills.com',
+    website: 'https://savills.com',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 17. Locksmith Services
+  {
+    id: 'service-17',
+    name: 'Sloane Square Locksmiths',
+    description: '24/7 emergency locksmith service covering Central London. Smart lock installation, key cutting, and security upgrades.',
+    category: 'locksmiths',
+    subcategories: ['Emergency', 'Smart Locks', 'Key Cutting', 'Safe Opening'],
+    borough: 'Kensington & Chelsea',
+    address: '4 Sloane Square, London SW1W 8EE',
+    phone: '+44 20 7730 9999',
+    email: 'help@sloanesquarelocks.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  // 18. Waste Removal
+  {
+    id: 'service-18',
+    name: 'ClearWaste London',
+    description: 'Licensed waste clearance, skip hire, and eco-friendly recycling for residential projects across Greater London.',
+    category: 'waste-removal',
+    subcategories: ['Clearance', 'Skip Hire', 'Recycling', 'Licensed'],
+    borough: 'Haringey',
+    address: '12 Wood Green, London N22 6YA',
+    phone: '+44 20 8888 4567',
+    email: 'clear@wastefree.london',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-18b',
+    name: 'EcoSkip South London',
+    description: 'Sustainable waste management and skip hire for south London residential renovations and garden clearances.',
+    category: 'waste-removal',
+    subcategories: ['Skip Hire', 'Garden Waste', 'Renovation', 'Eco'],
+    borough: 'Southwark',
+    address: '45 Old Kent Road, London SE1 5AN',
+    phone: '+44 20 7740 3322',
+    email: 'book@ecoskip.london',
+    is_verified: false,
     created_at: new Date().toISOString()
   }
 ];
