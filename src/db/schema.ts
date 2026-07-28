@@ -3,7 +3,7 @@
  * Representing standard PostgreSQL tables used in standard platform backends like Supabase or Convex.
  */
 
-export type UserRole = 'seeker' | 'agency' | 'landlord' | 'service-provider' | 'admin';
+export type UserRole = 'seeker' | 'agency' | 'landlord';
 
 export interface UserProfile {
   id: string;
@@ -58,7 +58,7 @@ export interface PropertyListing {
   created_at: string;
 }
 
-export type ServiceCategory = string;
+export type ServiceCategory = string; // Free-text for 18+ specific business categories
 
 export interface ServiceProvider {
   id: string;
