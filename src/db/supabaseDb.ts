@@ -10,8 +10,10 @@ import {
   type ServiceCategory,
   type UserRole 
 } from './schema';
+import { parseAndValidateFeed, transformProperty, parseFeedUrl } from './feedParser';
 
 export class SupabaseDatabase implements Database {
+  private feedUrls: Record<string, string> = {};
   // --- Auth APIs ---
   async getCurrentUser(): Promise<UserProfile | null> {
     const { data: { session } } = await supabase.auth.getSession();
@@ -304,6 +306,7 @@ export class SupabaseDatabase implements Database {
       };
     });
   }
+
   // --- Admin Panel Methods ---
   async getAllUsers(): Promise<UserProfile[]> {
     const { data, error } = await supabase.from('user_profiles').select('*').order('created_at', { ascending: false });
@@ -314,7 +317,7 @@ export class SupabaseDatabase implements Database {
   async getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]> {
     const { data, error } = await supabase.from('agency_details').select('*').order('created_at', { ascending: false });
     if (error) throw new Error(error.message);
-    return (data || []).map(a => ({ ...a, feed_url: '', sync_status: 'inactive' }));
+    return (data || []).map(a => ({ ...a, feed_url: this.feedUrls[a.id] || '', sync_status: 'inactive' }));
   }
 
   async blockUser(userId: string): Promise<void> {
@@ -326,13 +329,57 @@ export class SupabaseDatabase implements Database {
     await supabase.from('property_listings').delete().eq('provider_id', userId);
   }
 
-  async updateAgencyFeedUrl(agencyId: string, _feedUrl: string): Promise<void> {
+  async updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void> {
+    this.feedUrls[agencyId] = feedUrl;
     console.log('Supabase: feed URL updated for', agencyId);
   }
 
-  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
-    console.log('Supabase: import triggered for', agencyId);
-    return { imported: 0, failed: 0 };
+  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number; errors: string[] }> {
+    const feedUrl = this.feedUrls[agencyId];
+    if (!feedUrl) {
+      return { imported: 0, failed: 0, errors: ['No feed URL configured for this agency. Set one via updateAgencyFeedUrl.'] };
+    }
+
+    const { cleanUrl, apiKey } = parseFeedUrl(feedUrl);
+    if (!apiKey) {
+      return { imported: 0, failed: 0, errors: ['No API key found in feed URL. Append ?api_key=YOUR_KEY to the URL.'] };
+    }
+
+    const { properties, result } = await parseAndValidateFeed({
+      apiKey,
+      providerId: agencyId,
+      endpoint: cleanUrl,
+    });
+
+    if (result.errors.length > 0 && properties.length === 0) {
+      return result;
+    }
+
+    for (const property of properties) {
+      try {
+        const listingData = transformProperty(property, agencyId);
+        const newListing: PropertyListing = {
+          ...listingData,
+          id: crypto.randomUUID(),
+          is_verified: true,
+          created_at: new Date().toISOString(),
+        };
+
+        const { error } = await supabase.from('property_listings').insert([newListing]);
+        if (error) {
+          result.failed++;
+          result.imported--;
+          result.errors.push(`Supabase insert failed for "${property.title}": ${error.message}`);
+        }
+      } catch (err: any) {
+        result.failed++;
+        result.imported--;
+        result.errors.push(`Failed to insert "${property.title}": ${err.message}`);
+      }
+    }
+
+    return result;
   }
 }
+
 export const supabaseDb = new SupabaseDatabase();

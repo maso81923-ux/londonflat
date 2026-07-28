@@ -8,6 +8,7 @@ import {
   type ServiceProvider, 
   type ServiceCategory 
 } from './schema';
+import { parseAndValidateFeed, transformProperty, parseFeedUrl } from './feedParser';
 
 // Helper to generate IDs
 const generateId = () => Math.random().toString(36).substring(2, 11);
@@ -574,6 +575,7 @@ export class MockDatabase implements Database {
   private requests: ViewingRequest[] = [];
   private serviceProviders: ServiceProvider[] = [];
   private currentUser: UserProfile | null = null;
+  private feedUrls: Record<string, string> = {};
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -803,6 +805,71 @@ export class MockDatabase implements Database {
         };
       })
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  }
+
+  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number; errors: string[] }> {
+    const feedUrl = this.feedUrls[agencyId];
+    if (!feedUrl) {
+      return { imported: 0, failed: 0, errors: ['No feed URL configured for this agency. Set one via updateAgencyFeedUrl.'] };
+    }
+
+    const { cleanUrl, apiKey } = parseFeedUrl(feedUrl);
+    if (!apiKey) {
+      return { imported: 0, failed: 0, errors: ['No API key found in feed URL. Append ?api_key=YOUR_KEY to the URL.'] };
+    }
+
+    const { properties, result } = await parseAndValidateFeed({
+      apiKey,
+      providerId: agencyId,
+      endpoint: cleanUrl,
+    });
+
+    if (result.errors.length > 0 && properties.length === 0) {
+      return result;
+    }
+
+    for (const property of properties) {
+      try {
+        const newListing = await this.createListing(transformProperty(property, agencyId));
+        this.listings.push({ ...newListing, is_verified: true, created_at: newListing.created_at });
+      } catch (err: any) {
+        result.failed++;
+        result.imported--;
+        result.errors.push(`Failed to insert "${property.title}": ${err.message}`);
+      }
+    }
+
+    saveToStorage('listings', this.listings);
+    return result;
+  }
+
+  // --- Admin Panel Methods ---
+  async getAllUsers(): Promise<UserProfile[]> {
+    return [...this.users];
+  }
+
+  async getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]> {
+    return this.agencies.map(a => ({
+      ...a,
+      feed_url: this.feedUrls[a.id] || '',
+      sync_status: 'inactive',
+    }));
+  }
+
+  async blockUser(userId: string): Promise<void> {
+    this.users = this.users.filter(u => u.id !== userId);
+    this.listings = this.listings.filter(l => l.provider_id !== userId);
+    saveToStorage('users', this.users);
+    saveToStorage('listings', this.listings);
+  }
+
+  async deleteUserListings(userId: string): Promise<void> {
+    this.listings = this.listings.filter(l => l.provider_id !== userId);
+    saveToStorage('listings', this.listings);
+  }
+
+  async updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void> {
+    this.feedUrls[agencyId] = feedUrl;
   }
 }
 

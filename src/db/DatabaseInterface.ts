@@ -40,5 +40,5 @@ export interface Database {
   blockUser(userId: string): Promise<void>;
   deleteUserListings(userId: string): Promise<void>;
   updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void>;
-  importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }>;
+  importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number; errors: string[] }>;
 }
