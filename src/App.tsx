@@ -83,6 +83,11 @@ function App() {
 
   const handleLoginSuccess = (user: UserProfile) => {
     setCurrentUser(user);
+    if (user.role === 'admin') {
+      setCurrentView('admin');
+    } else if (user.role === 'agency' || user.role === 'landlord') {
+      setCurrentView('dashboard');
+    }
   };
 
   const handleLogout = async () => {
