@@ -206,8 +206,16 @@ export function AdminPage() {
                 {agencies.map(a => (
                   <tr key={a.id} className="border-b border-slate-800/60 hover:bg-slate-800/30">
                     <td className="py-3 pr-3">
-                      <div className="font-medium text-white">{a.company_name}</div>
-                      <div className="text-xs text-slate-500">{a.license_number}</div>
+                      <input
+                        type="text"
+                        value={a.company_name}
+                        onChange={e => {
+                          const updated = agencies.map(ag => ag.id === a.id ? { ...ag, company_name: e.target.value } : ag);
+                          setAgencies(updated);
+                        }}
+                        className="w-full min-w-[140px] px-2 py-1 rounded-md bg-slate-800 border border-slate-700 text-white text-sm font-medium focus:outline-none focus:ring-1 focus:ring-amber-500"
+                      />
+                      <div className="text-xs text-slate-500 mt-0.5">{a.license_number}</div>
                     </td>
                     <td className="py-3 pr-3">
                       <div className="flex gap-2 items-center">

@@ -51,6 +51,15 @@ const INITIAL_USERS: UserProfile[] = [
     phone: '+44 7700 900543',
     avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
     created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'user-admin',
+    email: 'info@londonflat.uk',
+    full_name: 'LondonFlat Admin',
+    role: 'admin',
+    phone: '+447576040868',
+    avatar_url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80',
+    created_at: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString()
   }
 ];
 
@@ -585,6 +594,15 @@ export class MockDatabase implements Database {
       this.listings = loadFromStorage('listings', INITIAL_LISTINGS);
       this.requests = loadFromStorage('requests', INITIAL_REQUESTS);
       this.serviceProviders = loadFromStorage('service_providers', INITIAL_SERVICE_PROVIDERS);
+      
+      // Ensure admin user is always present (localStorage may have stale data)
+      if (!this.users.find(u => u.id === 'user-admin')) {
+        const adminUser = INITIAL_USERS.find(u => u.id === 'user-admin');
+        if (adminUser) {
+          this.users.unshift(adminUser);
+          saveToStorage('users', this.users);
+        }
+      }
       
       const loggedIn = localStorage.getItem('londonflat_current_user');
       if (loggedIn) {
