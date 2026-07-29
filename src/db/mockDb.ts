@@ -54,7 +54,7 @@ const INITIAL_USERS: UserProfile[] = [
   },
   {
     id: 'user-admin',
-    email: 'info@londonflat.uk',
+    email: 'admin@londonflat.uk',
     full_name: 'LondonFlat Admin',
     role: 'admin',
     phone: '+447576040868',
