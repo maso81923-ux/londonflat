@@ -10,8 +10,11 @@ import {
   type ServiceCategory,
   type UserRole 
 } from './schema';
+import { parseFeedUrl, parseAndValidateFeed, transformProperty } from './feedParser';
 
 export class SupabaseDatabase implements Database {
+  private feedUrls: Record<string, string> = {};
+
   // --- Auth APIs ---
   async getCurrentUser(): Promise<UserProfile | null> {
     const { data: { session } } = await supabase.auth.getSession();
@@ -326,13 +329,52 @@ export class SupabaseDatabase implements Database {
     await supabase.from('property_listings').delete().eq('provider_id', userId);
   }
 
-  async updateAgencyFeedUrl(agencyId: string, _feedUrl: string): Promise<void> {
+  async updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void> {
+    this.feedUrls[agencyId] = feedUrl;
     console.log('Supabase: feed URL updated for', agencyId);
   }
 
   async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
-    console.log('Supabase: import triggered for', agencyId);
-    return { imported: 0, failed: 0 };
+    const feedUrl = this.feedUrls[agencyId];
+    if (!feedUrl) return { imported: 0, failed: 0 };
+
+    // Look up the agency to get the user_id
+    const { data: agency } = await supabase.from('agency_details').select('user_id').eq('id', agencyId).single();
+    if (!agency) return { imported: 0, failed: 0 };
+
+    const { cleanUrl, apiKey } = parseFeedUrl(feedUrl);
+    if (!apiKey) {
+      console.error('Feed URL missing api_key parameter');
+      return { imported: 0, failed: 0 };
+    }
+
+    const { properties, result } = await parseAndValidateFeed(cleanUrl, apiKey);
+    if (properties.length === 0) return { imported: 0, failed: result.failed };
+
+    let inserted = 0;
+    for (const property of properties) {
+      try {
+        const listingData = transformProperty(property, agency.user_id);
+        const newListing = {
+          ...listingData,
+          id: crypto.randomUUID(),
+          is_verified: true,
+          created_at: new Date().toISOString(),
+        };
+        const { error } = await supabase.from('property_listings').insert([newListing]);
+        if (error) {
+          result.failed++;
+          result.errors.push(`Insert failed for "${property.title}": ${error.message}`);
+        } else {
+          inserted++;
+        }
+      } catch (err: any) {
+        result.failed++;
+        result.errors.push(`Insert failed for "${property.title}": ${err.message}`);
+      }
+    }
+
+    return { imported: inserted, failed: result.failed };
   }
 }
 export const supabaseDb = new SupabaseDatabase();

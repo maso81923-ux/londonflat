@@ -8,6 +8,7 @@ import type { ServiceProvider, ServiceCategory } from '../db/schema';
 
 interface ServicesPageProps {
   providers: ServiceProvider[];
+  initialCategory?: string | null;
 }
 
 const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: string }[] = [

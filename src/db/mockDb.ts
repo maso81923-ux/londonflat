@@ -6,8 +6,10 @@ import {
   type AgencyDetails, 
   type RequestStatus, 
   type ServiceProvider, 
-  type ServiceCategory 
+  type ServiceCategory,
+  type UserRole
 } from './schema';
+import { parseFeedUrl, parseAndValidateFeed, transformProperty } from './feedParser';
 
 // Helper to generate IDs
 const generateId = () => Math.random().toString(36).substring(2, 11);
@@ -574,6 +576,7 @@ export class MockDatabase implements Database {
   private requests: ViewingRequest[] = [];
   private serviceProviders: ServiceProvider[] = [];
   private currentUser: UserProfile | null = null;
+  private feedUrls: Record<string, string> = {};
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -620,7 +623,7 @@ export class MockDatabase implements Database {
     }
   }
 
-  async registerUser(fullName: string, email: string, role: 'seeker' | 'agency' | 'landlord', phone?: string): Promise<UserProfile> {
+  async registerUser(fullName: string, email: string, role: UserRole, phone?: string): Promise<UserProfile> {
     // Check duplicate
     const existing = this.users.find(u => u.email.toLowerCase() === email.toLowerCase());
     if (existing) {
@@ -803,6 +806,72 @@ export class MockDatabase implements Database {
         };
       })
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  }
+
+  // --- Admin Panel Methods ---
+  async getAllUsers(): Promise<UserProfile[]> {
+    return this.users;
+  }
+
+  async getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]> {
+    return this.agencies.map(a => ({
+      ...a,
+      feed_url: this.feedUrls[a.id] || '',
+      sync_status: this.feedUrls[a.id] ? 'active' : 'inactive'
+    }));
+  }
+
+  async blockUser(userId: string): Promise<void> {
+    this.users = this.users.filter(u => u.id !== userId);
+    this.listings = this.listings.filter(l => l.provider_id !== userId);
+    this.requests = this.requests.filter(r => r.seeker_id !== userId);
+    this.serviceProviders = this.serviceProviders.filter(s => s.id !== userId);
+    saveToStorage('users', this.users);
+    saveToStorage('listings', this.listings);
+    saveToStorage('requests', this.requests);
+    saveToStorage('service_providers', this.serviceProviders);
+  }
+
+  async deleteUserListings(userId: string): Promise<void> {
+    this.listings = this.listings.filter(l => l.provider_id !== userId);
+    saveToStorage('listings', this.listings);
+  }
+
+  async updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void> {
+    this.feedUrls[agencyId] = feedUrl;
+  }
+
+  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
+    const feedUrl = this.feedUrls[agencyId];
+    if (!feedUrl) return { imported: 0, failed: 0 };
+
+    const agency = this.agencies.find(a => a.id === agencyId);
+    if (!agency) return { imported: 0, failed: 0 };
+
+    const { cleanUrl, apiKey } = parseFeedUrl(feedUrl);
+    if (!apiKey) {
+      console.error('Feed URL missing api_key parameter');
+      return { imported: 0, failed: 0 };
+    }
+
+    const { properties, result } = await parseAndValidateFeed(cleanUrl, apiKey);
+    if (properties.length === 0) return { imported: 0, failed: result.failed };
+
+    let inserted = 0;
+    for (const property of properties) {
+      try {
+        const listing = await this.createListing(transformProperty(property, agency.user_id));
+        listing.is_verified = true;
+        this.listings.push(listing);
+        inserted++;
+      } catch (err: any) {
+        result.failed++;
+        result.errors.push(`Insert failed for "${property.title}": ${err.message}`);
+      }
+    }
+
+    saveToStorage('listings', this.listings);
+    return { imported: inserted, failed: result.failed };
   }
 }
 
