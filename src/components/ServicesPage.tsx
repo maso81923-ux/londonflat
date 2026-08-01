@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { 
   Wrench, Scale, Truck, Shield, Globe, Phone, Mail, CheckCircle, Search,
   Zap, Droplets, Landmark, ShieldCheck, Camera, Heart, Sparkles,
-  Building2, Palette, Ruler, Key, Trash2, PenTool, Leaf
+  Building2, Palette, Ruler, Key, Trash2, PenTool, Leaf, Home
 } from 'lucide-react';
 import type { ServiceProvider, ServiceCategory } from '../db/schema';
 
@@ -29,7 +29,8 @@ const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: 
   { id: 'landscape-gardening', label: 'Landscape Gardening', icon: Leaf, description: 'Garden design, landscaping, and maintenance for London terraces and gardens.' },
   { id: 'surveying-valuations', label: 'Surveying & Valuations', icon: Ruler, description: 'RICS-certified surveyors for building surveys, valuations, and home reports.' },
   { id: 'locksmiths', label: 'Locksmith Services', icon: Key, description: '24/7 emergency locksmiths, security upgrades, and access control systems.' },
-  { id: 'waste-removal', label: 'Waste Removal', icon: Trash2, description: 'Licensed waste clearance, skip hire, and recycling services for London homes.' }
+  { id: 'waste-removal', label: 'Waste Removal', icon: Trash2, description: 'Licensed waste clearance, skip hire, and recycling services for London homes.' },
+  { id: 'independent-estate-agent', label: 'Independent Estate Agent', icon: Home, description: 'Expert valuations, buying/selling consultations, and structural property advice from trusted independent agents.' }
 ];
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ providers }) => {

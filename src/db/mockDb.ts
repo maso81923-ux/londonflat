@@ -543,6 +543,34 @@ const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
     email: 'book@ecoskip.london',
     is_verified: false,
     created_at: new Date().toISOString()
+  },
+  // 19. Independent Estate Agent
+  {
+    id: 'service-19',
+    name: 'Sterling Independent Estate Agents',
+    description: 'Trusted independent estate agency offering expert property valuations, buying and selling consultations, and honest structural advice across Greater London.',
+    category: 'independent-estate-agent',
+    subcategories: ['Valuations', 'Sales', 'Consultations', 'Surveys'],
+    borough: 'Westminster',
+    address: '72 Victoria Street, London SW1E 6SQ',
+    phone: '+44 20 7932 4455',
+    email: 'info@sterling-estates.co.uk',
+    website: 'https://sterling-estates.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-19b',
+    name: 'Clapham Property Consultants',
+    description: 'Boutique estate agency providing independent valuations, property search services, and honest buying/selling advice for south London homes.',
+    category: 'independent-estate-agent',
+    subcategories: ['Valuations', 'Buying Agent', 'Selling', 'Consultations'],
+    borough: 'Lambeth',
+    address: '14 Clapham High Street, London SW4 7UT',
+    phone: '+44 20 7622 9988',
+    email: 'hello@claphamproperty.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
   }
 ];
 
