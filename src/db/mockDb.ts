@@ -808,40 +808,44 @@ export class MockDatabase implements Database {
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   }
 
-  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number; errors: string[] }> {
+  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
     const feedUrl = this.feedUrls[agencyId];
     if (!feedUrl) {
-      return { imported: 0, failed: 0, errors: ['No feed URL configured for this agency. Set one via updateAgencyFeedUrl.'] };
+      console.error('No feed URL configured for agency', agencyId);
+      return { imported: 0, failed: 0 };
     }
 
     const { cleanUrl, apiKey } = parseFeedUrl(feedUrl);
     if (!apiKey) {
-      return { imported: 0, failed: 0, errors: ['No API key found in feed URL. Append ?api_key=YOUR_KEY to the URL.'] };
+      console.error('No API key found in feed URL for agency', agencyId);
+      return { imported: 0, failed: 0 };
     }
+
+    const agency = this.agencies.find(a => a.id === agencyId);
+    const providerId = agency?.user_id || agencyId;
 
     const { properties, result } = await parseAndValidateFeed({
       apiKey,
-      providerId: agencyId,
+      providerId,
       endpoint: cleanUrl,
     });
 
     if (result.errors.length > 0 && properties.length === 0) {
-      return result;
+      return { imported: result.imported, failed: result.failed };
     }
 
     for (const property of properties) {
       try {
-        const newListing = await this.createListing(transformProperty(property, agencyId));
+        const newListing = await this.createListing(transformProperty(property, providerId));
         this.listings.push({ ...newListing, is_verified: true, created_at: newListing.created_at });
       } catch (err: any) {
         result.failed++;
         result.imported--;
-        result.errors.push(`Failed to insert "${property.title}": ${err.message}`);
       }
     }
 
     saveToStorage('listings', this.listings);
-    return result;
+    return { imported: result.imported, failed: result.failed };
   }
 
   // --- Admin Panel Methods ---

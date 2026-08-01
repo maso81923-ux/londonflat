@@ -334,30 +334,36 @@ export class SupabaseDatabase implements Database {
     console.log('Supabase: feed URL updated for', agencyId);
   }
 
-  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number; errors: string[] }> {
+  async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
     const feedUrl = this.feedUrls[agencyId];
     if (!feedUrl) {
-      return { imported: 0, failed: 0, errors: ['No feed URL configured for this agency. Set one via updateAgencyFeedUrl.'] };
+      console.error('No feed URL configured for agency', agencyId);
+      return { imported: 0, failed: 0 };
     }
 
     const { cleanUrl, apiKey } = parseFeedUrl(feedUrl);
     if (!apiKey) {
-      return { imported: 0, failed: 0, errors: ['No API key found in feed URL. Append ?api_key=YOUR_KEY to the URL.'] };
+      console.error('No API key found in feed URL for agency', agencyId);
+      return { imported: 0, failed: 0 };
     }
+
+    // Look up the agency to get its user_id as providerId
+    const { data: agencyData } = await supabase.from('agency_details').select('user_id').eq('id', agencyId).single();
+    const providerId = agencyData?.user_id || agencyId;
 
     const { properties, result } = await parseAndValidateFeed({
       apiKey,
-      providerId: agencyId,
+      providerId,
       endpoint: cleanUrl,
     });
 
     if (result.errors.length > 0 && properties.length === 0) {
-      return result;
+      return { imported: result.imported, failed: result.failed };
     }
 
     for (const property of properties) {
       try {
-        const listingData = transformProperty(property, agencyId);
+        const listingData = transformProperty(property, providerId);
         const newListing: PropertyListing = {
           ...listingData,
           id: crypto.randomUUID(),
@@ -369,16 +375,14 @@ export class SupabaseDatabase implements Database {
         if (error) {
           result.failed++;
           result.imported--;
-          result.errors.push(`Supabase insert failed for "${property.title}": ${error.message}`);
         }
       } catch (err: any) {
         result.failed++;
         result.imported--;
-        result.errors.push(`Failed to insert "${property.title}": ${err.message}`);
       }
     }
 
-    return result;
+    return { imported: result.imported, failed: result.failed };
   }
 }
 
