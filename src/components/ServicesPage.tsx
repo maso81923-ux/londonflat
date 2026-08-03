@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { 
   Wrench, Scale, Truck, Shield, Globe, Phone, Mail, CheckCircle, Search,
   Zap, Droplets, Landmark, ShieldCheck, Camera, Heart, Sparkles,
-  Building2, Palette, Ruler, Key, Trash2, PenTool, Leaf
+  Building2, Palette, Ruler, Key, Trash2, PenTool, Leaf, Gavel
 } from 'lucide-react';
 import type { ServiceProvider, ServiceCategory } from '../db/schema';
 
@@ -17,6 +17,7 @@ const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: 
   { id: 'electricians', label: 'Electricians', icon: Zap, description: 'Certified electrical installations, repairs, and smart home wiring across London.' },
   { id: 'plumbing-heating', label: 'Plumbing & Heating', icon: Droplets, description: 'Professional plumbing, boiler servicing, and underfloor heating specialists.' },
   { id: 'legal-notaries', label: 'Legal & Notaries', icon: Scale, description: 'Trusted solicitors, notaries, and conveyancing services for property transactions.' },
+  { id: 'legal-eviction', label: 'Legal Eviction & Case Handling', icon: Gavel, description: 'Expert eviction solicitors, Section 21/8 notice specialists, and deposit dispute resolution for London landlords and tenants.' },
   { id: 'banking-mortgages', label: 'Banking & Mortgages', icon: Landmark, description: 'Premium mortgage advice, wealth management, and high-street banking services.' },
   { id: 'insurance', label: 'Insurance Agencies', icon: ShieldCheck, description: 'Comprehensive property, contents, and landlord insurance tailored for London.' },
   { id: 'property-security', label: 'Physical Property Security', icon: Shield, description: 'Security guards, access control, and manned guarding for residential buildings.' },

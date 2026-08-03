@@ -311,6 +311,35 @@ const INITIAL_SERVICE_PROVIDERS: ServiceProvider[] = [
     is_verified: true,
     created_at: new Date().toISOString()
   },
+  // 5b. Legal Eviction & Case Handling
+  {
+    id: 'service-5b',
+    name: 'Landlord Action London',
+    description: 'Section 21 and Section 8 notice specialists. Fast-track eviction solicitors with 24-hour notice preparation and court representation for London landlords.',
+    category: 'legal-eviction',
+    subcategories: ['Section 21', 'Section 8', 'Eviction', 'Court Representation'],
+    borough: 'Islington',
+    address: '45 City Road, Islington, EC1Y 1BD',
+    phone: '020 7946 2101',
+    email: 'info@landlordaction.london',
+    website: 'https://landlordaction.london',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'service-5c',
+    name: 'Tenant Defence Chambers',
+    description: 'Tenant-centred legal practice specialising in deposit protection disputes, illegal eviction defence, and disrepair claims for London tenants.',
+    category: 'legal-eviction',
+    subcategories: ['Deposit Disputes', 'Illegal Eviction', 'Disrepair', 'Tenant Defence'],
+    borough: 'Southwark',
+    address: '88 Borough High Street, Southwark, SE1 1LL',
+    phone: '020 7946 2102',
+    email: 'help@tenantdefence.co.uk',
+    website: 'https://tenantdefence.co.uk',
+    is_verified: true,
+    created_at: new Date().toISOString()
+  },
   // 6. Banking & Mortgages
   {
     id: 'service-6',
