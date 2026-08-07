@@ -1,0 +1,52 @@
+{
+  "boroughs": {
+    "westminster": {
+      "name": "Westminster",
+      "slug": "westminster",
+      "zone": "Zone 1",
+      "description": "The political and royal heart of London, Westminster combines world-famous landmarks with elegant residential enclaves. From the grandeur of Belgravia to the village feel of Marylebone, it attracts diplomats, policy professionals, and finance executives who demand centrality and prestige.",
+      "averageRent": { "studio": 1950, "1bed": 2800, "2bed": 4200, "3bed": 6500 },
+      "averageSalePrice": { "1bed": 850000, "2bed": 1400000, "3bed": 2400000 },
+      "transport": ["Jubilee Line", "Circle Line", "District Line", "Bakerloo Line", "Victoria Line", "National Rail (Victoria, Paddington, Marylebone)"],
+      "demographic": "MPs, policy advisors, diplomats, finance executives, established professionals aged 30–55",
+      "highlights": ["Buckingham Palace & St James's Park", "West End theatres & Soho nightlife", "World-class dining in Mayfair", "Hyde Park & Green Park", "Excellent state and private schools"],
+      "vibe": "Prestigious, connected, cosmopolitan"
+    },
+    "camden": {
+      "name": "Camden",
+      "slug": "camden",
+      "zone": "Zone 2",
+      "description": "Camden is London's creative powerhouse — a vibrant mix of alternative culture, tech innovation, and beautiful residential streets. From the iconic Camden Market to the leafy heights of Hampstead and the intellectual buzz of Bloomsbury, it's the borough of choice for creatives, tech founders, and media professionals.",
+      "averageRent": { "studio": 1450, "1bed": 2200, "2bed": 3100, "3bed": 4400 },
+      "averageSalePrice": { "1bed": 600000, "2bed": 950000, "3bed": 1600000 },
+      "transport": ["Northern Line", "Piccadilly Line", "Victoria Line", "London Overground", "Thameslink"],
+      "demographic": "Creatives, tech entrepreneurs, academics, media professionals, musicians, ages 22–45",
+      "highlights": ["Camden Market & live music venues", "Hampstead Heath swimming ponds", "British Library & British Museum", "Primrose Hill panoramic skyline view", "King's Cross redevelopment & Granary Square"],
+      "vibe": "Creative, eclectic, energetic"
+    },
+    "kensington-chelsea": {
+      "name": "Kensington & Chelsea",
+      "slug": "kensington-chelsea",
+      "zone": "Zone 1",
+      "description": "The Royal Borough of Kensington and Chelsea represents the pinnacle of prime central London living. White stucco terraces, garden squares, and world-class museums define this affluent enclave. Home to international diplomats, private equity partners, and established families seeking exceptional schools and discreet luxury.",
+      "averageRent": { "studio": 2100, "1bed": 3200, "2bed": 5200, "3bed": 8500 },
+      "averageSalePrice": { "1bed": 1100000, "2bed": 2200000, "3bed": 4500000 },
+      "transport": ["District Line", "Circle Line", "Piccadilly Line", "Central Line"],
+      "demographic": "High-net-worth international families, diplomats, private equity, entrepreneurs, ages 35–60",
+      "highlights": ["Natural History & V&A museums", "Harrods & Sloane Street shopping", "Holland Park & Kyoto Garden", "King's Road boutiques", "Royal Albert Hall"],
+      "vibe": "Refined, luxurious, international"
+    },
+    "tower-hamlets": {
+      "name": "Tower Hamlets",
+      "slug": "tower-hamlets",
+      "zone": "Zone 2",
+      "description": "Tower Hamlets is London's fastest-transforming borough, anchored by the Canary Wharf financial district and stretching to vibrant East End neighbourhoods. From slick riverside towers to converted warehouses in Shoreditch and Bethnal Green, it offers a compelling mix of urban energy, green space, and relative value.",
+      "averageRent": { "studio": 1350, "1bed": 1900, "2bed": 2700, "3bed": 3700 },
+      "averageSalePrice": { "1bed": 500000, "2bed": 750000, "3bed": 1100000 },
+      "transport": ["DLR", "Central Line", "Jubilee Line", "Hammersmith & City Line", "District Line", "Elizabeth Line", "London Overground"],
+      "demographic": "Finance professionals, tech workers, young families, university staff, ages 24–40",
+      "highlights": ["Canary Wharf skyline & rooftop bars", "Victoria Park & Regent's Canal", "Columbia Road Flower Market", "Brick Lane curry & vintage shops", "Museum of London Docklands"],
+      "vibe": "Dynamic, ambitious, on-the-rise"
+    }
+  }
+}

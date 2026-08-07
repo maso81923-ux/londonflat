@@ -9,6 +9,7 @@ import { ListingDetailsPage } from './components/ListingDetailsPage';
 import { DashboardPage } from './components/DashboardPage';
 import { AdminPage } from './components/AdminPage';
 import { ServicesPage } from './components/ServicesPage';
+import { BoroughGuidePage } from './components/BoroughGuidePage';
 import { AuthModal } from './components/AuthModal';
 import { InstallPWA } from './components/InstallPWA';
 import { SEO } from './components/SEO';
@@ -19,6 +20,7 @@ function App() {
   const [activeListingId, setActiveListingId] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
   const [selectedServiceCategory, setSelectedServiceCategory] = useState<ServiceCategory | null>(null);
+  const [activeBoroughSlug, setActiveBoroughSlug] = useState<string | null>(null);
   
   // Search state passed between Home and Listings
   const [searchFilters, setSearchFilters] = useState<{ borough: string; type: string; maxPrice: number } | undefined>(undefined);
@@ -60,7 +62,7 @@ function App() {
     fetchData();
   }, [currentView]); // Re-fetch on view change to ensure fresh data
 
-  const handleNavigate = (view: string, listingId?: string, serviceCategory?: ServiceCategory) => {
+  const handleNavigate = (view: string, listingId?: string, serviceCategory?: ServiceCategory, boroughSlug?: string) => {
     setCurrentView(view);
     if (listingId) {
       setActiveListingId(listingId);
@@ -71,6 +73,11 @@ function App() {
       setSelectedServiceCategory(serviceCategory);
     } else if (view !== 'services') {
       setSelectedServiceCategory(null);
+    }
+    if (boroughSlug) {
+      setActiveBoroughSlug(boroughSlug);
+    } else {
+      setActiveBoroughSlug(null);
     }
     // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -151,6 +158,12 @@ function App() {
         );
       case 'admin':
         return <AdminPage />;
+      case 'borough-guide':
+        return activeBoroughSlug ? (
+          <BoroughGuidePage slug={activeBoroughSlug} onNavigate={handleNavigate} />
+        ) : (
+          <HomePage listings={listings} onNavigate={handleNavigate} onSearch={handleSearch} />
+        );
       default:
         return (
           <HomePage 
@@ -182,6 +195,9 @@ function App() {
       )}
       {currentView === 'admin' && (
         <SEO title="Admin Panel" path="/admin" />
+      )}
+      {currentView === 'borough-guide' && activeBoroughSlug && (
+        <SEO title={`${activeBoroughSlug.charAt(0).toUpperCase() + activeBoroughSlug.slice(1).replace(/-/g, ' ')} Area Guide — LondonFlat`} description={`Explore the ${activeBoroughSlug.replace(/-/g, ' ')} London property market. Average rents, transport links, local highlights, and verified listings.`} path={`/boroughs/${activeBoroughSlug}`} />
       )}
       {/* Header */}
       <Header 
