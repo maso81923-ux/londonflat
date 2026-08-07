@@ -1,6 +1,7 @@
 import React from 'react';
 import type { UserProfile, UserRole } from '../db/schema';
 import { Building2, LogOut, LayoutDashboard, Shield } from 'lucide-react';
+import { PushNotificationManager } from './PushNotificationManager';
 
 interface HeaderProps {
   currentUser: UserProfile | null;
@@ -97,6 +98,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Auth / Account */}
         <div className="flex items-center space-x-4">
+          <PushNotificationManager />
           {currentUser ? (
             <div className="flex items-center space-x-4">
               <button

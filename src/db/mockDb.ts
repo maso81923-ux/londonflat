@@ -913,6 +913,7 @@ export class MockDatabase implements Database {
   private serviceProviders: ServiceProvider[] = [];
   private currentUser: UserProfile | null = null;
   private feedUrls: Record<string, string> = {};
+  private pushSubscriptions: any[] = [];
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -921,6 +922,7 @@ export class MockDatabase implements Database {
       this.listings = loadFromStorage('listings', INITIAL_LISTINGS);
       this.requests = loadFromStorage('requests', INITIAL_REQUESTS);
       this.serviceProviders = loadFromStorage('service_providers', INITIAL_SERVICE_PROVIDERS);
+      this.pushSubscriptions = loadFromStorage('push_subscriptions', []);
       
       // Ensure admin user is always present (localStorage may have stale data)
       if (!this.users.find(u => u.id === 'user-admin')) {
@@ -1217,6 +1219,25 @@ export class MockDatabase implements Database {
 
     saveToStorage('listings', this.listings);
     return { imported: inserted, failed: result.failed };
+  }
+
+  // Push Notifications
+
+  async savePushSubscription(subscription: any): Promise<void> {
+    // Avoid duplicates by endpoint
+    const existing = this.pushSubscriptions.findIndex(
+      (s) => s.endpoint === subscription.endpoint
+    );
+    if (existing >= 0) {
+      this.pushSubscriptions[existing] = subscription;
+    } else {
+      this.pushSubscriptions.push(subscription);
+    }
+    saveToStorage('push_subscriptions', this.pushSubscriptions);
+  }
+
+  async getPushSubscriptions(): Promise<any[]> {
+    return this.pushSubscriptions;
   }
 }
 

@@ -376,5 +376,23 @@ export class SupabaseDatabase implements Database {
 
     return { imported: inserted, failed: result.failed };
   }
+
+  // Push Notifications
+  async savePushSubscription(subscription: any): Promise<void> {
+    const { error } = await supabase
+      .from('push_subscriptions')
+      .upsert([subscription], { onConflict: 'endpoint' });
+
+    if (error) throw new Error(error.message);
+  }
+
+  async getPushSubscriptions(): Promise<any[]> {
+    const { data, error } = await supabase
+      .from('push_subscriptions')
+      .select('*');
+
+    if (error) throw new Error(error.message);
+    return data || [];
+  }
 }
 export const supabaseDb = new SupabaseDatabase();

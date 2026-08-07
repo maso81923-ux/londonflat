@@ -94,6 +94,10 @@ class DatabaseWrapper implements Database {
   async deleteUserListings(userId: string) { return (await this.getDb()).deleteUserListings(userId); }
   async updateAgencyFeedUrl(agencyId: string, feedUrl: string) { return (await this.getDb()).updateAgencyFeedUrl(agencyId, feedUrl); }
   async importAgencyListings(agencyId: string) { return (await this.getDb()).importAgencyListings(agencyId); }
+
+  // Push Notifications
+  async savePushSubscription(subscription: any) { return (await this.getDb()).savePushSubscription(subscription); }
+  async getPushSubscriptions() { return (await this.getDb()).getPushSubscriptions(); }
 }
 
 export const db = new DatabaseWrapper();

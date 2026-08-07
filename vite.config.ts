@@ -9,7 +9,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
+      strategies: 'injectManifest',
+      srcDir: 'public',
+      filename: 'sw.js',
       registerType: 'autoUpdate',
+      injectRegister: 'auto',
       includeAssets: ['favicon.svg', 'pwa-icon.svg', 'pwa-icon-192x192.png', 'pwa-icon-512x512.png', 'robots.txt'],
       manifest: {
         name: 'LondonFlat — Premium London Living',
@@ -80,7 +84,7 @@ export default defineConfig({
               cacheName: 'unsplash-images',
               expiration: {
                 maxEntries: 60,
-                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+                maxAgeSeconds: 60 * 60 * 24 * 30
               },
               cacheableResponse: {
                 statuses: [0, 200]
@@ -94,7 +98,7 @@ export default defineConfig({
               cacheName: 'avatar-images',
               expiration: {
                 maxEntries: 30,
-                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+                maxAgeSeconds: 60 * 60 * 24 * 30
               }
             }
           }

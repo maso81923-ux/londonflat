@@ -41,4 +41,8 @@ export interface Database {
   deleteUserListings(userId: string): Promise<void>;
   updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void>;
   importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }>;
+
+  // Push Notifications
+  savePushSubscription(subscription: any): Promise<void>;
+  getPushSubscriptions(): Promise<any[]>;
 }
