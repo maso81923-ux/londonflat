@@ -5,6 +5,7 @@ import {
   Building2, Palette, Ruler, Key, Trash2, PenTool, Leaf, Home, Gavel
 } from 'lucide-react';
 import type { ServiceProvider, ServiceCategory } from '../db/schema';
+import { FAQAccordion } from './FAQAccordion';
 
 interface ServicesPageProps {
   providers: ServiceProvider[];
@@ -210,6 +211,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ providers }) => {
             )}
           </div>
         )}
+
+        {/* FAQ Accordion */}
+        <div className={selectedCategory ? 'mt-16' : 'mt-8'}>
+          <FAQAccordion
+            category={selectedCategory}
+            categoryLabel={selectedCategory ? CATEGORIES.find(c => c.id === selectedCategory)?.label : undefined}
+          />
+        </div>
       </div>
     </div>
   );

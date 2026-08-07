@@ -10,6 +10,8 @@ import { DashboardPage } from './components/DashboardPage';
 import { AdminPage } from './components/AdminPage';
 import { ServicesPage } from './components/ServicesPage';
 import { BoroughGuidePage } from './components/BoroughGuidePage';
+import { MovingChecklistPage } from './components/MovingChecklistPage';
+import { TenantRightsPage } from './components/TenantRightsPage';
 import { AuthModal } from './components/AuthModal';
 import { InstallPWA } from './components/InstallPWA';
 import { SEO } from './components/SEO';
@@ -21,6 +23,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
   const [selectedServiceCategory, setSelectedServiceCategory] = useState<ServiceCategory | null>(null);
   const [activeBoroughSlug, setActiveBoroughSlug] = useState<string | null>(null);
+  const [activeRightsSlug, setActiveRightsSlug] = useState<string | null>(null);
   
   // Search state passed between Home and Listings
   const [searchFilters, setSearchFilters] = useState<{ borough: string; type: string; maxPrice: number } | undefined>(undefined);
@@ -62,7 +65,7 @@ function App() {
     fetchData();
   }, [currentView]); // Re-fetch on view change to ensure fresh data
 
-  const handleNavigate = (view: string, listingId?: string, serviceCategory?: ServiceCategory, boroughSlug?: string) => {
+  const handleNavigate = (view: string, listingId?: string, serviceCategory?: ServiceCategory, boroughSlug?: string, rightsSlug?: string) => {
     setCurrentView(view);
     if (listingId) {
       setActiveListingId(listingId);
@@ -78,6 +81,11 @@ function App() {
       setActiveBoroughSlug(boroughSlug);
     } else {
       setActiveBoroughSlug(null);
+    }
+    if (rightsSlug) {
+      setActiveRightsSlug(rightsSlug);
+    } else {
+      setActiveRightsSlug(null);
     }
     // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -164,6 +172,14 @@ function App() {
         ) : (
           <HomePage listings={listings} onNavigate={handleNavigate} onSearch={handleSearch} />
         );
+      case 'moving-checklist':
+        return <MovingChecklistPage onNavigate={handleNavigate} />;
+      case 'rights':
+        return activeRightsSlug ? (
+          <TenantRightsPage slug={activeRightsSlug} onNavigate={handleNavigate} />
+        ) : (
+          <HomePage listings={listings} onNavigate={handleNavigate} onSearch={handleSearch} />
+        );
       default:
         return (
           <HomePage 
@@ -198,6 +214,12 @@ function App() {
       )}
       {currentView === 'borough-guide' && activeBoroughSlug && (
         <SEO title={`${activeBoroughSlug.charAt(0).toUpperCase() + activeBoroughSlug.slice(1).replace(/-/g, ' ')} Area Guide — LondonFlat`} description={`Explore the ${activeBoroughSlug.replace(/-/g, ' ')} London property market. Average rents, transport links, local highlights, and verified listings.`} path={`/boroughs/${activeBoroughSlug}`} />
+      )}
+      {currentView === 'moving-checklist' && (
+        <SEO title="Moving Checklist — LondonFlat" description="Everything you need to plan a smooth London move. Tick items off as you go — progress saved automatically." path="/moving-checklist" />
+      )}
+      {currentView === 'rights' && activeRightsSlug && (
+        <SEO title={`${activeRightsSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} — Tenant Rights — LondonFlat`} path={`/rights/${activeRightsSlug}`} />
       )}
       {/* Header */}
       <Header 

@@ -1,0 +1,151 @@
+{
+  "categories": {
+    "property-maintenance": {
+      "categoryLabel": "Property Maintenance & Handyman Services",
+      "faqs": [
+        { "q": "How much does a handyman cost per hour in London?", "a": "Rates typically range from £35-£65 per hour in London, with a minimum 2-hour callout. Emergency or out-of-hours work commands a premium. Always get a written quote before work begins." },
+        { "q": "What qualifies as an emergency repair?", "a": "Emergency repairs include: total loss of heating in winter, burst pipes or major leaks, complete electrical failure, broken windows compromising security, and blocked drains causing flooding. Non-emergencies include dripping taps, minor plaster cracks, and cosmetic issues." },
+        { "q": "Can a handyman do electrical or gas work?", "a": "No. Electrical work in kitchens/bathrooms and any gas work must be done by Gas Safe registered or NICEIC qualified tradespeople. A general handyman can handle minor tasks like changing light fixtures, assembling furniture, or hanging shelves." },
+        { "q": "Do I need permission for repairs in a rental property?", "a": "Yes. Tenants must get landlord permission before arranging repairs unless it's an emergency and the landlord is unreachable. Unauthorised repairs may not be reimbursed. Always report issues in writing first." }
+      ]
+    },
+    "painters-decorators": {
+      "categoryLabel": "Painters & Decorators",
+      "faqs": [
+        { "q": "How much does it cost to paint a 2-bed flat in London?", "a": "Expect £1,200-£2,500 for a full repaint including walls, ceilings, and woodwork. Price varies by room size, ceiling height, and paint quality. Premium Farrow & Ball finishes add 30-40% to materials costs." },
+        { "q": "How long does painting take?", "a": "A 2-bedroom flat typically takes 3-5 working days with 2 decorators. Drying time between coats adds to the schedule. Allow an extra day for wallpaper stripping or extensive preparation." },
+        { "q": "Should I supply my own paint?", "a": "Most decorators prefer to supply paint as they can vouch for quality and get trade discounts they pass on. If you supply, ensure it's trade-quality paint — retail paint often requires more coats, increasing labour costs." }
+      ]
+    },
+    "electricians": {
+      "categoryLabel": "Electricians",
+      "faqs": [
+        { "q": "What electrical certificates do I need when renting out a property?", "a": "Landlords must provide an EICR (Electrical Installation Condition Report) every 5 years. Portable appliance testing (PAT) is recommended but not mandatory. Any new electrical work in kitchens or bathrooms requires a Part P certificate." },
+        { "q": "How much does an EICR cost in London?", "a": "A standard EICR costs £150-£300 depending on property size and number of circuits. Remedial work identified during the inspection is charged separately." }
+      ]
+    },
+    "plumbing-heating": {
+      "categoryLabel": "Plumbing & Heating",
+      "faqs": [
+        { "q": "How often should a boiler be serviced?", "a": "Annually, by a Gas Safe registered engineer. Most manufacturer warranties are void without annual servicing. Landlords are legally required to provide an annual Gas Safety Certificate (CP12) to tenants." },
+        { "q": "What's the average cost to fix a leaking pipe in London?", "a": "Minor leak repairs cost £80-£180 including callout. Major repairs involving floor/wall access or pipe replacement can run £300-£800. Burst pipes causing water damage require immediate attention — turn off the stopcock first." }
+      ]
+    },
+    "legal-notaries": {
+      "categoryLabel": "Legal & Notaries",
+      "faqs": [
+        { "q": "Do I need a solicitor for a property purchase?", "a": "Yes. Conveyancing is legally complex and most mortgage lenders require a qualified solicitor or licensed conveyancer. Expect to pay £800-£1,500 plus disbursements for a standard freehold purchase in London." },
+        { "q": "What's the difference between a solicitor and a notary?", "a": "A solicitor handles UK legal matters including conveyancing and litigation. A notary public authenticates documents for international use — they verify identity, witness signatures, and certify copies for use abroad." },
+        { "q": "How long does conveyancing take?", "a": "A straightforward freehold purchase typically takes 8-12 weeks from offer acceptance to completion. Leasehold properties, chain transactions, and Help to Buy schemes can extend to 16+ weeks." }
+      ]
+    },
+    "legal-eviction": {
+      "categoryLabel": "Legal Eviction & Case Handling",
+      "faqs": [
+        { "q": "How long does a Section 21 eviction take?", "a": "Minimum 3-4 months from serving notice to bailiff eviction if uncontested. With court delays in London, it can take 5-7 months. The notice itself is 2 months, followed by a possession claim (4-8 weeks for hearing), then 2-4 weeks for bailiff appointment." },
+        { "q": "What are valid grounds for a Section 8 notice?", "a": "There are 17 grounds under the Housing Act 1988. The most common are: Ground 8 (at least 2 months' rent arrears — mandatory), Ground 10 (any rent arrears — discretionary), Ground 12 (breach of tenancy), and Ground 14 (anti-social behaviour)." },
+        { "q": "Can I challenge a deposit deduction without a solicitor?", "a": "Yes. All three deposit protection schemes (DPS, TDS, MyDeposits) offer free dispute resolution. You submit evidence online and an independent adjudicator decides. You don't need legal representation, though a solicitor can help with complex disputes." },
+        { "q": "What is a Rent Repayment Order?", "a": "If your landlord operated an unlicensed HMO, failed to comply with an improvement notice, or committed certain offences, you can apply to the First-tier Tribunal for a Rent Repayment Order recovering up to 12 months' rent. You have 12 months from the date of the offence to apply." }
+      ]
+    },
+    "banking-mortgages": {
+      "categoryLabel": "Banking & Mortgages",
+      "faqs": [
+        { "q": "How much deposit do I need for a London property?", "a": "Minimum 5% with government schemes, but 10-15% is typical for competitive rates. London properties over £500,000 often require 15-25% deposit. Buy-to-let mortgages typically require 25% minimum." },
+        { "q": "What's the difference between a fixed and variable rate mortgage?", "a": "Fixed rates lock your interest rate for 2, 3, 5, or 10 years — payments are predictable. Variable rates (tracker or standard variable) fluctuate with the Bank of England base rate. Fixed rates are currently more popular due to rate uncertainty." }
+      ]
+    },
+    "architecture-planning": {
+      "categoryLabel": "Architecture & Planning",
+      "faqs": [
+        { "q": "Do I need planning permission for a loft conversion?", "a": "Most loft conversions fall under permitted development rights, meaning you don't need planning permission if they stay within volume limits (40m³ for terraced, 50m³ for detached/semi-detached). However, you always need building regulations approval. Flats and maisonettes always require planning permission." },
+        { "q": "How much does an architect cost for a home extension in London?", "a": "Architects typically charge 8-15% of construction costs for full service, or £2,500-£5,000 for planning drawings only. Some offer fixed-fee packages. Always check they're ARB-registered." }
+      ]
+    },
+    "interior-design": {
+      "categoryLabel": "Interior Design",
+      "faqs": [
+        { "q": "How much does an interior designer cost in London?", "a": "Hourly rates range from £60-£200. Full-service design for a 2-bed flat typically costs £3,000-£15,000 depending on scope. Many designers now offer virtual consultations from £150-£300 per room." },
+        { "q": "Can I hire a designer just for colour consultation?", "a": "Yes. Many designers offer standalone colour consultations for £200-£500. They'll assess your space, lighting, and existing furniture to recommend a cohesive palette. Some offer paint-only specification services." }
+      ]
+    },
+    "surveying-valuations": {
+      "categoryLabel": "Surveying & Valuations",
+      "faqs": [
+        { "q": "What type of survey do I need?", "a": "Level 1 (Condition Report): Basic, for modern flats in good condition (£300-£500). Level 2 (HomeBuyer Report): Mid-range, for conventional properties under 50 years old (£500-£900). Level 3 (Building Survey): Full structural, for older, listed, or unusual properties (£900-£1,500+). Always use a RICS-accredited surveyor." },
+        { "q": "Is a mortgage valuation the same as a survey?", "a": "No. A mortgage valuation is for the lender's benefit only — it confirms the property is worth the loan amount. It does not identify defects or repair costs. Always commission your own independent survey." }
+      ]
+    },
+    "cleaning": {
+      "categoryLabel": "Cleaning Services",
+      "faqs": [
+        { "q": "What's included in an end-of-tenancy clean?", "a": "A professional end-of-tenancy clean covers: all rooms (dusting, skirting boards, light fixtures, switches), kitchen (oven, extractor, fridge/freezer defrost and clean, cupboards inside-out), bathroom (tiles, grout, limescale removal, extractor fan), windows internally, and carpets vacuumed. It typically takes 4-8 hours for a 2-bed flat." },
+        { "q": "How much does professional deep cleaning cost in London?", "a": "End-of-tenancy cleaning for a 2-bed flat ranges from £180-£350. One-off deep cleans: £150-£300. Regular weekly cleaning: £15-£20 per hour. Prices are higher in Zones 1-2." },
+        { "q": "Do cleaning services bring their own equipment?", "a": "Most professional services bring all equipment and products, including vacuums, mops, and cleaning solutions. Some offer eco-friendly products on request. Always confirm what's included before booking." }
+      ]
+    },
+    "locksmiths": {
+      "categoryLabel": "Locksmith Services",
+      "faqs": [
+        { "q": "How much does an emergency locksmith cost in London?", "a": "Standard callout (lockout) during business hours: £65-£120. Out-of-hours/emergency: £120-£250. Lock replacement (including parts): £85-£200 per lock depending on security rating. Always use a Master Locksmiths Association (MLA) approved locksmith." },
+        { "q": "Should I change locks when moving into a new rental?", "a": "Legally, you can change locks without landlord permission as long as you replace the originals when you move out. It's highly recommended — you don't know who has copies. Budget £85-£150 per external door." }
+      ]
+    },
+    "removals-transport": {
+      "categoryLabel": "Removals & Transport",
+      "faqs": [
+        { "q": "How much do removals cost for a 2-bed flat in London?", "a": "Local moves (within London) for a 2-bed flat: £400-£800 including a Luton van and 2 movers. Distance moves outside London: £800-£1,500. Packing service adds £200-£400. Always get at least 3 written quotes." },
+        { "q": "Do I need removals insurance?", "a": "Yes. Most removal companies offer basic cover at £40-£100 per £10,000 of goods. Check your home contents insurance first — some policies cover goods in transit. Professional removers should have Goods in Transit and Public Liability insurance as standard." }
+      ]
+    },
+    "surveillance-cctv": {
+      "categoryLabel": "Home Surveillance & CCTV",
+      "faqs": [
+        { "q": "Can I install CCTV in a rental property?", "a": "Internal CCTV generally requires landlord permission. External cameras (doorbell cameras like Ring) usually don't — but you must comply with data protection laws. Cameras must not capture neighbours' private spaces without consent. Remove all equipment and make good when you leave." },
+        { "q": "How much does a home CCTV system cost?", "a": "Wireless doorbell cameras: £50-£200. Multi-camera wired systems with NVR: £400-£1,500 installed. Professional monitoring adds £15-£30/month. Wireless systems are DIY-friendly; wired systems need professional installation." }
+      ]
+    },
+    "child-elderly-care": {
+      "categoryLabel": "Child & Elderly Care",
+      "faqs": [
+        { "q": "How much does a nanny cost in London?", "a": "Live-out nannies: £12-£18 net per hour (£35,000-£55,000 gross annually). Live-in: £400-£600 net per week plus room and board. Nanny shares (two families) reduce costs by 25-30%. All nannies must be Ofsted registered or with an agency that handles payroll and tax." },
+        { "q": "What's the difference between a nanny and a childminder?", "a": "A nanny works in your home, employed by you directly. A childminder cares for children in their own home, is Ofsted-registered, and can care for children from multiple families. Childminders typically charge £7-£10 per hour per child." }
+      ]
+    },
+    "property-security": {
+      "categoryLabel": "Physical Property Security",
+      "faqs": [
+        { "q": "What security should a London rental property have?", "a": "Minimum: BS3621 5-lever mortice deadlock on external doors, window locks on ground-floor and accessible windows, and a door chain or viewer. Many insurers require these as standard. Higher-risk areas (burglary hotspots) benefit from alarms and security lighting." },
+        { "q": "How much does a monitored alarm system cost?", "a": "Installation: £500-£1,200 for a wireless system with 4-6 sensors and control panel. Professional monitoring: £20-£35/month. Police-response monitored alarms require NSI or SSAIB accreditation — these cost more but provide the highest security grade." }
+      ]
+    },
+    "landscape-gardening": {
+      "categoryLabel": "Landscape Gardening",
+      "faqs": [
+        { "q": "How much does garden landscaping cost in London?", "a": "Small patio/courtyard (15-25m²): £3,000-£8,000. Medium garden redesign (50-80m²): £10,000-£25,000. Regular maintenance: £30-£50 per hour. London premium adds 15-25% compared to national averages." },
+        { "q": "Do I need planning permission for garden landscaping?", "a": "Generally no for patios, decking (under 30cm height), planting, and most hard landscaping. You may need permission in conservation areas, for listed buildings, or if the work affects drainage or boundary walls over 2m." }
+      ]
+    },
+    "waste-removal": {
+      "categoryLabel": "Waste Removal",
+      "faqs": [
+        { "q": "How much does a skip cost in London?", "a": "4-yard skip (small): £150-£250. 8-yard (builder's skip): £250-£400. Permit for skip on public road: £50-£80 from local council. Wait-and-load services (van waits while you fill): £100-£200." },
+        { "q": "Can I take large items to the tip myself?", "a": "Yes, all London boroughs have reuse and recycling centres. You may need to book a slot and prove residency. Some restrict van access. Councils also offer bulky waste collection (£20-£60 for up to 5 items)." }
+      ]
+    },
+    "insurance": {
+      "categoryLabel": "Insurance Agencies",
+      "faqs": [
+        { "q": "Do tenants need contents insurance?", "a": "It's not legally required but highly recommended. The landlord's insurance covers the building, not your belongings. A basic contents policy for a 2-bed flat costs £60-£120/year. Also protects your deposit if you accidentally damage the landlord's fixtures." },
+        { "q": "What insurance must a landlord have?", "a": "Buildings insurance (mandatory for leasehold, essential for freehold). Landlord contents insurance for furnished properties. Rent guarantee insurance (optional, covers unpaid rent up to 12 months). Public liability insurance (recommended, covers injury claims)." }
+      ]
+    },
+    "independent-estate-agent": {
+      "categoryLabel": "Independent Estate Agent",
+      "faqs": [
+        { "q": "What's the difference between an independent and a chain estate agent?", "a": "Independent agents typically offer more personalised service, local market expertise, and flexibility on fees. Chain agents have wider reach but higher fees and a more standardised process. Independents often sell faster in their specialist areas." },
+        { "q": "How much are estate agent fees for selling in London?", "a": "High street agents: 1.2-2% + VAT. Online/hybrid agents: £999-£2,000 fixed fee. Independent agents are often negotiable, especially for higher-value properties. Always compare fee structures including withdrawal fees and contract length." }
+      ]
+    }
+  }
+}

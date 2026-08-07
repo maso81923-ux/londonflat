@@ -1,0 +1,48 @@
+{
+  "groups": [
+    {
+      "id": "4-weeks",
+      "label": "4 Weeks Before",
+      "items": [
+        { "id": "m1", "label": "Confirm moving date with landlord/agent", "tip": "Get written confirmation of your move-out and move-in dates." },
+        { "id": "m2", "label": "Book professional removals company", "tip": "Get at least 3 quotes. Weekend slots book up 4-6 weeks ahead.", "serviceHubCategory": "Removals & Transport", "serviceHubSlug": "removals-transport" },
+        { "id": "m3", "label": "Notify utility providers of move date", "tip": "Gas, electric, water, broadband — arrange final readings and disconnection." },
+        { "id": "m4", "label": "Redirect post with Royal Mail", "tip": "Set up mail redirection for at least 3 months. Costs from £33.99.", "serviceHubCategory": "Legal & Notaries", "serviceHubSlug": "legal-notaries" },
+        { "id": "m5", "label": "Declutter and sort belongings", "tip": "Donate, sell, or dispose of items you won't take. Start room by room.", "serviceHubCategory": "Waste Removal", "serviceHubSlug": "waste-removal" }
+      ]
+    },
+    {
+      "id": "2-weeks",
+      "label": "2 Weeks Before",
+      "items": [
+        { "id": "m6", "label": "Book professional deep cleaning of premises", "tip": "End-of-tenancy cleans are more thorough. Most agencies require professional receipt.", "serviceHubCategory": "Cleaning Services", "serviceHubSlug": "cleaning" },
+        { "id": "m7", "label": "Arrange professional end-of-tenancy inventory check", "tip": "Independent inventory clerk protects your deposit. £100-£200 typical cost.", "serviceHubCategory": "Surveying & Valuations", "serviceHubSlug": "surveying-valuations" },
+        { "id": "m8", "label": "Start packing non-essential items", "tip": "Label boxes by room. Use wardrobe boxes for clothes — no need to fold." },
+        { "id": "m9", "label": "Hire professional painters for final touch-ups", "tip": "Scuff marks on walls? A quick touch-up can save deposit deductions.", "serviceHubCategory": "Painters & Decorators", "serviceHubSlug": "painters-decorators" },
+        { "id": "m10", "label": "Update council tax and electoral roll", "tip": "Notify your local council of your move-in and move-out dates." }
+      ]
+    },
+    {
+      "id": "moving-week",
+      "label": "Moving Week",
+      "items": [
+        { "id": "m11", "label": "Pack and coordinate heavy furniture transfer", "tip": "Disassemble large furniture. Photograph condition before wrapping.", "serviceHubCategory": "Removals & Transport", "serviceHubSlug": "removals-transport" },
+        { "id": "m12", "label": "Change primary external security cylinders", "tip": "New home? Change locks immediately. You don't know who has copies.", "serviceHubCategory": "Locksmith Services", "serviceHubSlug": "locksmiths" },
+        { "id": "m13", "label": "Take final meter readings", "tip": "Photograph all meters with timestamp. Send to utility companies same day." },
+        { "id": "m14", "label": "Set up home surveillance and security alarm", "tip": "Get CCTV or alarm installed before furniture arrives.", "serviceHubCategory": "Home Surveillance & CCTV", "serviceHubSlug": "surveillance-cctv" },
+        { "id": "m15", "label": "Defrost freezer and clean white goods", "tip": "Turn off 24 hours before. Leave doors open to prevent mould." }
+      ]
+    },
+    {
+      "id": "moving-day",
+      "label": "Moving Day",
+      "items": [
+        { "id": "m16", "label": "Final walkthrough with landlord/agent", "tip": "Do this together. Photograph every room, wall, floor, and appliance." },
+        { "id": "m17", "label": "Hand over all keys and fobs", "tip": "Get written receipt. Include window keys, shed keys, parking permits." },
+        { "id": "m18", "label": "Coordinate waste disposal of packing materials", "tip": "Flatten boxes. Book a collection if you have large volumes.", "serviceHubCategory": "Waste Removal", "serviceHubSlug": "waste-removal" },
+        { "id": "m19", "label": "Check new property utilities are working", "tip": "Test hot water, heating, electrics, and internet. Report issues immediately." },
+        { "id": "m20", "label": "Register with new GP and dentist", "tip": "NHS registration can take weeks. Register online as soon as you have proof of address." }
+      ]
+    }
+  ]
+}
