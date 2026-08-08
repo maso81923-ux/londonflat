@@ -15,6 +15,7 @@ import { TenantRightsPage } from './components/TenantRightsPage';
 import { AuthModal } from './components/AuthModal';
 import { InstallPWA } from './components/InstallPWA';
 import { SEO } from './components/SEO';
+import { StructuredData } from './components/StructuredData';
 import './App.css';
 
 function App() {
@@ -220,6 +221,33 @@ function App() {
       )}
       {currentView === 'rights' && activeRightsSlug && (
         <SEO title={`${activeRightsSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} — Tenant Rights — LondonFlat`} path={`/rights/${activeRightsSlug}`} />
+      )}
+      {/* Structured Data: BreadcrumbList */}
+      {currentView === 'home' && (
+        <StructuredData type="BreadcrumbList" breadcrumbs={[{ name: 'Home', url: '/' }]} />
+      )}
+      {currentView === 'listings' && (
+        <StructuredData type="BreadcrumbList" breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Listings', url: '/listings' }]} />
+      )}
+      {currentView === 'services' && (
+        <StructuredData type="BreadcrumbList" breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }]} />
+      )}
+      {currentView === 'moving-checklist' && (
+        <StructuredData type="BreadcrumbList" breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Moving Checklist', url: '/moving-checklist' }]} />
+      )}
+      {currentView === 'borough-guide' && activeBoroughSlug && (
+        <StructuredData type="BreadcrumbList" breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Borough Guides', url: '/boroughs' },
+          { name: activeBoroughSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), url: `/boroughs/${activeBoroughSlug}` }
+        ]} />
+      )}
+      {currentView === 'rights' && activeRightsSlug && (
+        <StructuredData type="BreadcrumbList" breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Tenant Rights', url: '/rights' },
+          { name: activeRightsSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), url: `/rights/${activeRightsSlug}` }
+        ]} />
       )}
       {/* Header */}
       <Header 

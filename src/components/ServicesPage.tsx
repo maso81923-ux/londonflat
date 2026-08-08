@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import type { ServiceProvider, ServiceCategory } from '../db/schema';
 import { FAQAccordion } from './FAQAccordion';
+import { StructuredData } from './StructuredData';
+import faqData from '../data/faqs.json';
 
 interface ServicesPageProps {
   providers: ServiceProvider[];
@@ -219,6 +221,17 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ providers }) => {
             categoryLabel={selectedCategory ? CATEGORIES.find(c => c.id === selectedCategory)?.label : undefined}
           />
         </div>
+
+        {/* Structured Data: FAQPage */}
+        {selectedCategory && faqData.categories[selectedCategory as keyof typeof faqData.categories] && (
+          <StructuredData
+            type="FAQPage"
+            faqs={(faqData.categories[selectedCategory as keyof typeof faqData.categories] as any).faqs.map((f: any) => ({
+              question: f.q,
+              answer: f.a,
+            }))}
+          />
+        )}
       </div>
     </div>
   );

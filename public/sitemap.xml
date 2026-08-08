@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Primary Pages -->
   <url>
     <loc>https://londonflat.uk/</loc>
     <changefreq>daily</changefreq>
@@ -13,8 +14,69 @@
   <url>
     <loc>https://londonflat.uk/services</loc>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/moving-checklist</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Borough Guides -->
+  <url>
+    <loc>https://londonflat.uk/boroughs/westminster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/boroughs/camden</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/boroughs/kensington-chelsea</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/boroughs/tower-hamlets</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Tenant & Landlord Rights Hub -->
+  <url>
+    <loc>https://londonflat.uk/rights/section-21-eviction</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/rights/section-8-eviction</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/rights/deposit-protection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/rights/landlord-repair-obligations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/rights/rent-increases</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/rights/hmo-licensing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Auth Pages -->
   <url>
     <loc>https://londonflat.uk/dashboard</loc>
     <changefreq>weekly</changefreq>

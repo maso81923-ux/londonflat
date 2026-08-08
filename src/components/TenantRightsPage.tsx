@@ -1,5 +1,6 @@
 import { Scale, Shield, AlertTriangle, ArrowRight } from 'lucide-react';
 import rightsData from '../data/tenantRights.json';
+import { StructuredData } from './StructuredData';
 
 interface TenantRightsPageProps {
   slug: string;
@@ -120,6 +121,18 @@ export const TenantRightsPage: React.FC<TenantRightsPageProps> = ({ slug, onNavi
           </article>
         </div>
       </div>
+
+      {/* Structured Data: Article */}
+      <StructuredData
+        type="Article"
+        article={{
+          headline: article.title,
+          description: article.summary,
+          datePublished: '2026-07-15T00:00:00+00:00',
+          author: 'LondonFlat',
+          url: `https://londonflat.uk/rights/${slug}`,
+        }}
+      />
     </div>
   );
 };
