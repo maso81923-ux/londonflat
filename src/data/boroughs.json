@@ -47,6 +47,54 @@
       "demographic": "Finance professionals, tech workers, young families, university staff, ages 24–40",
       "highlights": ["Canary Wharf skyline & rooftop bars", "Victoria Park & Regent's Canal", "Columbia Road Flower Market", "Brick Lane curry & vintage shops", "Museum of London Docklands"],
       "vibe": "Dynamic, ambitious, on-the-rise"
+    },
+    "wandsworth": {
+      "name": "Wandsworth",
+      "slug": "wandsworth",
+      "zone": "Zone 2–3",
+      "description": "Wandsworth is south-west London's family powerhouse — combining excellent state schools, vast green spaces, and some of the lowest council tax in the capital. Battersea's Power Station regeneration has brought riverside luxury, while Clapham Junction remains one of Britain's busiest transport hubs. Popular with young families priced out of Fulham and Chelsea.",
+      "averageRent": { "studio": 1200, "1bed": 1700, "2bed": 2400, "3bed": 3200 },
+      "averageSalePrice": { "1bed": 450000, "2bed": 700000, "3bed": 1100000 },
+      "transport": ["South Western Railway (Clapham Junction)", "Northern Line", "District Line", "London Overground", "Thameslink"],
+      "demographic": "Young families, City professionals, private equity, established couples aged 28–45",
+      "highlights": ["Battersea Power Station & Riverside", "Clapham Common & Wandsworth Common", "Southside Shopping Centre", "Thames Path walking & cycling route", "Outstanding-rated state schools"],
+      "vibe": "Family-friendly, green, well-connected"
+    },
+    "hackney": {
+      "name": "Hackney",
+      "slug": "hackney",
+      "zone": "Zone 2",
+      "description": "Hackney is east London's creative and cultural epicentre. From the independent cafes and galleries of London Fields to the nightlife of Dalston and the canal-side calm of Hackney Wick, it's the borough of choice for artists, designers, and tech workers. Rapidly gentrifying but retaining its authentic edge — one of London's most exciting property markets.",
+      "averageRent": { "studio": 1250, "1bed": 1750, "2bed": 2400, "3bed": 3200 },
+      "averageSalePrice": { "1bed": 475000, "2bed": 650000, "3bed": 950000 },
+      "transport": ["London Overground", "National Rail (Hackney Central, Hackney Downs)", "Victoria Line (via walk)"],
+      "demographic": "Artists, designers, tech founders, musicians, young professionals aged 24–38",
+      "highlights": ["Broadway Market & London Fields", "Hackney Empire theatre", "Regent's Canal towpath", "Victoria Park festivals", "Dalston's rooftop bars & music venues"],
+      "vibe": "Hip, creative, unpolished-cool"
+    },
+    "islington": {
+      "name": "Islington",
+      "slug": "islington",
+      "zone": "Zone 2",
+      "description": "Islington blends Georgian elegance with modern energy — Upper Street's restaurants and boutiques draw crowds from across London, while the quiet squares of Barnsbury and Canonbury offer village-like calm minutes from King's Cross. A favourite for barristers, academics, and media executives who want Zone 1 proximity without Westminster's formality.",
+      "averageRent": { "studio": 1550, "1bed": 2100, "2bed": 3000, "3bed": 4200 },
+      "averageSalePrice": { "1bed": 575000, "2bed": 900000, "3bed": 1500000 },
+      "transport": ["Northern Line", "Piccadilly Line", "Victoria Line", "London Overground", "Great Northern (King's Cross)"],
+      "demographic": "Barristers, academics, media executives, politicians, established professionals aged 30–50",
+      "highlights": ["Upper Street dining & theatre", "Camden Passage antiques market", "Regent's Canal & Angel Basin", "Almeida Theatre", "Arsenal's Emirates Stadium"],
+      "vibe": "Sophisticated, well-heeled, village-chic"
+    },
+    "southwark": {
+      "name": "Southwark",
+      "slug": "southwark",
+      "zone": "Zone 1–2",
+      "description": "Southwark spans the South Bank's cultural institutions, the gastronomic mecca of Borough Market, and the leafy residential streets of Dulwich. Home to the Shard, Tate Modern, and Shakespeare's Globe — it's where London's history meets its skyline. Strong demand from culture-sector professionals, NHS staff at Guy's & St Thomas', and City workers seeking a short commute.",
+      "averageRent": { "studio": 1400, "1bed": 2000, "2bed": 2900, "3bed": 3900 },
+      "averageSalePrice": { "1bed": 525000, "2bed": 800000, "3bed": 1300000 },
+      "transport": ["Jubilee Line", "Northern Line", "Bakerloo Line", "Thameslink", "National Rail (London Bridge, Waterloo East)"],
+      "demographic": "Culture professionals, NHS staff, City workers, creatives, young families aged 26–42",
+      "highlights": ["Tate Modern & Shakespeare's Globe", "Borough Market & food scene", "The Shard & London Bridge", "Dulwich Village & Picture Gallery", "South Bank riverfront"],
+      "vibe": "Cultural, riverside, food-obsessed"
     }
   }
 }
