@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-const PAYPAL_CLIENT_ID = 'PAYPAL_CLIENT_ID_PLACEHOLDER'; // Replace with your PayPal Client ID
+const PAYPAL_CLIENT_ID = 'BAAA5WLF9BRAD9gkGs0VYJ-NhZmcmYewuvhZiZQ5DF4hzgOmSFngZwWKWAn749FISsqi7X4kFSknWXacmQ';
+const PAYPAL_BUSINESS_EMAIL = 'kuldijamahmut75@gmail.com';
 
 interface PayPalButtonProps {
   amount: number;
@@ -98,7 +99,7 @@ export const PayPalButton: React.FC<PayPalButtonProps> = ({
 
   // Show payment link fallback until Client ID is set
   if (PAYPAL_CLIENT_ID === 'PAYPAL_CLIENT_ID_PLACEHOLDER') {
-    const paypalLink = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info@londonflat.uk&item_name=${encodeURIComponent(productName + ' — Monthly Subscription')}&amount=${amount}&currency_code=${currency}&no_shipping=1`;
+    const paypalLink = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${PAYPAL_BUSINESS_EMAIL}&item_name=${encodeURIComponent(productName + ' — Monthly Subscription')}&amount=${amount}&currency_code=${currency}&no_shipping=1`;
     return (
       <div className={className}>
         <a
