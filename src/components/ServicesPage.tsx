@@ -12,6 +12,7 @@ import faqData from '../data/faqs.json';
 interface ServicesPageProps {
   providers: ServiceProvider[];
   initialCategory?: string | null;
+  onNavigate: (view: string, listingId?: string, serviceCategory?: string) => void;
 }
 
 const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: string }[] = [
@@ -37,7 +38,7 @@ const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: 
   { id: 'independent-estate-agent', label: 'Independent Estate Agent', icon: Home, description: 'Expert valuations, buying/selling consultations, and structural property advice from trusted independent agents.' }
 ];
 
-export const ServicesPage: React.FC<ServicesPageProps> = ({ providers }) => {
+export const ServicesPage: React.FC<ServicesPageProps> = ({ providers, initialCategory, onNavigate }) => {
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
   const [boroughFilter, setBoroughFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -116,6 +117,20 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ providers }) => {
                   </p>
                 </div>
               </div>
+
+              {/* Subscribe CTA */}
+              {selectedCategory && (
+                <button
+                  onClick={() => {
+                    const highTicketCategories = ['legal-notaries', 'banking-mortgages', 'architecture-planning', 'independent-estate-agent', 'surveying-valuations', 'legal-eviction', 'interior-design'];
+                    const productId = highTicketCategories.includes(selectedCategory) ? 'hub-high-ticket' : 'hub-high-frequency';
+                    onNavigate('checkout', productId);
+                  }}
+                  className="shrink-0 px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold rounded-lg text-sm transition shadow-lg shadow-amber-500/10"
+                >
+                  Subscribe — £{['legal-notaries', 'banking-mortgages', 'architecture-planning', 'independent-estate-agent', 'surveying-valuations', 'legal-eviction', 'interior-design'].includes(selectedCategory) ? '1,200' : '650'}/mo
+                </button>
+              )}
 
               {/* Filters */}
               <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">

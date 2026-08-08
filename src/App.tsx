@@ -12,6 +12,7 @@ import { ServicesPage } from './components/ServicesPage';
 import { BoroughGuidePage } from './components/BoroughGuidePage';
 import { MovingChecklistPage } from './components/MovingChecklistPage';
 import { TenantRightsPage } from './components/TenantRightsPage';
+import { CheckoutPage } from './components/CheckoutPage';
 import { AuthModal } from './components/AuthModal';
 import { InstallPWA } from './components/InstallPWA';
 import { SEO } from './components/SEO';
@@ -163,6 +164,7 @@ function App() {
           <ServicesPage 
             providers={serviceProviders} 
             initialCategory={selectedServiceCategory}
+            onNavigate={handleNavigate}
           />
         );
       case 'admin':
@@ -178,6 +180,12 @@ function App() {
       case 'rights':
         return activeRightsSlug ? (
           <TenantRightsPage slug={activeRightsSlug} onNavigate={handleNavigate} />
+        ) : (
+          <HomePage listings={listings} onNavigate={handleNavigate} onSearch={handleSearch} />
+        );
+      case 'checkout':
+        return activeListingId ? (
+          <CheckoutPage productId={activeListingId} onNavigate={handleNavigate} />
         ) : (
           <HomePage listings={listings} onNavigate={handleNavigate} onSearch={handleSearch} />
         );
@@ -221,6 +229,9 @@ function App() {
       )}
       {currentView === 'rights' && activeRightsSlug && (
         <SEO title={`${activeRightsSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} — Tenant Rights — LondonFlat`} path={`/rights/${activeRightsSlug}`} />
+      )}
+      {currentView === 'checkout' && (
+        <SEO title="Checkout — LondonFlat" path="/checkout" />
       )}
       {/* Structured Data: BreadcrumbList */}
       {currentView === 'home' && (
