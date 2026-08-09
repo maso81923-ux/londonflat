@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Shield, Zap, Globe, ArrowLeft } from 'lucide-react';
 import { PayPalButton } from './PayPalButton';
 import { ALL_PRODUCTS } from '../data/pricing';
-import type { PricingProduct } from '../data/pricing';
+
 
 interface CheckoutPageProps {
   productId: string;

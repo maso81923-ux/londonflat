@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const PAYPAL_CLIENT_ID = 'BAAA5WLF9BRAD9gkGs0VYJ-NhZmcmYewuvhZiZQ5DF4hzgOmSFngZwWKWAn749FISsqi7X4kFSknWXacmQ';
+const PAYPAL_CLIENT_ID: string = 'BAAA5WLF9BRAD9gkGs0VYJ-NhZmcmYewuvhZiZQ5DF4hzgOmSFngZwWKWAn749FISsqi7X4kFSknWXacmQ';
 const PAYPAL_BUSINESS_EMAIL = 'kuldijamahmut75@gmail.com';
 
 interface PayPalButtonProps {

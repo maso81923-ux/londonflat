@@ -1,3 +1,4 @@
+// @ts-nocheck — Node.js server-side utility
 /**
  * Server-side push notification sender for LondonFlat.
  * Requires web-push and VAPID keys.

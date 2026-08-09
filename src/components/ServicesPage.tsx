@@ -38,7 +38,7 @@ const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: 
   { id: 'independent-estate-agent', label: 'Independent Estate Agent', icon: Home, description: 'Expert valuations, buying/selling consultations, and structural property advice from trusted independent agents.' }
 ];
 
-export const ServicesPage: React.FC<ServicesPageProps> = ({ providers, initialCategory, onNavigate }) => {
+export const ServicesPage: React.FC<ServicesPageProps> = ({ providers, onNavigate }) => {
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
   const [boroughFilter, setBoroughFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
