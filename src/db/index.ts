@@ -98,6 +98,15 @@ class DatabaseWrapper implements Database {
   // Push Notifications
   async savePushSubscription(subscription: any) { return (await this.getDb()).savePushSubscription(subscription); }
   async getPushSubscriptions() { return (await this.getDb()).getPushSubscriptions(); }
+
+  // Feed Ingestion Engine
+  async registerAgencyFeed(feed: any) { return (await this.getDb()).registerAgencyFeed(feed); }
+  async getAgencyFeeds() { return (await this.getDb()).getAgencyFeeds(); }
+  async getAgencyFeedById(id: string) { return (await this.getDb()).getAgencyFeedById(id); }
+  async updateAgencyFeedSync(id: string, lastSyncAt: string) { return (await this.getDb()).updateAgencyFeedSync(id, lastSyncAt); }
+  async upsertFeedListings(agencyId: string, listings: any[]) { return (await this.getDb()).upsertFeedListings(agencyId, listings); }
+  async getFeedListingsByAgency(agencyId: string) { return (await this.getDb()).getFeedListingsByAgency(agencyId); }
+  async deactivateStaleFeedListings(agencyId: string, activeExternalIds: string[]) { return (await this.getDb()).deactivateStaleFeedListings(agencyId, activeExternalIds); }
 }
 
 export const db = new DatabaseWrapper();

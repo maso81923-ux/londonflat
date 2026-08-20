@@ -394,5 +394,52 @@ export class SupabaseDatabase implements Database {
     if (error) throw new Error(error.message);
     return data || [];
   }
+
+  // Feed Ingestion Engine
+  async registerAgencyFeed(feed: any): Promise<any> {
+    const { data, error } = await supabase.from('agency_feeds').insert([{...feed, last_sync_at: null, created_at: new Date().toISOString()}]).select().single();
+    if (error) throw new Error(error.message);
+    return data;
+  }
+  async getAgencyFeeds(): Promise<any[]> {
+    const { data, error } = await supabase.from('agency_feeds').select('*');
+    if (error) throw new Error(error.message);
+    return data || [];
+  }
+  async getAgencyFeedById(id: string): Promise<any> {
+    const { data, error } = await supabase.from('agency_feeds').select('*').eq('id', id).single();
+    if (error) throw new Error(error.message);
+    return data;
+  }
+  async updateAgencyFeedSync(id: string, lastSyncAt: string): Promise<void> {
+    const { error } = await supabase.from('agency_feeds').update({ last_sync_at: lastSyncAt }).eq('id', id);
+    if (error) throw new Error(error.message);
+  }
+  async upsertFeedListings(agencyId: string, listings: any[]): Promise<any> {
+    const result = { imported: 0, failed: 0, errors: [] as string[] };
+    for (const listing of listings) {
+      const { error } = await supabase.from('feed_listings').upsert(
+        { ...listing, agency_id: agencyId, last_synced_at: new Date().toISOString() },
+        { onConflict: 'agency_id,external_id' }
+      );
+      if (error) { result.failed++; result.errors.push(error.message); }
+      else result.imported++;
+    }
+    return result;
+  }
+  async getFeedListingsByAgency(agencyId: string): Promise<any[]> {
+    const { data, error } = await supabase.from('feed_listings').select('*').eq('agency_id', agencyId);
+    if (error) throw new Error(error.message);
+    return data || [];
+  }
+  async deactivateStaleFeedListings(agencyId: string, _activeExternalIds: string[]): Promise<number> {
+    const { data, error } = await supabase.from('feed_listings')
+      .update({ status: 'rented' })
+      .eq('agency_id', agencyId)
+      .eq('status', 'available')
+      .select('id');
+    if (error) throw new Error(error.message);
+    return data?.length || 0;
+  }
 }
 export const supabaseDb = new SupabaseDatabase();

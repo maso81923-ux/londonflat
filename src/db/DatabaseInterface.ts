@@ -6,7 +6,10 @@ import {
   type ServiceProvider, 
   type ServiceCategory, 
   type RequestStatus,
-  type UserRole
+  type UserRole,
+  type AgencyFeed,
+  type FeedListing,
+  type FeedImportResult
 } from './schema';
 
 export interface Database {
@@ -45,4 +48,13 @@ export interface Database {
   // Push Notifications
   savePushSubscription(subscription: any): Promise<void>;
   getPushSubscriptions(): Promise<any[]>;
+
+  // Feed Ingestion Engine
+  registerAgencyFeed(feed: Omit<AgencyFeed, 'id' | 'last_sync_at' | 'created_at'>): Promise<AgencyFeed>;
+  getAgencyFeeds(): Promise<AgencyFeed[]>;
+  getAgencyFeedById(id: string): Promise<AgencyFeed | undefined>;
+  updateAgencyFeedSync(id: string, lastSyncAt: string): Promise<void>;
+  upsertFeedListings(agencyId: string, listings: Omit<FeedListing, 'id' | 'created_at'>[]): Promise<FeedImportResult>;
+  getFeedListingsByAgency(agencyId: string): Promise<FeedListing[]>;
+  deactivateStaleFeedListings(agencyId: string, activeExternalIds: string[]): Promise<number>;
 }

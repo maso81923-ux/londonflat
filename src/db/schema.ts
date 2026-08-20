@@ -77,6 +77,45 @@ export interface ServiceProvider {
   created_at: string;
 }
 
+// === Feed Ingestion Schema ===
+
+export type FeedType = 'xml' | 'json';
+export type FeedTier = 'standard' | 'premium';
+
+export interface AgencyFeed {
+  id: string;
+  agency_name: string;
+  feed_url: string;
+  feed_type: FeedType;
+  api_key: string;
+  tier: FeedTier;
+  is_active: boolean;
+  last_sync_at: string | null;
+  created_at: string;
+}
+
+export interface FeedListing {
+  id: string;
+  external_id: string;
+  agency_id: string;
+  source: string;
+  feed_type: FeedType;
+  property_data: PropertyListing;
+  status: PropertyStatus;
+  borough: string;
+  price: number;
+  bedrooms: number;
+  images: string[];
+  last_synced_at: string;
+  created_at: string;
+}
+
+export interface FeedImportResult {
+  imported: number;
+  failed: number;
+  errors: string[];
+}
+
 export type RequestStatus = 'pending' | 'confirmed' | 'cancelled';
 
 export interface ViewingRequest {

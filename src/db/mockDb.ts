@@ -7,7 +7,10 @@ import {
   type RequestStatus, 
   type ServiceProvider, 
   type ServiceCategory,
-  type UserRole
+  type UserRole,
+  type AgencyFeed,
+  type FeedListing,
+  type FeedImportResult
 } from './schema';
 import { parseFeedUrl, parseAndValidateFeed, transformProperty } from './feedParser';
 
@@ -914,6 +917,8 @@ export class MockDatabase implements Database {
   private currentUser: UserProfile | null = null;
   private feedUrls: Record<string, string> = {};
   private pushSubscriptions: any[] = [];
+  private agencyFeeds: AgencyFeed[] = [];
+  private feedListings: FeedListing[] = [];
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -1238,6 +1243,81 @@ export class MockDatabase implements Database {
 
   async getPushSubscriptions(): Promise<any[]> {
     return this.pushSubscriptions;
+  }
+
+  // Feed Ingestion Engine
+  async registerAgencyFeed(feed: Omit<AgencyFeed, 'id' | 'last_sync_at' | 'created_at'>): Promise<AgencyFeed> {
+    const newFeed: AgencyFeed = {
+      id: generateId(),
+      ...feed,
+      last_sync_at: null,
+      created_at: new Date().toISOString(),
+    };
+    this.agencyFeeds.push(newFeed);
+    return newFeed;
+  }
+
+  async getAgencyFeeds(): Promise<AgencyFeed[]> {
+    return this.agencyFeeds;
+  }
+
+  async getAgencyFeedById(id: string): Promise<AgencyFeed | undefined> {
+    return this.agencyFeeds.find(f => f.id === id);
+  }
+
+  async updateAgencyFeedSync(id: string, lastSyncAt: string): Promise<void> {
+    const feed = this.agencyFeeds.find(f => f.id === id);
+    if (feed) {
+      feed.last_sync_at = lastSyncAt;
+    }
+  }
+
+  async upsertFeedListings(agencyId: string, listings: Omit<FeedListing, 'id' | 'created_at'>[]): Promise<FeedImportResult> {
+    const result: FeedImportResult = { imported: 0, failed: 0, errors: [] };
+    for (const listing of listings) {
+      try {
+        const existing = this.feedListings.findIndex(
+          fl => fl.agency_id === agencyId && fl.external_id === listing.external_id
+        );
+        if (existing >= 0) {
+          this.feedListings[existing] = {
+            ...listing,
+            id: this.feedListings[existing].id,
+            created_at: this.feedListings[existing].created_at,
+            last_synced_at: new Date().toISOString(),
+          };
+        } else {
+          this.feedListings.push({
+            ...listing,
+            id: generateId(),
+            created_at: new Date().toISOString(),
+            last_synced_at: new Date().toISOString(),
+          });
+        }
+        result.imported++;
+      } catch (err: any) {
+        result.failed++;
+        result.errors.push(`Failed to upsert listing ${listing.external_id}: ${err.message}`);
+      }
+    }
+    saveToStorage('feed_listings', this.feedListings);
+    return result;
+  }
+
+  async getFeedListingsByAgency(agencyId: string): Promise<FeedListing[]> {
+    return this.feedListings.filter(fl => fl.agency_id === agencyId);
+  }
+
+  async deactivateStaleFeedListings(agencyId: string, activeExternalIds: string[]): Promise<number> {
+    let count = 0;
+    for (const fl of this.feedListings) {
+      if (fl.agency_id === agencyId && !activeExternalIds.includes(fl.external_id) && fl.status === 'available') {
+        fl.status = 'rented';
+        count++;
+      }
+    }
+    saveToStorage('feed_listings', this.feedListings);
+    return count;
   }
 }
 
