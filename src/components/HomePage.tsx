@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import type { PropertyListing, ServiceProvider, ServiceCategory } from '../db/schema';
-import { Search, MapPin, Sparkles, ShieldCheck, CheckCircle2, Star, Compass, ArrowRight, UserPlus, Wrench, Scale, Truck, Shield, Zap, Droplet, Landmark, ShieldCheck as ShieldCheckIcon, Camera, Heart, Palette, Leaf, Ruler, Key, Trash2, Building2, Paintbrush } from 'lucide-react';
+import { Search, MapPin, Sparkles, ShieldCheck, CheckCircle2, Star, Compass, ArrowRight, UserPlus, Wrench, Scale, Truck, Shield, Zap, Droplet, Landmark, ShieldCheck as ShieldCheckIcon, Camera, Heart, Palette, Leaf, Ruler, Key, Trash2, Building2, Paintbrush, TrendingUp } from 'lucide-react';
+import londonSoldPrices from '../data/londonSoldPrices.json';
+
+type SoldPriceRecord = {
+  price: number;
+  date: string;
+  postcode: string;
+  type: string;
+  address?: string | null;
+  borough: string;
+  tenure: string;
+};
 
 interface HomePageProps {
   listings: PropertyListing[];
@@ -297,6 +308,42 @@ export const HomePage: React.FC<HomePageProps> = ({ listings, onNavigate, onSear
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Recent Sold Prices — HM Land Registry */}
+      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12">
+          <div>
+            <h2 className="text-2xl font-bold sm:text-3xl text-white flex items-center gap-2">
+              <TrendingUp className="h-6 w-6 text-amber-500" />
+              Recent London Sold Prices
+            </h2>
+            <p className="mt-2 text-slate-400 text-sm max-w-2xl">
+              Real recorded transactions from <span className="text-slate-300 font-semibold">HM Land Registry Price Paid Data</span> (2026). These are completed sale prices — not live rental or for-sale listings.
+            </p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {(londonSoldPrices as SoldPriceRecord[]).slice(0, 8).map((r, i) => (
+            <div key={i} className="rounded-2xl bg-slate-900 border border-slate-800/80 p-5 hover:border-amber-500/30 transition">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{r.type}</span>
+                <span className="text-[10px] font-bold text-amber-400">{r.tenure}</span>
+              </div>
+              <div className="text-xl font-bold text-white">£{r.price.toLocaleString()}</div>
+              <div className="mt-1 text-xs text-slate-400 flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+                <span>{r.postcode} • {r.borough}</span>
+              </div>
+              <div className="mt-3 pt-3 border-t border-slate-800/80 text-[11px] text-slate-500">
+                Sold {new Date(r.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 text-[11px] text-slate-500">
+          Source: HM Land Registry, released under the Open Government Licence v3.0.
+        </p>
       </section>
 
       {/* London Borough Spotlight */}

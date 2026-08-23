@@ -1,0 +1,182 @@
+[
+  {
+    "price": 335000,
+    "date": "2026-03-20",
+    "postcode": "SE5 9HF",
+    "type": "Flat",
+    "address": "WIDECOMBE HOUSE",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 500000,
+    "date": "2026-03-16",
+    "postcode": "SW18 4PY",
+    "type": "Flat",
+    "address": "129 EARLSFIELD",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 385000,
+    "date": "2026-03-12",
+    "postcode": "SE13 5BT",
+    "type": "Flat",
+    "address": "8",
+    "borough": "Lewisham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 342500,
+    "date": "2026-03-11",
+    "postcode": "SW18 2AQ",
+    "type": "Flat",
+    "address": "BEMBRIDGE HOUSE, 1",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 237000,
+    "date": "2026-03-06",
+    "postcode": "SE14 6DZ",
+    "type": "Flat",
+    "address": "152",
+    "borough": "Lewisham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 405000,
+    "date": "2026-03-06",
+    "postcode": "SW16 2PL",
+    "type": "Flat",
+    "address": "20 STREATHAM",
+    "borough": "Lambeth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 589500,
+    "date": "2026-02-27",
+    "postcode": "SE3 7LS",
+    "type": "Semi-detached",
+    "address": "33",
+    "borough": "Greenwich",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 335000,
+    "date": "2026-02-27",
+    "postcode": "SW12 9JE",
+    "type": "Flat",
+    "address": "71",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 632500,
+    "date": "2026-02-27",
+    "postcode": "SW15 5EH",
+    "type": "Terraced",
+    "address": "76",
+    "borough": "Wandsworth",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 420000,
+    "date": "2026-02-27",
+    "postcode": "SE2 9AZ",
+    "type": "Terraced",
+    "address": "86",
+    "borough": "Greenwich",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 420000,
+    "date": "2026-02-27",
+    "postcode": "SE3 7NJ",
+    "type": "Flat",
+    "address": "FENTONS",
+    "borough": "Greenwich",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 395000,
+    "date": "2026-02-25",
+    "postcode": "SE16 5HU",
+    "type": "Flat",
+    "address": "3",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 390000,
+    "date": "2026-02-24",
+    "postcode": "SE6 1LA",
+    "type": "Terraced",
+    "address": "9",
+    "borough": "Lewisham",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 450000,
+    "date": "2026-02-20",
+    "postcode": "SW15 2AY",
+    "type": "Flat",
+    "address": "7",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 275000,
+    "date": "2026-02-19",
+    "postcode": "SE2 9QS",
+    "type": "Flat",
+    "address": "38",
+    "borough": "Greenwich",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 380000,
+    "date": "2026-02-18",
+    "postcode": "SE17 2JL",
+    "type": "Flat",
+    "address": "DUNNICO HOUSE",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 502000,
+    "date": "2026-02-13",
+    "postcode": "SE9 3EJ",
+    "type": "Detached",
+    "address": "17",
+    "borough": "Greenwich",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 312000,
+    "date": "2026-02-12",
+    "postcode": "SW18 2BE",
+    "type": "Flat",
+    "address": "71C",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 675000,
+    "date": "2026-01-23",
+    "postcode": "SE15 2RR",
+    "type": "Terraced",
+    "address": "31",
+    "borough": "Southwark",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 500000,
+    "date": "2026-01-19",
+    "postcode": "SW16 2SL",
+    "type": "Flat",
+    "address": "19",
+    "borough": "Lambeth",
+    "tenure": "Leasehold"
+  }
+]
