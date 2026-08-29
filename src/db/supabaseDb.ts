@@ -315,7 +315,10 @@ export class SupabaseDatabase implements Database {
   async getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]> {
     const { data, error } = await supabase.from('agency_details').select('*').order('created_at', { ascending: false });
     if (error) throw new Error(error.message);
-    return (data || []).map(a => ({ ...a, feed_url: a.feed_url || '', sync_status: 'inactive' }));
+    const { data: feeds } = await supabase.from('agency_feeds').select('agency_name, feed_url');
+    const feedByName: Record<string, string> = {};
+    (feeds || []).forEach((f: any) => { if (f.agency_name) feedByName[f.agency_name] = f.feed_url; });
+    return (data || []).map(a => ({ ...a, feed_url: feedByName[a.company_name] || '', sync_status: 'inactive' }));
   }
 
   async blockUser(userId: string): Promise<void> {
@@ -328,16 +331,27 @@ export class SupabaseDatabase implements Database {
   }
 
   async updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void> {
-    const { error } = await supabase.from('agency_details').update({ feed_url: feedUrl }).eq('id', agencyId);
-    if (error) throw new Error(error.message);
+    const { data: agency } = await supabase.from('agency_details').select('company_name').eq('id', agencyId).single();
+    if (!agency) throw new Error('Agency not found');
+
+    const { data: existing } = await supabase.from('agency_feeds').select('id').eq('agency_name', agency.company_name).maybeSingle();
+    if (existing) {
+      const { error } = await supabase.from('agency_feeds').update({ feed_url: feedUrl }).eq('id', existing.id);
+      if (error) throw new Error(error.message);
+    } else {
+      const { error } = await supabase.from('agency_feeds').insert([{ agency_name: agency.company_name, feed_url: feedUrl }]);
+      if (error) throw new Error(error.message);
+    }
   }
 
   async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
-    // Look up the agency to get the user_id and persisted feed URL
-    const { data: agency } = await supabase.from('agency_details').select('user_id, feed_url').eq('id', agencyId).single();
+    // Look up the agency to get the user_id and company name
+    const { data: agency } = await supabase.from('agency_details').select('user_id, company_name').eq('id', agencyId).single();
     if (!agency) return { imported: 0, failed: 0 };
 
-    const feedUrl = agency.feed_url;
+    // Resolve the persisted feed URL from agency_feeds (keyed by agency_name)
+    const { data: feed } = await supabase.from('agency_feeds').select('feed_url').eq('agency_name', agency.company_name).maybeSingle();
+    const feedUrl = feed?.feed_url;
     if (!feedUrl) return { imported: 0, failed: 0 };
 
     const { cleanUrl, apiKey } = parseFeedUrl(feedUrl);
