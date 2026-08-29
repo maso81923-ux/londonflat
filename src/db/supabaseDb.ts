@@ -13,8 +13,6 @@ import {
 import { parseFeedUrl, parseAndValidateFeed, transformProperty } from './feedParser';
 
 export class SupabaseDatabase implements Database {
-  private feedUrls: Record<string, string> = {};
-
   // --- Auth APIs ---
   async getCurrentUser(): Promise<UserProfile | null> {
     const { data: { session } } = await supabase.auth.getSession();
@@ -317,7 +315,7 @@ export class SupabaseDatabase implements Database {
   async getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]> {
     const { data, error } = await supabase.from('agency_details').select('*').order('created_at', { ascending: false });
     if (error) throw new Error(error.message);
-    return (data || []).map(a => ({ ...a, feed_url: '', sync_status: 'inactive' }));
+    return (data || []).map(a => ({ ...a, feed_url: a.feed_url || '', sync_status: 'inactive' }));
   }
 
   async blockUser(userId: string): Promise<void> {
@@ -330,17 +328,17 @@ export class SupabaseDatabase implements Database {
   }
 
   async updateAgencyFeedUrl(agencyId: string, feedUrl: string): Promise<void> {
-    this.feedUrls[agencyId] = feedUrl;
-    console.log('Supabase: feed URL updated for', agencyId);
+    const { error } = await supabase.from('agency_details').update({ feed_url: feedUrl }).eq('id', agencyId);
+    if (error) throw new Error(error.message);
   }
 
   async importAgencyListings(agencyId: string): Promise<{ imported: number; failed: number }> {
-    const feedUrl = this.feedUrls[agencyId];
-    if (!feedUrl) return { imported: 0, failed: 0 };
-
-    // Look up the agency to get the user_id
-    const { data: agency } = await supabase.from('agency_details').select('user_id').eq('id', agencyId).single();
+    // Look up the agency to get the user_id and persisted feed URL
+    const { data: agency } = await supabase.from('agency_details').select('user_id, feed_url').eq('id', agencyId).single();
     if (!agency) return { imported: 0, failed: 0 };
+
+    const feedUrl = agency.feed_url;
+    if (!feedUrl) return { imported: 0, failed: 0 };
 
     const { cleanUrl, apiKey } = parseFeedUrl(feedUrl);
     if (!apiKey) {

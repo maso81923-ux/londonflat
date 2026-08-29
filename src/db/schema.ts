@@ -24,6 +24,7 @@ export interface AgencyDetails {
   phone: string;
   office_address: string;
   website?: string;
+  feed_url?: string;
   created_at: string;
   is_verified: boolean;
 }
