@@ -13,6 +13,7 @@ import { BoroughGuidePage } from './components/BoroughGuidePage';
 import { MovingChecklistPage } from './components/MovingChecklistPage';
 import { TenantRightsPage } from './components/TenantRightsPage';
 import { CheckoutPage } from './components/CheckoutPage';
+import { MarketingPage } from './components/MarketingPage';
 import { AuthModal } from './components/AuthModal';
 import { InstallPWA } from './components/InstallPWA';
 import { SEO } from './components/SEO';
@@ -189,6 +190,8 @@ function App() {
         ) : (
           <HomePage listings={listings} onNavigate={handleNavigate} onSearch={handleSearch} />
         );
+      case 'marketing':
+        return <MarketingPage onNavigate={handleNavigate} />;
       default:
         return (
           <HomePage 
@@ -232,6 +235,9 @@ function App() {
       )}
       {currentView === 'checkout' && (
         <SEO title="Checkout — LondonFlat" path="/checkout" />
+      )}
+      {currentView === 'marketing' && (
+        <SEO title="Sales & Marketing — LondonFlat" path="/marketing" />
       )}
       {/* Structured Data: BreadcrumbList */}
       {currentView === 'home' && (
