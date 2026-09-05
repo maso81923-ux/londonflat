@@ -67,6 +67,12 @@ const pitchPillars = [
     pillar: 'Pillar 1 — XML/API Feed License',
     audience: 'Estate agents & letting agencies',
     headline: "Your whole portfolio on London's premium flat marketplace — automatically.",
+    metrics: [
+      ['London private rented sector', '≈1m+ households rent privately (~29% of ~3.6m London households) — GLA Housing in London / English Housing Survey'],
+      ['Average London rent', '£2,317/mo London average; Kensington & Chelsea £3,629/mo — ONS Price Index of Private Rents, July 2026'],
+      ['Agency fee economics', 'Full management 12–20% of monthly rent (12–15% mainstream, 15–20%+ prime central). A £2,317/mo let ≈ £278–£463/mo = £3,336–£5,560/yr per property'],
+      ['Search demand', 'Exact-match domains ≈74k/mo (londonflat.uk) + ≈110k/mo (londonrealestate.app) — owner domain data'],
+    ],
     points: [
       ['Problem', 'Manual uploads, stale listings, wasted enquiry time on portals that bury you under thousands.'],
       ['Solution', 'A live XML/API feed syncs your full portfolio in real time, with prioritised indexing in the boroughs you serve.'],
@@ -79,6 +85,12 @@ const pitchPillars = [
     pillar: 'Pillar 2 — Services Hub',
     audience: '20 property-lifecycle categories',
     headline: 'Own your category. One flat fee. No bidding.',
+    metrics: [
+      ['Addressable households', '≈3.6m London households; ≈1m+ private renters — every let and move triggers maintenance, cleaning, removals, legal and referencing spend'],
+      ['Sellable inventory', '20 categories × 32 London boroughs = 640 exclusive borough-category slots'],
+      ['Fee value vs. job size', 'One removal, conveyancing case or mortgage instruction typically earns the provider more than a full month of the subscription tier'],
+      ['Anchor demand', 'High-intent London renters/buyers reach providers at the exact moment of need ("plumber near me", "conveyancing solicitor")'],
+    ],
     points: [
       ['Problem', 'Londoners search Google for "plumber near me" — not a directory — at the exact moment they need you.'],
       ['Solution', 'Be the listed provider for your category on a premium London property platform, visible at the moment of need.'],
@@ -90,6 +102,11 @@ const pitchPillars = [
     pillar: 'Pillar 3 — Automated Placements',
     audience: 'Fixed-price inventory',
     headline: 'The one placement every LondonFlat visitor sees.',
+    metrics: [
+      ['Combined EMD reach', '≈184k/mo search volume across both exact-match domains — target reach, not yet observed traffic'],
+      ['Traffic assumption', '1–5% click-through ≈ 1,840–9,200 sessions/mo (planning assumption)'],
+      ['Exclusivity', 'Single advertiser on the header, single category-owner per borough — scarcity, not auction'],
+    ],
     points: [
       ['Problem', 'Stand out against competitors across every entry point, or within a single borough.'],
       ['Solution', 'Main Platform Header £4,500/mo — exclusive global banner. Borough Sponsorship £1,200/mo — the only provider in your category for a chosen borough.'],
@@ -195,6 +212,14 @@ export const MarketingPage: React.FC<MarketingPageProps> = ({ onNavigate }) => {
                     </div>
                   ))}
                 </div>
+                <div className="mt-5 rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 space-y-2">
+                  <span className="block text-xs font-semibold text-amber-400 uppercase tracking-wider">Market data</span>
+                  {p.metrics.map(([k, v]) => (
+                    <p key={k} className="text-xs text-slate-300">
+                      <span className="text-white font-medium">{k}: </span>{v}
+                    </p>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -272,6 +297,20 @@ export const MarketingPage: React.FC<MarketingPageProps> = ({ onNavigate }) => {
             </div>
             <p className="text-xs text-slate-500 mt-4">Directories to pull full per-borough lists: Yell, Checkatrade, TrustATrader, Rated People, Google Business Profile + trade bodies (NICEIC, Gas Safe Register, RICS, RIBA, Law Society, BIID, APL).</p>
           </div>
+        </section>
+
+        {/* Planning assumptions */}
+        <section className="rounded-2xl border border-slate-800 bg-slate-900/30 p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <TrendingUp className="h-5 w-5 text-amber-500" />
+            <h2 className="text-xl font-bold">Planning Assumptions</h2>
+          </div>
+          <ul className="space-y-2 text-sm text-slate-400">
+            <li>• Search volumes (74k/mo + ~110k/mo) are exact-match domain search figures from owner domain data — treated as target reach, not observed site traffic.</li>
+            <li>• Click-through assumption: 1–5% of search volume reaches the site (depends on SEO ranking; the site is pre-traffic today).</li>
+            <li>• Enquiry conversion assumption: 1–3% of sessions convert to an enquiry (industry benchmark, not yet measured on this site).</li>
+            <li>• All other figures are sourced (ONS Price Index of Private Rents, GLA Housing in London / English Housing Survey) or clearly-labelled arithmetic from those sources.</li>
+          </ul>
         </section>
       </div>
     </div>
