@@ -1,182 +1,1352 @@
 [
   {
-    "price": 335000,
-    "date": "2026-03-20",
-    "postcode": "SE5 9HF",
+    "price": 865000,
+    "date": "2026-07-31",
+    "postcode": "SW6 1JP",
     "type": "Flat",
-    "address": "WIDECOMBE HOUSE",
-    "borough": "Southwark",
+    "address": "GROUND AND FIRST FLOOR MAISONETTE, 16",
+    "borough": "Hammersmith And Fulham",
     "tenure": "Leasehold"
   },
   {
-    "price": 500000,
-    "date": "2026-03-16",
-    "postcode": "SW18 4PY",
-    "type": "Flat",
-    "address": "129 EARLSFIELD",
-    "borough": "Wandsworth",
-    "tenure": "Leasehold"
-  },
-  {
-    "price": 385000,
-    "date": "2026-03-12",
-    "postcode": "SE13 5BT",
-    "type": "Flat",
-    "address": "8",
-    "borough": "Lewisham",
-    "tenure": "Leasehold"
-  },
-  {
-    "price": 342500,
-    "date": "2026-03-11",
-    "postcode": "SW18 2AQ",
-    "type": "Flat",
-    "address": "BEMBRIDGE HOUSE, 1",
-    "borough": "Wandsworth",
-    "tenure": "Leasehold"
-  },
-  {
-    "price": 237000,
-    "date": "2026-03-06",
-    "postcode": "SE14 6DZ",
-    "type": "Flat",
-    "address": "152",
-    "borough": "Lewisham",
-    "tenure": "Leasehold"
-  },
-  {
-    "price": 405000,
-    "date": "2026-03-06",
-    "postcode": "SW16 2PL",
-    "type": "Flat",
-    "address": "20 STREATHAM",
+    "price": 821500,
+    "date": "2026-07-31",
+    "postcode": "SW2 3BD",
+    "type": "Terraced",
+    "address": "186",
     "borough": "Lambeth",
-    "tenure": "Leasehold"
+    "tenure": "Freehold"
   },
   {
-    "price": 589500,
-    "date": "2026-02-27",
-    "postcode": "SE3 7LS",
+    "price": 570000,
+    "date": "2026-07-31",
+    "postcode": "RM2 5AP",
     "type": "Semi-detached",
-    "address": "33",
-    "borough": "Greenwich",
+    "address": "23",
+    "borough": "Havering",
     "tenure": "Freehold"
   },
   {
-    "price": 335000,
-    "date": "2026-02-27",
-    "postcode": "SW12 9JE",
+    "price": 870000,
+    "date": "2026-07-30",
+    "postcode": "NW6 1LL",
     "type": "Flat",
-    "address": "71",
-    "borough": "Wandsworth",
+    "address": "FLAT 28, CUMBERLAND MANSIONS",
+    "borough": "Camden",
     "tenure": "Leasehold"
   },
   {
-    "price": 632500,
-    "date": "2026-02-27",
-    "postcode": "SW15 5EH",
+    "price": 801000,
+    "date": "2026-07-30",
+    "postcode": "E18 1DG",
     "type": "Terraced",
-    "address": "76",
-    "borough": "Wandsworth",
+    "address": "10",
+    "borough": "Redbridge",
     "tenure": "Freehold"
   },
   {
-    "price": 420000,
-    "date": "2026-02-27",
-    "postcode": "SE2 9AZ",
+    "price": 755000,
+    "date": "2026-07-30",
+    "postcode": "KT3 3HD",
     "type": "Terraced",
-    "address": "86",
-    "borough": "Greenwich",
+    "address": "48",
+    "borough": "Kingston Upon Thames",
     "tenure": "Freehold"
   },
   {
-    "price": 420000,
-    "date": "2026-02-27",
-    "postcode": "SE3 7NJ",
-    "type": "Flat",
-    "address": "FENTONS",
-    "borough": "Greenwich",
-    "tenure": "Leasehold"
-  },
-  {
-    "price": 395000,
-    "date": "2026-02-25",
-    "postcode": "SE16 5HU",
-    "type": "Flat",
-    "address": "3",
-    "borough": "Southwark",
-    "tenure": "Leasehold"
-  },
-  {
-    "price": 390000,
-    "date": "2026-02-24",
-    "postcode": "SE6 1LA",
+    "price": 521000,
+    "date": "2026-07-30",
+    "postcode": "UB4 0RA",
     "type": "Terraced",
-    "address": "9",
+    "address": "61",
+    "borough": "Hillingdon",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 365000,
+    "date": "2026-07-30",
+    "postcode": "SM5 2NQ",
+    "type": "Flat",
+    "address": "34",
+    "borough": "Sutton",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 315000,
+    "date": "2026-07-30",
+    "postcode": "TW2 7SY",
+    "type": "Flat",
+    "address": "FLAT 9, CHALLENGE COURT",
+    "borough": "Richmond Upon Thames",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 825000,
+    "date": "2026-07-29",
+    "postcode": "SE12 9HX",
+    "type": "Semi-detached",
+    "address": "14",
     "borough": "Lewisham",
     "tenure": "Freehold"
   },
   {
-    "price": 450000,
-    "date": "2026-02-20",
-    "postcode": "SW15 2AY",
+    "price": 785000,
+    "date": "2026-07-29",
+    "postcode": "SW15 3LX",
     "type": "Flat",
-    "address": "7",
+    "address": "FLAT 16, SOMERVILLE HOUSE",
     "borough": "Wandsworth",
     "tenure": "Leasehold"
   },
   {
-    "price": 275000,
-    "date": "2026-02-19",
-    "postcode": "SE2 9QS",
-    "type": "Flat",
-    "address": "38",
-    "borough": "Greenwich",
-    "tenure": "Leasehold"
-  },
-  {
-    "price": 380000,
-    "date": "2026-02-18",
-    "postcode": "SE17 2JL",
-    "type": "Flat",
-    "address": "DUNNICO HOUSE",
-    "borough": "Southwark",
-    "tenure": "Leasehold"
-  },
-  {
-    "price": 502000,
-    "date": "2026-02-13",
-    "postcode": "SE9 3EJ",
-    "type": "Detached",
-    "address": "17",
-    "borough": "Greenwich",
+    "price": 782500,
+    "date": "2026-07-29",
+    "postcode": "TW12 1RT",
+    "type": "Semi-detached",
+    "address": "34",
+    "borough": "Richmond Upon Thames",
     "tenure": "Freehold"
   },
   {
-    "price": 312000,
-    "date": "2026-02-12",
-    "postcode": "SW18 2BE",
+    "price": 740000,
+    "date": "2026-07-29",
+    "postcode": "EN1 3DS",
+    "type": "Semi-detached",
+    "address": "114",
+    "borough": "Enfield",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 735000,
+    "date": "2026-07-29",
+    "postcode": "NW8 7NS",
     "type": "Flat",
-    "address": "71C",
-    "borough": "Wandsworth",
+    "address": "FLAT 34, COCHRANE CLOSE 27-37",
+    "borough": "City Of Westminster",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 628000,
+    "date": "2026-07-29",
+    "postcode": "E14 3WG",
+    "type": "Flat",
+    "address": "354",
+    "borough": "Tower Hamlets",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 600000,
+    "date": "2026-07-29",
+    "postcode": "NW8 7NS",
+    "type": "Flat",
+    "address": "FLAT 28, COCHRANE CLOSE 27-37",
+    "borough": "City Of Westminster",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 540000,
+    "date": "2026-07-29",
+    "postcode": "N15 5RA",
+    "type": "Terraced",
+    "address": "3",
+    "borough": "Haringey",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 465000,
+    "date": "2026-07-29",
+    "postcode": "NW1 8YN",
+    "type": "Flat",
+    "address": "9B",
+    "borough": "Camden",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 460000,
+    "date": "2026-07-29",
+    "postcode": "NW6 7HA",
+    "type": "Flat",
+    "address": "27A",
+    "borough": "Brent",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 430000,
+    "date": "2026-07-29",
+    "postcode": "NW3 2ST",
+    "type": "Flat",
+    "address": "FLAT 4, 17",
+    "borough": "Camden",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 430000,
+    "date": "2026-07-29",
+    "postcode": "DA8 2BY",
+    "type": "Semi-detached",
+    "address": "4",
+    "borough": "Bexley",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 425000,
+    "date": "2026-07-29",
+    "postcode": "RM8 2TT",
+    "type": "Semi-detached",
+    "address": "2",
+    "borough": "Barking And Dagenham",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 360000,
+    "date": "2026-07-29",
+    "postcode": "NW2 7RU",
+    "type": "Terraced",
+    "address": "11",
+    "borough": "Brent",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 350000,
+    "date": "2026-07-29",
+    "postcode": "SE20 8ET",
+    "type": "Flat",
+    "address": "FLAT 8, KATHERINE COURT, 39",
+    "borough": "Bromley",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 336000,
+    "date": "2026-07-29",
+    "postcode": "E1 1LF",
+    "type": "Flat",
+    "address": "FLAT 805, DRYDEN BUILDING, 37",
+    "borough": "Tower Hamlets",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 280000,
+    "date": "2026-07-29",
+    "postcode": "SE19 2AJ",
+    "type": "Flat",
+    "address": "4G",
+    "borough": "Bromley",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 866500,
+    "date": "2026-07-28",
+    "postcode": "E17 4PS",
+    "type": "Terraced",
+    "address": "78",
+    "borough": "Waltham Forest",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 840000,
+    "date": "2026-07-28",
+    "postcode": "NW2 4RT",
+    "type": "Flat",
+    "address": "GROUND FLOOR FLAT, 132",
+    "borough": "Brent",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 757500,
+    "date": "2026-07-28",
+    "postcode": "N2 8BE",
+    "type": "Terraced",
+    "address": "14",
+    "borough": "Barnet",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 726000,
+    "date": "2026-07-28",
+    "postcode": "HA4 9QX",
+    "type": "Semi-detached",
+    "address": "131",
+    "borough": "Hillingdon",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 695000,
+    "date": "2026-07-28",
+    "postcode": "EC1V 2AE",
+    "type": "Flat",
+    "address": "APARTMENT 107, CARRARA TOWER, 1",
+    "borough": "Islington",
     "tenure": "Leasehold"
   },
   {
     "price": 675000,
-    "date": "2026-01-23",
-    "postcode": "SE15 2RR",
+    "date": "2026-07-28",
+    "postcode": "TW11 9BZ",
+    "type": "Detached",
+    "address": "36",
+    "borough": "Richmond Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 550000,
+    "date": "2026-07-28",
+    "postcode": "KT1 2AJ",
+    "type": "Semi-detached",
+    "address": "5",
+    "borough": "Kingston Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 475000,
+    "date": "2026-07-28",
+    "postcode": "BR7 6AW",
     "type": "Terraced",
-    "address": "31",
+    "address": "81",
+    "borough": "Bromley",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 470000,
+    "date": "2026-07-28",
+    "postcode": "KT4 8BT",
+    "type": "Semi-detached",
+    "address": "26",
+    "borough": "Kingston Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 404000,
+    "date": "2026-07-28",
+    "postcode": "SE11 6NE",
+    "type": "Flat",
+    "address": "FLAT 9, DRESDEN HOUSE",
+    "borough": "Lambeth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 400000,
+    "date": "2026-07-28",
+    "postcode": "KT6 6BP",
+    "type": "Flat",
+    "address": "7",
+    "borough": "Kingston Upon Thames",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 345000,
+    "date": "2026-07-28",
+    "postcode": "SE1 5HS",
+    "type": "Flat",
+    "address": "FLAT 10, LACKLAND HOUSE",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 270000,
+    "date": "2026-07-28",
+    "postcode": "UB3 1SW",
+    "type": "Flat",
+    "address": "70",
+    "borough": "Hillingdon",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 200000,
+    "date": "2026-07-28",
+    "postcode": "HA8 8SX",
+    "type": "Flat",
+    "address": "FIRST FLOOR FLAT, 44",
+    "borough": "Barnet",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 941000,
+    "date": "2026-07-27",
+    "postcode": "KT2 7RD",
+    "type": "Terraced",
+    "address": "27",
+    "borough": "Kingston Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 914000,
+    "date": "2026-07-27",
+    "postcode": "N15 3NJ",
+    "type": "Terraced",
+    "address": "86",
+    "borough": "Haringey",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 895000,
+    "date": "2026-07-27",
+    "postcode": "KT2 6HG",
+    "type": "Terraced",
+    "address": "14",
+    "borough": "Kingston Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 850000,
+    "date": "2026-07-27",
+    "postcode": "EN4 9RJ",
+    "type": "Semi-detached",
+    "address": "122",
+    "borough": "Barnet",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 850000,
+    "date": "2026-07-27",
+    "postcode": "SE16 6LD",
+    "type": "Terraced",
+    "address": "25",
     "borough": "Southwark",
     "tenure": "Freehold"
   },
   {
-    "price": 500000,
-    "date": "2026-01-19",
-    "postcode": "SW16 2SL",
+    "price": 820000,
+    "date": "2026-07-27",
+    "postcode": "NW6 6AJ",
     "type": "Flat",
+    "address": "49A",
+    "borough": "Brent",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 755000,
+    "date": "2026-07-27",
+    "postcode": "E11 3JZ",
+    "type": "Terraced",
+    "address": "62",
+    "borough": "Waltham Forest",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 696000,
+    "date": "2026-07-27",
+    "postcode": "SE6 1BT",
+    "type": "Terraced",
+    "address": "56",
+    "borough": "Lewisham",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 678000,
+    "date": "2026-07-27",
+    "postcode": "RM3 7LD",
+    "type": "Detached",
+    "address": "HARTSWOOD",
+    "borough": "Havering",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 674000,
+    "date": "2026-07-27",
+    "postcode": "KT3 5BS",
+    "type": "Semi-detached",
     "address": "19",
+    "borough": "Kingston Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 590000,
+    "date": "2026-07-27",
+    "postcode": "NW10 4HL",
+    "type": "Flat",
+    "address": "16B",
+    "borough": "Brent",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 590000,
+    "date": "2026-07-27",
+    "postcode": "BR3 1RB",
+    "type": "Flat",
+    "address": "4, LUCERNE COURT",
+    "borough": "Bromley",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 580000,
+    "date": "2026-07-27",
+    "postcode": "UB6 8EP",
+    "type": "Semi-detached",
+    "address": "36",
+    "borough": "Ealing",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 567500,
+    "date": "2026-07-27",
+    "postcode": "SW2 2BX",
+    "type": "Flat",
+    "address": "16",
     "borough": "Lambeth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 552500,
+    "date": "2026-07-27",
+    "postcode": "SE13 7AY",
+    "type": "Terraced",
+    "address": "5",
+    "borough": "Lewisham",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 550000,
+    "date": "2026-07-27",
+    "postcode": "BR3 4TB",
+    "type": "Terraced",
+    "address": "22",
+    "borough": "Bromley",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 499000,
+    "date": "2026-07-27",
+    "postcode": "SE8 3GP",
+    "type": "Flat",
+    "address": "38, BOWSPIRIT APARTMENTS",
+    "borough": "Lewisham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 468000,
+    "date": "2026-07-27",
+    "postcode": "SW15 2PS",
+    "type": "Flat",
+    "address": "10",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 450000,
+    "date": "2026-07-27",
+    "postcode": "KT3 3DQ",
+    "type": "Flat",
+    "address": "30A",
+    "borough": "Kingston Upon Thames",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 415000,
+    "date": "2026-07-27",
+    "postcode": "NW10 4HP",
+    "type": "Flat",
+    "address": "FIRST FLOOR FLAT B, 48",
+    "borough": "Brent",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 385000,
+    "date": "2026-07-27",
+    "postcode": "SW20 8JR",
+    "type": "Flat",
+    "address": "429",
+    "borough": "Merton",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 335000,
+    "date": "2026-07-27",
+    "postcode": "SE27 9QT",
+    "type": "Flat",
+    "address": "HALL FLOOR FLAT, 147",
+    "borough": "Lambeth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 334000,
+    "date": "2026-07-27",
+    "postcode": "HA4 6RB",
+    "type": "Flat",
+    "address": "372A",
+    "borough": "Hillingdon",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 333500,
+    "date": "2026-07-27",
+    "postcode": "BR2 7EQ",
+    "type": "Flat",
+    "address": "27A",
+    "borough": "Bromley",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 325000,
+    "date": "2026-07-27",
+    "postcode": "SM4 6DB",
+    "type": "Flat",
+    "address": "25",
+    "borough": "Merton",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 325000,
+    "date": "2026-07-27",
+    "postcode": "DA16 2RJ",
+    "type": "Flat",
+    "address": "26B",
+    "borough": "Bexley",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 324600,
+    "date": "2026-07-27",
+    "postcode": "SE15 3JN",
+    "type": "Flat",
+    "address": "27",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 300000,
+    "date": "2026-07-27",
+    "postcode": "RM7 0FF",
+    "type": "Flat",
+    "address": "FLAT 23, PULSE COURT",
+    "borough": "Havering",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 300000,
+    "date": "2026-07-27",
+    "postcode": "HA8 8FW",
+    "type": "Flat",
+    "address": "FLAT 1, TORMAID COURT, 5",
+    "borough": "Barnet",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 280000,
+    "date": "2026-07-27",
+    "postcode": "SE13 7UL",
+    "type": "Flat",
+    "address": "82E",
+    "borough": "Lewisham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 975000,
+    "date": "2026-07-24",
+    "postcode": "BR2 7HE",
+    "type": "Detached",
+    "address": "51",
+    "borough": "Bromley",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 935000,
+    "date": "2026-07-24",
+    "postcode": "TW9 2EP",
+    "type": "Terraced",
+    "address": "21",
+    "borough": "Richmond Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 910000,
+    "date": "2026-07-24",
+    "postcode": "E11 3DY",
+    "type": "Terraced",
+    "address": "40",
+    "borough": "Waltham Forest",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 900000,
+    "date": "2026-07-24",
+    "postcode": "TW11 8SB",
+    "type": "Terraced",
+    "address": "23",
+    "borough": "Richmond Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 885000,
+    "date": "2026-07-24",
+    "postcode": "SW15 2LR",
+    "type": "Terraced",
+    "address": "30B",
+    "borough": "Wandsworth",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 835000,
+    "date": "2026-07-24",
+    "postcode": "NW6 6NE",
+    "type": "Flat",
+    "address": "GROUND FLOOR FLAT, 59",
+    "borough": "Brent",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 768500,
+    "date": "2026-07-24",
+    "postcode": "SE23 1PL",
+    "type": "Terraced",
+    "address": "3",
+    "borough": "Lewisham",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 750000,
+    "date": "2026-07-24",
+    "postcode": "E20 1HL",
+    "type": "Flat",
+    "address": "7",
+    "borough": "Newham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 745000,
+    "date": "2026-07-24",
+    "postcode": "E7 0DN",
+    "type": "Terraced",
+    "address": "49",
+    "borough": "Newham",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 735000,
+    "date": "2026-07-24",
+    "postcode": "SM6 9NY",
+    "type": "Semi-detached",
+    "address": "8",
+    "borough": "Sutton",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 725000,
+    "date": "2026-07-24",
+    "postcode": "E17 8DE",
+    "type": "Terraced",
+    "address": "72",
+    "borough": "Waltham Forest",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 720000,
+    "date": "2026-07-24",
+    "postcode": "SW14 7HE",
+    "type": "Terraced",
+    "address": "11",
+    "borough": "Richmond Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 707000,
+    "date": "2026-07-24",
+    "postcode": "E15 1UJ",
+    "type": "Terraced",
+    "address": "15",
+    "borough": "Waltham Forest",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 700000,
+    "date": "2026-07-24",
+    "postcode": "SW12 9HL",
+    "type": "Flat",
+    "address": "FLAT 1, 176",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 700000,
+    "date": "2026-07-24",
+    "postcode": "SW11 6EH",
+    "type": "Flat",
+    "address": "43B",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 670000,
+    "date": "2026-07-24",
+    "postcode": "SE15 4RA",
+    "type": "Flat",
+    "address": "55A",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 665000,
+    "date": "2026-07-24",
+    "postcode": "HA5 3HN",
+    "type": "Flat",
+    "address": "2",
+    "borough": "Harrow",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 654750,
+    "date": "2026-07-24",
+    "postcode": "SE6 4TA",
+    "type": "Terraced",
+    "address": "27",
+    "borough": "Lewisham",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 650000,
+    "date": "2026-07-24",
+    "postcode": "RM14 3UL",
+    "type": "Semi-detached",
+    "address": "48",
+    "borough": "Havering",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 637500,
+    "date": "2026-07-24",
+    "postcode": "SE1 3DP",
+    "type": "Flat",
+    "address": "FLAT 28, FLORIN COURT, 70",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 625000,
+    "date": "2026-07-24",
+    "postcode": "UB3 3JB",
+    "type": "Semi-detached",
+    "address": "38",
+    "borough": "Hillingdon",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 625000,
+    "date": "2026-07-24",
+    "postcode": "CR8 2HG",
+    "type": "Semi-detached",
+    "address": "78B",
+    "borough": "Croydon",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 615000,
+    "date": "2026-07-24",
+    "postcode": "NW5 4AA",
+    "type": "Flat",
+    "address": "FLAT 17, 2",
+    "borough": "Camden",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 610000,
+    "date": "2026-07-24",
+    "postcode": "BR6 7TT",
+    "type": "Detached",
+    "address": "2",
+    "borough": "Bromley",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 595000,
+    "date": "2026-07-24",
+    "postcode": "N17 9ED",
+    "type": "Terraced",
+    "address": "90",
+    "borough": "Haringey",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 585000,
+    "date": "2026-07-24",
+    "postcode": "SW15 2HB",
+    "type": "Flat",
+    "address": "FLAT 2, 30",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 575000,
+    "date": "2026-07-24",
+    "postcode": "TW10 5DG",
+    "type": "Flat",
+    "address": "26",
+    "borough": "Richmond Upon Thames",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 572500,
+    "date": "2026-07-24",
+    "postcode": "BR6 0PL",
+    "type": "Terraced",
+    "address": "2",
+    "borough": "Bromley",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 545000,
+    "date": "2026-07-24",
+    "postcode": "SM1 3AT",
+    "type": "Semi-detached",
+    "address": "75",
+    "borough": "Sutton",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 532000,
+    "date": "2026-07-24",
+    "postcode": "BR6 6DG",
+    "type": "Semi-detached",
+    "address": "58",
+    "borough": "Bromley",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 518500,
+    "date": "2026-07-24",
+    "postcode": "RM12 6SR",
+    "type": "Semi-detached",
+    "address": "20",
+    "borough": "Havering",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 512320,
+    "date": "2026-07-24",
+    "postcode": "E10 6LX",
+    "type": "Flat",
+    "address": "128",
+    "borough": "Waltham Forest",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 500000,
+    "date": "2026-07-24",
+    "postcode": "W1H 4NF",
+    "type": "Flat",
+    "address": "FLAT 33, CRANFIELD COURT",
+    "borough": "City Of Westminster",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 500000,
+    "date": "2026-07-24",
+    "postcode": "DA15 7JW",
+    "type": "Semi-detached",
+    "address": "55",
+    "borough": "Bexley",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 500000,
+    "date": "2026-07-24",
+    "postcode": "SE15 4AR",
+    "type": "Terraced",
+    "address": "23",
+    "borough": "Southwark",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 495000,
+    "date": "2026-07-24",
+    "postcode": "N14 4FT",
+    "type": "Flat",
+    "address": "3A",
+    "borough": "Enfield",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 495000,
+    "date": "2026-07-24",
+    "postcode": "SM5 4LH",
+    "type": "Semi-detached",
+    "address": "34",
+    "borough": "Sutton",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 490000,
+    "date": "2026-07-24",
+    "postcode": "RM3 0UB",
+    "type": "Terraced",
+    "address": "114",
+    "borough": "Havering",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 486000,
+    "date": "2026-07-24",
+    "postcode": "E17 8EQ",
+    "type": "Flat",
+    "address": "68",
+    "borough": "Waltham Forest",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 485000,
+    "date": "2026-07-24",
+    "postcode": "SE10 9GD",
+    "type": "Flat",
+    "address": "FLAT 130, BEACON POINT, 12",
+    "borough": "Greenwich",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 482500,
+    "date": "2026-07-24",
+    "postcode": "SW19 3TQ",
+    "type": "Flat",
+    "address": "194A",
+    "borough": "Merton",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 475000,
+    "date": "2026-07-24",
+    "postcode": "SE25 5NX",
+    "type": "Terraced",
+    "address": "14",
+    "borough": "Croydon",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 475000,
+    "date": "2026-07-24",
+    "postcode": "KT3 3RR",
+    "type": "Terraced",
+    "address": "42",
+    "borough": "Kingston Upon Thames",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 470000,
+    "date": "2026-07-24",
+    "postcode": "E1W 1LG",
+    "type": "Flat",
+    "address": "FLAT 82, MATILDA HOUSE",
+    "borough": "Tower Hamlets",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 460000,
+    "date": "2026-07-24",
+    "postcode": "CR4 2BZ",
+    "type": "Terraced",
+    "address": "7",
+    "borough": "Merton",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 457500,
+    "date": "2026-07-24",
+    "postcode": "SE3 9QU",
+    "type": "Terraced",
+    "address": "80",
+    "borough": "Greenwich",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 455000,
+    "date": "2026-07-24",
+    "postcode": "E11 3BH",
+    "type": "Flat",
+    "address": "23B",
+    "borough": "Waltham Forest",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 453000,
+    "date": "2026-07-24",
+    "postcode": "SE22 0PW",
+    "type": "Flat",
+    "address": "FLAT 148, LADLANDS",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 450000,
+    "date": "2026-07-24",
+    "postcode": "RM13 8AS",
+    "type": "Detached",
+    "address": "43",
+    "borough": "Havering",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 442500,
+    "date": "2026-07-24",
+    "postcode": "HA8 9EG",
+    "type": "Terraced",
+    "address": "27",
+    "borough": "Barnet",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 440000,
+    "date": "2026-07-24",
+    "postcode": "RM3 7BH",
+    "type": "Semi-detached",
+    "address": "17",
+    "borough": "Havering",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 437000,
+    "date": "2026-07-24",
+    "postcode": "N1 9SS",
+    "type": "Flat",
+    "address": "15",
+    "borough": "Islington",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 435000,
+    "date": "2026-07-24",
+    "postcode": "N17 9SJ",
+    "type": "Terraced",
+    "address": "131",
+    "borough": "Haringey",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 435000,
+    "date": "2026-07-24",
+    "postcode": "SW6 4JX",
+    "type": "Flat",
+    "address": "FLAT E, 30",
+    "borough": "Hammersmith And Fulham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 435000,
+    "date": "2026-07-24",
+    "postcode": "SW19 1EH",
+    "type": "Flat",
+    "address": "FLAT 7, 144",
+    "borough": "Merton",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 430000,
+    "date": "2026-07-24",
+    "postcode": "KT4 8LB",
+    "type": "Terraced",
+    "address": "169",
+    "borough": "Sutton",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 415000,
+    "date": "2026-07-24",
+    "postcode": "SW19 1LT",
+    "type": "Flat",
+    "address": "FLAT 1, 127",
+    "borough": "Merton",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 406701,
+    "date": "2026-07-24",
+    "postcode": "SW16 2SN",
+    "type": "Flat",
+    "address": "12",
+    "borough": "Lambeth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 405000,
+    "date": "2026-07-24",
+    "postcode": "TW9 4AE",
+    "type": "Flat",
+    "address": "FLAT 30, LIME HOUSE, 33",
+    "borough": "Richmond Upon Thames",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 395000,
+    "date": "2026-07-24",
+    "postcode": "E16 1GQ",
+    "type": "Flat",
+    "address": "FLAT 47, 30",
+    "borough": "Newham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 380000,
+    "date": "2026-07-24",
+    "postcode": "W3 6TU",
+    "type": "Flat",
+    "address": "FLAT 16, WESTERN COURT",
+    "borough": "Ealing",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 380000,
+    "date": "2026-07-24",
+    "postcode": "SE4 1PD",
+    "type": "Flat",
+    "address": "FLAT 3, 38",
+    "borough": "Lewisham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 375000,
+    "date": "2026-07-24",
+    "postcode": "SE15 3BG",
+    "type": "Flat",
+    "address": "FLAT 56, PRIORY COURT, 1",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 370000,
+    "date": "2026-07-24",
+    "postcode": "BR1 5HX",
+    "type": "Terraced",
+    "address": "553",
+    "borough": "Lewisham",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 365000,
+    "date": "2026-07-24",
+    "postcode": "SW14 7BX",
+    "type": "Flat",
+    "address": "FLAT 104, CHERTSEY COURT",
+    "borough": "Richmond Upon Thames",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 362000,
+    "date": "2026-07-24",
+    "postcode": "SW9 6BY",
+    "type": "Flat",
+    "address": "FLAT 7, 69",
+    "borough": "Lambeth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 355000,
+    "date": "2026-07-24",
+    "postcode": "NW6 7TR",
+    "type": "Flat",
+    "address": "FLAT 52, MAPES HOUSE, 1 - 13",
+    "borough": "Brent",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 355000,
+    "date": "2026-07-24",
+    "postcode": "BR5 1AF",
+    "type": "Flat",
+    "address": "70",
+    "borough": "Bromley",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 345000,
+    "date": "2026-07-24",
+    "postcode": "SW17 8QL",
+    "type": "Flat",
+    "address": "FLAT 6, 3",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 340000,
+    "date": "2026-07-24",
+    "postcode": "CR2 7DJ",
+    "type": "Terraced",
+    "address": "145",
+    "borough": "Croydon",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 330000,
+    "date": "2026-07-24",
+    "postcode": "SE22 8JH",
+    "type": "Flat",
+    "address": "305D",
+    "borough": "Southwark",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 325000,
+    "date": "2026-07-24",
+    "postcode": "SW15 3DA",
+    "type": "Flat",
+    "address": "47",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 325000,
+    "date": "2026-07-24",
+    "postcode": "SW15 3PB",
+    "type": "Flat",
+    "address": "FLAT 26, REPTON HOUSE, 20",
+    "borough": "Wandsworth",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 320000,
+    "date": "2026-07-24",
+    "postcode": "SE25 4RG",
+    "type": "Flat",
+    "address": "31",
+    "borough": "Croydon",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 318750,
+    "date": "2026-07-24",
+    "postcode": "RM11 2PT",
+    "type": "Detached",
+    "address": "20",
+    "borough": "Havering",
+    "tenure": "Freehold"
+  },
+  {
+    "price": 317500,
+    "date": "2026-07-24",
+    "postcode": "TW4 7QH",
+    "type": "Flat",
+    "address": "5",
+    "borough": "Hounslow",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 295000,
+    "date": "2026-07-24",
+    "postcode": "UB8 1XT",
+    "type": "Flat",
+    "address": "2",
+    "borough": "Hillingdon",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 285000,
+    "date": "2026-07-24",
+    "postcode": "TW4 7RJ",
+    "type": "Flat",
+    "address": "11, SPRINGWELL COURT",
+    "borough": "Hounslow",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 275000,
+    "date": "2026-07-24",
+    "postcode": "IG11 9ED",
+    "type": "Flat",
+    "address": "432A",
+    "borough": "Barking And Dagenham",
+    "tenure": "Leasehold"
+  },
+  {
+    "price": 270000,
+    "date": "2026-07-24",
+    "postcode": "TW3 1QG",
+    "type": "Flat",
+    "address": "33",
+    "borough": "Hounslow",
     "tenure": "Leasehold"
   }
 ]
