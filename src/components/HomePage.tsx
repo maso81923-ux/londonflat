@@ -319,12 +319,12 @@ export const HomePage: React.FC<HomePageProps> = ({ listings, onNavigate, onSear
               Recent London Sold Prices
             </h2>
             <p className="mt-2 text-slate-400 text-sm max-w-2xl">
-              Real recorded transactions from <span className="text-slate-300 font-semibold">HM Land Registry Price Paid Data</span> (2026). These are completed sale prices — not live rental or for-sale listings.
+              Real recorded transactions from <span className="text-slate-300 font-semibold">HM Land Registry Price Paid Data</span> (2026). Showing the 24 most recent of 150 completed sale prices — not live rental or for-sale listings.
             </p>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {(londonSoldPrices as SoldPriceRecord[]).slice(0, 8).map((r, i) => (
+          {(londonSoldPrices as SoldPriceRecord[]).slice(0, 24).map((r, i) => (
             <div key={i} className="rounded-2xl bg-slate-900 border border-slate-800/80 p-5 hover:border-amber-500/30 transition">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{r.type}</span>
