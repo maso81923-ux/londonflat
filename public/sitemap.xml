@@ -21,6 +21,17 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://londonflat.uk/privacy-policy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://londonflat.uk/cookie-policy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
 
   <!-- Borough Guides -->
   <url>

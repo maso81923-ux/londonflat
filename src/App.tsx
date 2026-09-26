@@ -15,9 +15,65 @@ import { TenantRightsPage } from './components/TenantRightsPage';
 import { CheckoutPage } from './components/CheckoutPage';
 import { AuthModal } from './components/AuthModal';
 import { InstallPWA } from './components/InstallPWA';
+import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
+import { CookiePolicyPage } from './components/CookiePolicyPage';
+import { CookieConsent } from './components/CookieConsent';
 import { SEO } from './components/SEO';
 import { StructuredData } from './components/StructuredData';
 import './App.css';
+
+// --- URL routing helpers (SPA paths ↔ views) ---
+interface ParsedPath {
+  view: string;
+  listingId?: string;
+  boroughSlug?: string;
+  rightsSlug?: string;
+}
+
+function pathToView(pathname: string): ParsedPath {
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+  const segments = path.split('/').filter(Boolean);
+  const first = segments[0] || '';
+  switch (first) {
+    case 'listing':
+      return segments[1] ? { view: 'details', listingId: segments[1] } : { view: 'home' };
+    case 'boroughs':
+      return segments[1] ? { view: 'borough-guide', boroughSlug: segments[1] } : { view: 'home' };
+    case 'rights':
+      return segments[1] ? { view: 'rights', rightsSlug: segments[1] } : { view: 'home' };
+    case 'listings': return { view: 'listings' };
+    case 'services': return { view: 'services' };
+    case 'moving-checklist': return { view: 'moving-checklist' };
+    case 'dashboard': return { view: 'dashboard' };
+    case 'admin': return { view: 'admin' };
+    case 'checkout': return { view: 'checkout' };
+    case 'privacy-policy': return { view: 'privacy-policy' };
+    case 'cookie-policy': return { view: 'cookie-policy' };
+    default: return { view: 'home' };
+  }
+}
+
+function viewToPath(view: string, listingId?: string | null, boroughSlug?: string | null, rightsSlug?: string | null): string {
+  switch (view) {
+    case 'details': return listingId ? `/listing/${listingId}` : '/';
+    case 'borough-guide': return boroughSlug ? `/boroughs/${boroughSlug}` : '/';
+    case 'rights': return rightsSlug ? `/rights/${rightsSlug}` : '/';
+    case 'privacy-policy': return '/privacy-policy';
+    case 'cookie-policy': return '/cookie-policy';
+    default: {
+      const base: Record<string, string> = {
+        home: '/',
+        listings: '/listings',
+        services: '/services',
+        dashboard: '/dashboard',
+        admin: '/admin',
+        'moving-checklist': '/moving-checklist',
+        checkout: '/checkout',
+      };
+      return base[view] || '/';
+    }
+  }
+}
 
 function App() {
   const [currentView, setCurrentView] = useState<string>('home');
@@ -44,6 +100,20 @@ function App() {
       }
     };
     init();
+  }, []);
+
+  // URL → view on initial load + browser back/forward
+  useEffect(() => {
+    const applyPath = () => {
+      const parsed = pathToView(window.location.pathname);
+      setCurrentView(parsed.view);
+      setActiveListingId(parsed.listingId || null);
+      setActiveBoroughSlug(parsed.boroughSlug || null);
+      setActiveRightsSlug(parsed.rightsSlug || null);
+    };
+    applyPath(); // initial load
+    window.addEventListener('popstate', applyPath);
+    return () => window.removeEventListener('popstate', applyPath);
   }, []);
 
   // Listings state
@@ -89,6 +159,8 @@ function App() {
     } else {
       setActiveRightsSlug(null);
     }
+    // Keep the URL in sync (deep-linkable paths)
+    window.history.pushState({}, '', viewToPath(view, listingId, boroughSlug, rightsSlug));
     // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -102,8 +174,10 @@ function App() {
     setCurrentUser(user);
     if (user.role === 'admin') {
       setCurrentView('admin');
+      window.history.pushState({}, '', '/admin');
     } else if (user.role === 'agency' || user.role === 'landlord') {
       setCurrentView('dashboard');
+      window.history.pushState({}, '', '/dashboard');
     }
   };
 
@@ -189,6 +263,10 @@ function App() {
         ) : (
           <HomePage listings={listings} onNavigate={handleNavigate} onSearch={handleSearch} />
         );
+      case 'privacy-policy':
+        return <PrivacyPolicyPage onNavigate={handleNavigate} />;
+      case 'cookie-policy':
+        return <CookiePolicyPage onNavigate={handleNavigate} />;
       default:
         return (
           <HomePage 
@@ -233,6 +311,12 @@ function App() {
       {currentView === 'checkout' && (
         <SEO title="Checkout — LondonFlat" path="/checkout" />
       )}
+      {currentView === 'privacy-policy' && (
+        <SEO title="Privacy Policy" description="How LondonFlat processes personal data — UK GDPR & Data Protection Act 2018 compliance." path="/privacy-policy" />
+      )}
+      {currentView === 'cookie-policy' && (
+        <SEO title="Cookie Policy" description="How LondonFlat uses cookies — UK GDPR & PECR compliant cookie policy and consent preferences." path="/cookie-policy" />
+      )}
       {/* Structured Data: BreadcrumbList */}
       {currentView === 'home' && (
         <StructuredData type="BreadcrumbList" breadcrumbs={[{ name: 'Home', url: '/' }]} />
@@ -259,6 +343,12 @@ function App() {
           { name: 'Tenant Rights', url: '/rights' },
           { name: activeRightsSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), url: `/rights/${activeRightsSlug}` }
         ]} />
+      )}
+      {currentView === 'privacy-policy' && (
+        <StructuredData type="BreadcrumbList" breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Privacy Policy', url: '/privacy-policy' }]} />
+      )}
+      {currentView === 'cookie-policy' && (
+        <StructuredData type="BreadcrumbList" breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Cookie Policy', url: '/cookie-policy' }]} />
       )}
       {/* Header */}
       <Header 
@@ -288,6 +378,9 @@ function App() {
 
       {/* PWA Install Prompt */}
       <InstallPWA />
+
+      {/* GDPR/PECR Cookie Consent Banner + Preferences Panel */}
+      <CookieConsent />
     </div>
   );
 }

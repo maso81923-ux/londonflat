@@ -72,8 +72,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <li className="hover:text-white transition cursor-pointer">
                 Agency Code of Practice
               </li>
-              <li className="hover:text-white transition cursor-pointer">
-                Privacy Policy & Cookies
+              <li>
+                <button
+                  onClick={() => onNavigate('privacy-policy')}
+                  className="text-left hover:text-amber-400 transition"
+                >
+                  Privacy Policy & Cookies
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('cookie-policy')}
+                  className="text-left hover:text-amber-400 transition"
+                >
+                  Cookie Policy
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => window.dispatchEvent(new Event('lf:open-cookie-settings'))}
+                  className="text-left hover:text-amber-400 transition"
+                >
+                  Cookie Settings
+                </button>
               </li>
               <li className="hover:text-white transition cursor-pointer">
                 Terms of Service
