@@ -23,6 +23,8 @@ const KEYWORD_SETS: Record<string, string> = {
   'moving-checklist': 'London moving checklist, moving house London tips, London removals guide, moving out checklist UK',
   'borough-guide': 'London area guide, London property prices by borough, London renting guide, London neighbourhood guide',
   rights: 'tenant rights UK, section 21 eviction, section 8 notice, deposit protection UK, landlord repair obligations, HMO licensing London, rent increase rules',
+  'privacy-policy': 'LondonFlat privacy policy, UK GDPR privacy, data protection London property, personal data rights, privacy policy UK real estate',
+  'cookie-policy': 'LondonFlat cookie policy, UK GDPR cookies, PECR consent, cookie preferences UK, cookie banner policy London property',
 };
 
 export function SEO({ title, description, image, path, type = 'website', keywords, publishedTime, author }: SEOProps) {
@@ -54,8 +56,9 @@ export function SEO({ title, description, image, path, type = 'website', keyword
     // Standard meta
     setMeta('description', desc);
 
-    // Page-specific or default keywords
-    const kw = keywords || KEYWORD_SETS[type] || KEYWORD_SETS.home;
+    // Page-specific or default keywords (keyed by the first path segment)
+    const pathKey = path ? path.replace(/^\//, '').split('/')[0] : '';
+    const kw = keywords || KEYWORD_SETS[pathKey] || KEYWORD_SETS[type] || KEYWORD_SETS.home;
     setMeta('keywords', kw);
 
     // Open Graph
