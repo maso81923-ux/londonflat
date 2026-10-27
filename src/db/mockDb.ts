@@ -97,6 +97,34 @@ const INITIAL_AGENCIES: AgencyDetails[] = [
 // Static Mock Property Listings
 const INITIAL_LISTINGS: PropertyListing[] = [
   {
+    id: 'listing-demo-1',
+    provider_id: 'user-apex',
+    title: 'Example listing — Double Room in a Marylebone Mews House',
+    description: 'Sample listing: this entry is shown to demonstrate how a premium room is presented on LondonFlat and is not an offer of a real property. It illustrates the layout only — a bright double room in a quiet mews house a few minutes from Marylebone High Street, sharing with two professionals, with bills and a weekly clean included.',
+    price_per_month: 1450,
+    deposit: 1675,
+    address: '14 Chiltern Street, Marylebone',
+    borough: 'Westminster',
+    postcode: 'W1U 7QR',
+    type: 'room',
+    listing_purpose: 'rent',
+    property_status: 'available',
+    bedrooms: 3,
+    bathrooms: 2,
+    available_from: '2026-12-01',
+    is_bills_included: true,
+    amenities: ['Superfast Wifi', 'Bills Included', 'Weekly Cleaner', 'Furnished', 'Washing Machine', 'Mews House'],
+    images: [
+      'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80'
+    ],
+    is_verified: false,
+    latitude: 51.5188,
+    longitude: -0.152,
+    created_at: new Date(Date.now() - 60 * 60 * 1000).toISOString()
+  },
+  {
     id: 'listing-1',
     provider_id: 'user-apex',
     title: 'Luxury Double Room in Knightsbridge Duplex Flat',
