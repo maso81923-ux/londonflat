@@ -24,7 +24,7 @@ const gtmPlan = [
   {
     title: 'Target segments (priority order)',
     bullets: [
-      'A — Service providers (fastest first £): 20 categories, £650–£1,200/mo; only need proof of a London audience.',
+      'A — Service providers (fastest first £): 34 categories, £650–£1,200/mo; only need proof of a London audience.',
       'B — Independent agents & letting agencies: £1,500/£2,500 per branch/mo; supply inventory via feed; land 2–3 on a free beta first.',
       'C — Build-to-rent operators: large premium portfolios.',
       'D — Seekers (free demand): professionals, expats, students; via SEO content + communities.',
@@ -83,18 +83,18 @@ const pitchPillars = [
   },
   {
     pillar: 'Pillar 2 — Services Hub',
-    audience: '20 property-lifecycle categories',
+    audience: '34 property-lifecycle categories',
     headline: 'Own your category. One flat fee. No bidding.',
     metrics: [
       ['Addressable households', '≈3.6m London households; ≈1m+ private renters — every let and move triggers maintenance, cleaning, removals, legal and referencing spend'],
-      ['Sellable inventory', '20 categories × 32 London boroughs = 640 exclusive borough-category slots'],
+      ['Sellable inventory', '34 categories × 32 London boroughs = 1,088 exclusive borough-category slots'],
       ['Fee value vs. job size', 'One removal, conveyancing case or mortgage instruction typically earns the provider more than a full month of the subscription tier'],
       ['Anchor demand', 'High-intent London renters/buyers reach providers at the exact moment of need ("plumber near me", "conveyancing solicitor")'],
     ],
     points: [
       ['Problem', 'Londoners search Google for "plumber near me" — not a directory — at the exact moment they need you.'],
       ['Solution', 'Be the listed provider for your category on a premium London property platform, visible at the moment of need.'],
-      ['Plans', 'High-ticket £1,200/mo (Legal, Mortgages, Architecture, Independent Agents, Surveying, Eviction, Interior Design). High-frequency £650/mo (Maintenance, Painters, Electricians, Plumbing, Security, Removals, CCTV, Care, Cleaning, Locksmith, Waste, Landscaping).'],
+      ['Plans', 'High-ticket £1,200/mo (Legal & Notaries, Legal Eviction & Case Handling, Banking & Mortgages, Independent Estate Agents, Surveying & Valuations, Architecture & Planning, Interior Design, Building Contractors & Renovation, Inspections & Certificates, Smart Home & Automation, Property Management, Tenant & Landlord Services, Financial & Tax Advisory). High-frequency £650/mo (Property Maintenance & Handyman, Painters & Decorators, Electricians, Plumbing & Heating, Insurance Agencies, Physical Property Security, Removals & Transport, Home Surveillance & CCTV, Child & Elderly Care, Cleaning Services, Landscape Gardening, Locksmith Services, Waste Removal, Flooring Specialists, Windows & Doors, Roofing Specialists, Damp Proofing & Waterproofing, Utilities & Home Setup, Appliance Repair, Pest Control, Lifestyle & Local Services).'],
       ['Proof', 'Fixed-price, no-bid, direct checkout; exclusivity per category/borough.'],
     ],
   },
@@ -120,28 +120,43 @@ const agenciesIndependent = ['Benham & Reeves', 'Portico', 'Ludlow Thompson', 'D
 const btrOperators = ['Get Living', 'Greystar', 'Quintain Living (Wembley Park)', 'Grainger', 'L&Q Living', 'Related Argent (King\'s Cross)', 'Essential Living', 'UNCLE (Realstar)', 'Vertus (Canary Wharf Group)', 'Fizzy Living (Metropolitan Thames Valley)', 'Folio London (Notting Hill Genesis)', 'Way of Life', 'Dandara Living', 'Be:here (Willmott Dixon)', 'Moda Living'];
 
 const servicesHighTicket: [string, string][] = [
-  ['Legal & Notaries', 'source: Law Society find-a-solicitor'],
-  ['Banking & Mortgages', 'anchors: L&C Mortgages, Habito, Trussle'],
-  ['Architecture & Planning', 'source: RIBA Find an Architect'],
-  ['Independent Estate Agents', 'anchor list in Pillar 1'],
-  ['Surveying & Valuations', 'source: RICS Find a Surveyor'],
-  ['Legal Eviction & Case Handling', 'source: Law Society (landlord & tenant)'],
-  ['Interior Design', 'source: BIID (British Institute of Interior Design)'],
+  ['Legal & Notaries', "source: Law Society find-a-solicitor"],
+  ['Legal Eviction & Case Handling', "source: Law Society (landlord & tenant)"],
+  ['Banking & Mortgages', "anchors: L&C Mortgages, Habito, Trussle"],
+  ['Independent Estate Agents', "anchor list in Pillar 1"],
+  ['Surveying & Valuations', "source: RICS Find a Surveyor"],
+  ['Architecture & Planning', "source: RIBA Find an Architect"],
+  ['Interior Design', "source: BIID (British Institute of Interior Design)"],
+  ['Building Contractors & Renovation', "source: FMB (Federation of Master Builders)"],
+  ['Inspections & Certificates', "source: Gas Safe Register, NICEIC, Elmhurst (EPC)"],
+  ['Smart Home & Automation', "anchors: Nest, Hive and Ring installers"],
+  ['Property Management', "source: ARLA Propertymark"],
+  ['Tenant & Landlord Services', "source: ARLA Propertymark, NRLA"],
+  ['Financial & Tax Advisory', "source: Unbiased, ATT (tax advisers)"],
 ];
 
 const servicesHighFrequency: [string, string][] = [
-  ['Property Maintenance & Handyman', 'anchors: Fantastic Services, Aspect'],
-  ['Painters & Decorators', 'source: Checkatrade, TrustATrader'],
-  ['Electricians', 'anchors: Aspect, Rightio; source: NICEIC'],
-  ['Plumbing & Heating', 'anchors: Pimlico Plumbers, Dyno-Rod, ERG Facilities'],
-  ['Physical Property Security', 'anchors: Banham, Chubb'],
+  ['Property Maintenance & Handyman', "anchors: Fantastic Services, Aspect"],
+  ['Painters & Decorators', "source: Checkatrade, TrustATrader"],
+  ['Electricians', "anchors: Aspect, Rightio; source: NICEIC"],
+  ['Plumbing & Heating', "anchors: Pimlico Plumbers, Dyno-Rod, ERG Facilities"],
+  ['Insurance Agencies', "anchors: Direct Line, Aviva, Hiscox"],
+  ['Physical Property Security', "anchors: Banham, Chubb"],
   ['Removals & Transport', "anchors: AnyVan, Pickfords, Bishop's Move"],
-  ['Home Surveillance & CCTV', 'anchors: Verisure, ADT'],
-  ['Child & Elderly Care', 'anchors: Home Instead, Bluebird Care'],
-  ['Cleaning Services', 'anchors: Housekeep, Fantastic Services, Molly Maid'],
-  ['Locksmith Services', 'anchor: Banham'],
-  ['Waste Removal', 'anchors: Clearabee, HIPPO (HIPPOBAG)'],
-  ['Landscape Gardening', 'source: Association of Professional Landscapers (APL)'],
+  ['Home Surveillance & CCTV', "anchors: Verisure, ADT"],
+  ['Child & Elderly Care', "anchors: Home Instead, Bluebird Care"],
+  ['Cleaning Services', "anchors: Housekeep, Fantastic Services, Molly Maid"],
+  ['Landscape Gardening', "source: Association of Professional Landscapers (APL)"],
+  ['Locksmith Services', "anchor: Banham"],
+  ['Waste Removal', "anchors: Clearabee, HIPPO (HIPPOBAG)"],
+  ['Flooring Specialists', "source: Checkatrade, TrustATrader"],
+  ['Windows & Doors', "source: FENSA registered installers"],
+  ['Roofing Specialists', "source: NFRC (National Federation of Roofing Contractors)"],
+  ['Damp Proofing & Waterproofing', "source: PCA (Property Care Association)"],
+  ['Utilities & Home Setup', "source: Ofgem, Ofcom comparison services"],
+  ['Appliance Repair', "anchors: Repaircare, Domex; source: Which? Trusted Traders"],
+  ['Pest Control', "source: BPCA (British Pest Control Association)"],
+  ['Lifestyle & Local Services', "concierge, pet services, key holding, parking"],
 ];
 
 export const MarketingPage: React.FC<MarketingPageProps> = ({ onNavigate }) => {
@@ -269,7 +284,7 @@ export const MarketingPage: React.FC<MarketingPageProps> = ({ onNavigate }) => {
           <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6">
             <div className="flex items-center gap-2 mb-4">
               <Shield className="h-4 w-4 text-amber-500" />
-              <h3 className="text-base font-semibold text-white">Services Hub — 20 Categories</h3>
+              <h3 className="text-base font-semibold text-white">Services Hub — 34 Categories</h3>
             </div>
             <div className="grid gap-6 md:grid-cols-2">
               <div>
