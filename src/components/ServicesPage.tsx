@@ -1,9 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  Wrench, Scale, Truck, Shield, Globe, Phone, Mail, CheckCircle, Search,
-  Zap, Droplets, Landmark, ShieldCheck, Camera, Heart, Sparkles,
-  Building2, Palette, Ruler, Key, Trash2, PenTool, Leaf, Home, Gavel
-} from 'lucide-react';
+import { Wrench, Scale, Truck, Shield, Globe, Phone, Mail, CheckCircle, Search, Zap, Droplets, Landmark, ShieldCheck, Camera, Heart, Sparkles, Building2, Palette, Ruler, Key, Trash2, PenTool, Leaf, Home, Gavel, Bug, Layers, DoorOpen, HardHat, ClipboardCheck, Plug, Cpu, Calculator, Users, Warehouse } from 'lucide-react';
 import type { ServiceProvider, ServiceCategory } from '../db/schema';
 import { FAQAccordion } from './FAQAccordion';
 import { StructuredData } from './StructuredData';
@@ -35,7 +31,21 @@ const CATEGORIES: { id: ServiceCategory; label: string; icon: any; description: 
   { id: 'surveying-valuations', label: 'Surveying & Valuations', icon: Ruler, description: 'RICS-certified surveyors for building surveys, valuations, and home reports.' },
   { id: 'locksmiths', label: 'Locksmith Services', icon: Key, description: '24/7 emergency locksmiths, security upgrades, and access control systems.' },
   { id: 'waste-removal', label: 'Waste Removal', icon: Trash2, description: 'Licensed waste clearance, skip hire, and recycling services for London homes.' },
-  { id: 'independent-estate-agent', label: 'Independent Estate Agent', icon: Home, description: 'Expert valuations, buying/selling consultations, and structural property advice from trusted independent agents.' }
+  { id: 'independent-estate-agent', label: 'Independent Estate Agent', icon: Home, description: 'Expert valuations, buying/selling consultations, and structural property advice from trusted independent agents.' },
+  { id: 'building-contractors', label: 'Building Contractors & Renovation', icon: HardHat, description: 'Contractors, builders and structural work for London renovations.' },
+  { id: 'flooring', label: 'Flooring Specialists', icon: Layers, description: 'Carpet, hardwood, tile and floor restoration for London homes.' },
+  { id: 'windows-doors', label: 'Windows & Doors', icon: DoorOpen, description: 'Window and door replacement, glazing and draught-proofing.' },
+  { id: 'roofing', label: 'Roofing Specialists', icon: Warehouse, description: 'Roof repair and replacement, gutters and roof maintenance.' },
+  { id: 'damp-proofing', label: 'Damp Proofing & Waterproofing', icon: Droplets, description: 'Damp proofing, waterproofing and basement sealing specialists.' },
+  { id: 'inspections-certificates', label: 'Inspections & Certificates', icon: ClipboardCheck, description: 'EPC, gas safety, EICR, fire safety, asbestos and building regulation certificates.' },
+  { id: 'utilities-setup', label: 'Utilities & Home Setup', icon: Plug, description: 'Broadband, energy, water, council tax and TV licence setup for a new home.' },
+  { id: 'smart-home', label: 'Smart Home & Automation', icon: Cpu, description: 'Smart home installers, home automation consultants and setup support.' },
+  { id: 'property-management', label: 'Property Management', icon: Building2, description: 'Hands-off property management, rent collection and landlord support.' },
+  { id: 'tenant-landlord-services', label: 'Tenant & Landlord Services', icon: Users, description: 'Inventories, tenant referencing, rent guarantee insurance and tenant-find services.' },
+  { id: 'financial-tax-advisory', label: 'Financial & Tax Advisory', icon: Calculator, description: 'Financial advisers, property tax specialists and investment advice.' },
+  { id: 'appliance-repair', label: 'Appliance Repair', icon: Wrench, description: 'Boiler, washing machine, oven and white goods repair.' },
+  { id: 'pest-control', label: 'Pest Control', icon: Bug, description: 'Rodents, insects, wasps and preventive pest treatment.' },
+  { id: 'lifestyle-local', label: 'Lifestyle & Local Services', icon: Heart, description: 'Concierge, dog walkers and pet services, key holding, mail forwarding and parking.' },
 ];
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ providers, onNavigate }) => {
