@@ -4,3 +4,5 @@ dist/
 .env.local
 .env.*.local
 *.tsbuildinfo
+# local seed scripts hold a service-role secret — never commit
+seed-services.cjs
