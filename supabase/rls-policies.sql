@@ -438,7 +438,7 @@ commit;
 --                      'agency_feeds','agency_details')
 --  order by tablename;
 
--- 2. Every policy this script created (should be 26 rows).
+-- 2. Every policy this script created (should be 27 rows).
 -- select tablename, policyname, cmd, roles from pg_policies
 --  where schemaname = 'public' order by tablename, policyname;
 
