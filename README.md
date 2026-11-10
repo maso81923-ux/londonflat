@@ -1,3 +1,23 @@
+# LondonFlat
+
+Premium London real estate and flat-sharing marketplace. See
+[docs/feed-and-admin.md](docs/feed-and-admin.md) for the admin panel and the
+XML/API feed engine.
+
+## Environment variables
+
+| Name | Where | Notes |
+| --- | --- | --- |
+| `SUPABASE_SERVICE_ROLE_KEY` | Hosting environment (Vercel → Settings → Environment Variables), as a secret | Server-side only. Used by `api/ingest.ts`, `api/sync.ts`, `api/scrape.ts` to write the RLS-protected `feed_listings` / `agency_feeds` tables. **Never commit it and never put it in client code.** Without it those endpoints return 503 `feed ingestion not configured`. |
+| `SUPABASE_SECRET_KEY` | Hosting environment | Optional fallback name for the same key. |
+| `SUPABASE_URL` | Hosting environment | Optional; defaults to the project URL. |
+
+The publishable key in `src/db/supabaseClient.ts` is public by design and is
+protected by Row Level Security (`supabase/rls-policies.sql`,
+`supabase/rls-admin-policies.sql`).
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

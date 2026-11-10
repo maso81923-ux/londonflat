@@ -4,3 +4,5 @@ dist/
 .env.local
 .env.*.local
 *.tsbuildinfo
+# local helper scripts that hold credentials (never commit)
+seed-services.cjs

@@ -306,13 +306,25 @@ export class SupabaseDatabase implements Database {
     });
   }
   // --- Admin Panel Methods ---
+  // These read RLS-protected tables. They run on the signed-in admin's own
+  // session (supabase-js attaches that JWT to every request) and are authorised
+  // by the admin policies in supabase/rls-admin-policies.sql — no secret key.
+  private async requireAdminSession(): Promise<void> {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      throw new Error('Admin panel data requires a signed-in admin account.');
+    }
+  }
+
   async getAllUsers(): Promise<UserProfile[]> {
+    await this.requireAdminSession();
     const { data, error } = await supabase.from('user_profiles').select('*').order('created_at', { ascending: false });
     if (error) throw new Error(error.message);
     return data || [];
   }
 
   async getAllAgencies(): Promise<(AgencyDetails & { feed_url?: string; sync_status?: string })[]> {
+    await this.requireAdminSession();
     const { data, error } = await supabase.from('agency_details').select('*').order('created_at', { ascending: false });
     if (error) throw new Error(error.message);
     const { data: feeds } = await supabase.from('agency_feeds').select('agency_name, feed_url');
@@ -399,6 +411,7 @@ export class SupabaseDatabase implements Database {
   }
 
   async getPushSubscriptions(): Promise<any[]> {
+    await this.requireAdminSession();
     const { data, error } = await supabase
       .from('push_subscriptions')
       .select('*');
@@ -414,6 +427,7 @@ export class SupabaseDatabase implements Database {
     return data;
   }
   async getAgencyFeeds(): Promise<any[]> {
+    await this.requireAdminSession();
     const { data, error } = await supabase.from('agency_feeds').select('*');
     if (error) throw new Error(error.message);
     return data || [];
