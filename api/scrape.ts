@@ -13,9 +13,8 @@
  * using the Supabase REST API, so a price/image change updates rather than duplicates.
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-
-const SUPABASE_URL = 'https://qpmgaejnvxgrzrdxpitt.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_sowtXiQPWwwvygDiLFfPbg_UV7OXpS2';
+import type { SupabaseClient } from '@supabase/supabase-js';
+import { createServiceClient, NOT_CONFIGURED_MESSAGE, NOT_CONFIGURED_DETAIL } from '../server/supabaseAdmin';
 
 // ─── Greater London postcode filter ───────────────────────────────────────
 const CORE_LONDON = ['EC', 'WC', 'E', 'N', 'NW', 'SE', 'SW', 'W'];
@@ -206,11 +205,43 @@ async function discoverUrls(siteUrl: string, sitemapUrl?: string): Promise<strin
 }
 
 // ─── Supabase persist (upsert — update on price/image change) ─────────────
-async function persistListings(agencyName: string, listings: ScrapedListing[]): Promise<number> {
+// Writes go through the server-side service-role client (RLS bypass), never the
+// publishable key: feed_listings is protected and this is a server-only path.
+
+async function resolveAgencyFeedId(
+  client: SupabaseClient,
+  agencyName: string,
+  siteUrl: string
+): Promise<string> {
+  const { data: existing } = await client
+    .from('agency_feeds')
+    .select('id')
+    .eq('agency_name', agencyName)
+    .maybeSingle();
+  if (existing?.id) return existing.id as string;
+
+  const { data: created, error } = await client
+    .from('agency_feeds')
+    .insert({ agency_name: agencyName, feed_url: siteUrl, feed_type: 'json', tier: 'standard' })
+    .select('id')
+    .single();
+  if (error || !created) {
+    throw new Error(`Could not register a feed for ${agencyName}: ${error?.message || 'unknown error'}`);
+  }
+  return created.id as string;
+}
+
+async function persistListings(
+  client: SupabaseClient,
+  agencyName: string,
+  siteUrl: string,
+  listings: ScrapedListing[]
+): Promise<number> {
+  const agencyFeedId = await resolveAgencyFeedId(client, agencyName, siteUrl);
   let persisted = 0;
   for (const l of listings) {
     const row = {
-      agency_id: agencyName,
+      agency_id: agencyFeedId,
       external_id: l.source_url,
       source: 'website-scrape',
       feed_type: 'json',
@@ -228,21 +259,10 @@ async function persistListings(agencyName: string, listings: ScrapedListing[]): 
       status: 'available',
       last_synced_at: new Date().toISOString(),
     };
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/feed_listings`, {
-        method: 'POST',
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json',
-          Prefer: 'resolution=merge-duplicates',
-        },
-        body: JSON.stringify([row]),
-      });
-      if (res.ok) persisted++;
-    } catch {
-      /* skip */
-    }
+    const { error } = await client
+      .from('feed_listings')
+      .upsert(row, { onConflict: 'agency_id,external_id' });
+    if (!error) persisted++;
   }
   return persisted;
 }
@@ -286,7 +306,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const london = deduped.filter((l) => l.is_london);
 
     let persisted = 0;
-    if (persist) persisted = await persistListings(agency, london);
+    if (persist) {
+      // Fail closed: no server key means no writes. Read-only scraping below
+      // works without it, so an agency can preview a feed before it is wired.
+      const client = createServiceClient();
+      if (!client) {
+        return res.status(503).json({
+          error: NOT_CONFIGURED_MESSAGE,
+          detail: NOT_CONFIGURED_DETAIL,
+          persisted: 0,
+        });
+      }
+      persisted = await persistListings(client, agency, url, london);
+    }
 
     return res.status(200).json({
       agency,

@@ -9,6 +9,7 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { XMLParser } from 'fast-xml-parser';
+import { createServiceClient, NOT_CONFIGURED_MESSAGE, NOT_CONFIGURED_DETAIL } from '../server/supabaseAdmin';
 
 // In-memory store of registered feeds (serverless — resets on cold start)
 // In production this should use a database
@@ -232,24 +233,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // POST: ingest
   if (req.method === 'POST') {
     const apiKey = req.headers['x-api-key'] as string || req.headers['authorization']?.replace('Bearer ', '') || '';
-    const feedId = (req.query.feed_id as string) || Object.keys(REGISTERED_FEEDS).find(k => REGISTERED_FEEDS[k].apiKey === apiKey) || '';
-    
+
     if (!apiKey) {
-      return res.status(401).json({ error: 'Missing API key. Provide X-API-Key header or ?feed_id query parameter.' });
-    }
-    
-    if (!feedId || !REGISTERED_FEEDS[feedId] || REGISTERED_FEEDS[feedId].apiKey !== apiKey) {
-      return res.status(403).json({ error: 'Invalid API key or feed_id' });
+      return res.status(401).json({ error: 'Missing API key. Provide an X-API-Key header.' });
     }
 
     const contentType = req.headers['content-type'] || '';
     let properties: ParsedProperty[];
+    let feedType: 'xml' | 'json' = 'json';
 
     try {
       if (contentType.includes('xml') || contentType.includes('application/xml') || 
           (typeof req.body === 'string' && req.body.trim().startsWith('<'))) {
         const xml = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
         properties = parseXmlFeed(xml);
+        feedType = 'xml';
       } else {
         properties = parseJsonFeed(req.body);
       }
@@ -257,12 +255,76 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(422).json({ error: `Feed parsing failed: ${err.message}`, imported: 0 });
     }
 
+    // ─── Persist through the server-side service-role client ─────────────────
+    // feed_listings / agency_feeds are RLS-protected: the publishable key can no
+    // longer write them, and the key must never reach the browser. Fail closed
+    // when the server key is absent rather than falling back to the anon key.
+    const client = createServiceClient();
+    if (!client) {
+      return res.status(503).json({
+        error: NOT_CONFIGURED_MESSAGE,
+        detail: NOT_CONFIGURED_DETAIL,
+        imported: 0,
+      });
+    }
+
+    // The API key is the agency's subscription credential: it identifies the
+    // registered feed row the listings belong to.
+    const { data: feed, error: feedError } = await client
+      .from('agency_feeds')
+      .select('id, agency_name, is_active')
+      .eq('api_key', apiKey)
+      .maybeSingle();
+
+    if (feedError) {
+      return res.status(500).json({ error: `Feed lookup failed: ${feedError.message}`, imported: 0 });
+    }
+    if (!feed) {
+      return res.status(403).json({ error: 'Invalid API key: no registered agency feed matches this key', imported: 0 });
+    }
+    if (feed.is_active === false) {
+      return res.status(409).json({ error: `Feed for ${feed.agency_name} is inactive`, imported: 0 });
+    }
+
+    const now = new Date().toISOString();
+    const rows = properties
+      .filter(p => !!p.external_id)
+      .map(p => ({
+        agency_id: feed.id,
+        external_id: p.external_id,
+        source: 'xml-api-feed',
+        feed_type: feedType,
+        property_data: p,
+        status: p.status,
+        borough: p.borough || null,
+        price: p.price || null,
+        bedrooms: p.bedrooms || null,
+        images: p.images || [],
+        last_synced_at: now,
+      }));
+
+    let imported = 0;
+    const failed = properties.length - rows.length;
+    if (rows.length > 0) {
+      const { error: upsertError, count } = await client
+        .from('feed_listings')
+        .upsert(rows, { onConflict: 'agency_id,external_id', count: 'exact' });
+      if (upsertError) {
+        return res.status(500).json({ error: `Feed import failed: ${upsertError.message}`, imported: 0 });
+      }
+      imported = count ?? rows.length;
+    }
+
+    await client.from('agency_feeds').update({ last_sync_at: now }).eq('id', feed.id);
+
     return res.status(200).json({
-      feed_id: feedId,
-      imported: properties.length,
+      feed_id: feed.id,
+      agency: feed.agency_name,
+      imported,
+      failed,
       properties: properties.slice(0, 5), // return first 5 for verification
       total: properties.length,
-      message: `Successfully parsed ${properties.length} properties`,
+      message: `Imported ${imported} of ${properties.length} properties`,
     });
   }
 
