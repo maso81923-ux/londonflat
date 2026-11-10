@@ -14,8 +14,8 @@
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const SUPABASE_URL = 'https://ffqwbtvdemoihuxbmczq.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_rFuQxqMcTsb74DkaVa9NCg_Y91O37KV';
+const SUPABASE_URL = 'https://qpmgaejnvxgrzrdxpitt.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_sowtXiQPWwwvygDiLFfPbg_UV7OXpS2';
 
 // ─── Greater London postcode filter ───────────────────────────────────────
 const CORE_LONDON = ['EC', 'WC', 'E', 'N', 'NW', 'SE', 'SW', 'W'];
